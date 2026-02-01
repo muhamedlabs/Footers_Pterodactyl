@@ -5,9 +5,7 @@
             display: flex;
             justify-content: center;
             padding: 22px 12px;
-
             background: url("https://i.ibb.co/Tx697qdQ/4.jpg") center / cover no-repeat;
-
             position: relative;
             opacity: 0;
             transform: translateY(30px);
@@ -161,7 +159,7 @@
             51%,100% { opacity: 0; }
         }
 
-        /* ===== SOCIAL ICONS & BUTTON ===== */
+        /* ===== SOCIAL ICONS ===== */
         .footer-actions {
             display: flex;
             align-items: center;
@@ -233,63 +231,167 @@
             }
         }
 
-        .footer-button {
-            padding: 12px 26px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #ff265c, #ff5f8a);
+        /* ===== КНОПКА НОВОГО СТИЛЯ ===== */
+        .multilink-button {
+            position: relative;
+            padding: 14px 34px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, 
+                #ff1e53 0%, 
+                #ff265c 25%, 
+                #ff5f8a 50%, 
+                #ff265c 75%, 
+                #ff1e53 100%);
+            background-size: 200% 200%;
             color: #fff;
-            font-weight: 700;
+            font-weight: 800;
             text-decoration: none;
-            box-shadow: 0 8px 24px rgba(255,38,92,0.55);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 
+                0 10px 30px rgba(255, 38, 92, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 4px 0 0 #d41b4e,
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             position: relative;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 3;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(10px);
-            animation: slideUpButton 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.4s;
+            transform: translateY(15px) scale(0.9);
+            animation: buttonReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.5s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 160px;
         }
 
-        @keyframes slideUpButton {
-            to {
+        @keyframes buttonReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(15px) scale(0.9) rotateX(-45deg);
+            }
+            70% {
+                transform: translateY(-5px) scale(1.05) rotateX(5deg);
+            }
+            100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1) rotateX(0);
             }
         }
 
-        .footer-button::before {
+        /* Анимация градиента */
+        .multilink-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
             transition: left 0.7s;
         }
 
-        .footer-button:hover::before {
+        /* 3D эффект */
+        .multilink-button::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 8px;
+            right: 8px;
+            height: 8px;
+            background: rgba(180, 25, 68, 0.7);
+            border-radius: 0 0 20px 20px;
+            filter: blur(4px);
+            transition: all 0.3s;
+            z-index: -1;
+        }
+
+        /* Иконка стрелки */
+        .multilink-button .arrow {
+            font-size: 18px;
+            transition: all 0.3s;
+            display: inline-block;
+            animation: arrowFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes arrowFloat {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(3px);
+            }
+        }
+
+        /* Эффект частиц при наведении */
+        .multilink-button .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        /* Hover эффекты */
+        .multilink-button:hover {
+            background-position: 100% 100%;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(255, 38, 92, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                0 6px 0 0 #d41b4e,
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: buttonPulse 1s infinite alternate;
+        }
+
+        @keyframes buttonPulse {
+            from {
+                box-shadow: 
+                    0 15px 40px rgba(255, 38, 92, 0.6),
+                    0 0 0 1px rgba(255, 255, 255, 0.2),
+                    0 6px 0 0 #d41b4e,
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            to {
+                box-shadow: 
+                    0 15px 40px rgba(255, 38, 92, 0.8),
+                    0 0 0 1px rgba(255, 255, 255, 0.3),
+                    0 6px 0 0 #d41b4e,
+                    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        .multilink-button:hover::before {
             left: 100%;
         }
 
-        .footer-button::after {
-            content: "↦";
-            position: absolute;
-            right: 18px;
-            opacity: 0;
-            transform: translateX(-6px);
-            transition: 0.3s;
+        .multilink-button:hover::after {
+            height: 10px;
+            filter: blur(6px);
+            background: rgba(180, 25, 68, 0.9);
         }
 
-        .footer-button:hover::after {
-            opacity: 1;
-            transform: translateX(0);
+        .multilink-button:hover .arrow {
+            transform: translateX(5px) scale(1.2);
+            animation: none;
         }
 
-        .footer-button:hover {
-            padding-right: 38px;
-            box-shadow: 0 12px 38px rgba(255,38,92,0.75);
-            transform: translateY(-2px);
+        /* Активная анимация (при клике) */
+        .multilink-button:active {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(255, 38, 92, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 3px 0 0 #d41b4e,
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.1s;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -307,6 +409,12 @@
                 width: 36px;
                 height: 36px;
                 font-size: 14px;
+            }
+            
+            .multilink-button {
+                padding: 12px 28px;
+                font-size: 14px;
+                min-width: 140px;
             }
         }
     </style>
@@ -329,7 +437,10 @@
                 <a href="https://t.me/muhamedlabs" class="social-icon" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
                 <a href="https://tiktok.com/@muhamedlabs" class="social-icon" title="Tiktok"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="https://github.com/muhamedlabs" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="#" class="footer-button" title="Multilink">Multilink</a>
+                <a href="#" class="multilink-button" title="Multilink">
+                    <span>Multilink</span>
+                    <span class="arrow">→</span>
+                </a>
             </div>
         </div>
     </footer>
@@ -464,5 +575,79 @@
             },
             retina_detect: true
         });
+
+        // ===== АНИМАЦИЯ КНОПКИ С ЧАСТИЦАМИ =====
+        const button = document.querySelector('.multilink-button');
+        
+        button.addEventListener('mouseenter', function(e) {
+            createButtonParticles(e);
+        });
+        
+        button.addEventListener('click', function(e) {
+            createClickExplosion(e);
+            // Дополнительная анимация при клике
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'buttonPulse 1s infinite alternate';
+            }, 10);
+        });
+
+        function createButtonParticles(e) {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            for (let i = 0; i < 8; i++) {
+                createParticle(x, y);
+            }
+        }
+
+        function createClickExplosion(e) {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            for (let i = 0; i < 15; i++) {
+                createParticle(x, y, true);
+            }
+        }
+
+        function createParticle(x, y, isExplosion = false) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            button.appendChild(particle);
+            
+            const size = Math.random() * 3 + 2;
+            const speedX = (Math.random() - 0.5) * (isExplosion ? 8 : 4);
+            const speedY = (Math.random() - 0.5) * (isExplosion ? 8 : 4);
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            particle.style.opacity = '1';
+            particle.style.background = isExplosion 
+                ? `hsl(${Math.random() * 20 + 340}, 100%, 65%)`
+                : '#fff';
+            particle.style.boxShadow = isExplosion 
+                ? '0 0 8px currentColor'
+                : '0 0 4px #fff';
+            
+            const animation = particle.animate([
+                { 
+                    transform: 'translate(0, 0) scale(1)',
+                    opacity: 1
+                },
+                { 
+                    transform: `translate(${speedX * 20}px, ${speedY * 20}px) scale(0)`,
+                    opacity: 0
+                }
+            ], {
+                duration: isExplosion ? 600 : 800,
+                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
     });
 </script>
