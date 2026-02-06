@@ -3,7 +3,7 @@
     .footer-wrapper {
         display: flex;
         justify-content: center;
-        padding: 22px 12px;
+        padding: clamp(16px, 4vw, 22px) clamp(8px, 2vw, 12px);
 
         background: url("https://i.ibb.co/Tx697qdQ/4.jpg") center / cover no-repeat;
         
@@ -13,6 +13,7 @@
         transform: translateY(20px);
         animation: subtleSlideUp 0.6s ease-out forwards;
         animation-delay: 0.2s;
+        -webkit-tap-highlight-color: transparent;
     }
 
     @keyframes subtleSlideUp {
@@ -24,11 +25,12 @@
 
     /* ===== FOOTER GLASS ===== */
     .footer {
-        max-width: 1180px;
+        max-width: min(1180px, 90vw);
         width: 100%;
-        padding: 22px 30px;
-        border-radius: 24px;
+        padding: clamp(16px, 3vw, 22px) clamp(16px, 3vw, 30px);
+        border-radius: clamp(16px, 3vw, 24px);
         backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         background: linear-gradient(135deg, rgba(255,38,92,0.12), rgba(255,255,255,0.035));
         border: 1px solid rgba(255,38,92,0.2);
         box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 0 15px rgba(255,38,92,0.08);
@@ -36,6 +38,7 @@
         position: relative;
         overflow: hidden;
         transform: translateZ(0);
+        box-sizing: border-box;
     }
 
     /* ===== PARTICLE EFFECT ===== */
@@ -47,8 +50,9 @@
         left: 0;
         z-index: 1;
         pointer-events: none;
-        border-radius: 24px;
-        opacity: 0.7; 
+        border-radius: inherit;
+        opacity: 0.7;
+        will-change: transform;
     }
 
     /* ===== CONTAINER ===== */
@@ -56,7 +60,7 @@
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: center;
-        gap: 20px;
+        gap: clamp(12px, 3vw, 20px);
         position: relative;
         z-index: 2;
     }
@@ -64,7 +68,7 @@
     /* ===== NAME ===== */
     .footer-info h3 {
         margin: 0;
-        font-size: 24px;
+        font-size: clamp(18px, 4vw, 24px);
         font-weight: 700;
         color: #ff265c;
         text-shadow: 0 1px 5px rgba(255,38,92,0.2);
@@ -73,6 +77,8 @@
         opacity: 0;
         transform: translateX(-10px);
         animation: fadeInLeft 0.5s ease-out forwards 0.4s;
+        line-height: 1.2;
+        word-break: break-word;
     }
 
     @keyframes fadeInLeft {
@@ -99,17 +105,77 @@
         }
     }
 
-    /* ===== TYPING TEXT ===== */
+    /* ===== TEXT WITH EMOJI ===== */
     .footer-info p {
-        margin-top: 8px;
-        font-size: 13px;
+        margin-top: clamp(4px, 1vw, 8px);
+        font-size: clamp(13px, 2.5vw, 15px);
         opacity: 0.85;
+        line-height: 1.5;
+        display: flex;
+        align-items: center;
+        min-height: 1.8em;
+        flex-wrap: wrap;
+        gap: 8px;
+        position: relative;
     }
 
+    /* ===== STYLED EMOJI ===== */
+    .emoji-container {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, rgba(255,38,92,0.15), rgba(255,255,255,0.05));
+        border-radius: 50%;
+        border: 2px solid rgba(255,38,92,0.4);
+        font-size: 18px;
+        margin-right: 8px;
+        flex-shrink: 0;
+        box-shadow: 
+            0 2px 10px rgba(255,38,92,0.25),
+            inset 0 0 5px rgba(255,255,255,0.1);
+        position: relative;
+        z-index: 2;
+        opacity: 0;
+        transform: scale(0.8) rotate(-10deg);
+        animation: emojiEntrance 0.5s ease-out forwards 0.3s,
+                   emojiPulse 2s infinite alternate 0.8s;
+    }
+
+    @keyframes emojiEntrance {
+        to {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+    }
+
+    @keyframes emojiPulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 
+                0 2px 10px rgba(255,38,92,0.25),
+                inset 0 0 5px rgba(255,255,255,0.1);
+        }
+        100% {
+            transform: scale(1.08);
+            box-shadow: 
+                0 4px 16px rgba(255,38,92,0.35),
+                inset 0 0 8px rgba(255,255,255,0.15);
+        }
+    }
+
+    /* ===== TYPING TEXT (no highlighting) ===== */
     #typing-text {
         font-weight: 500;
         opacity: 0;
         animation: fadeIn 0.5s ease-out forwards 0.6s;
+        display: inline-block;
+        min-height: 1.5em;
+        line-height: 1.5;
+        vertical-align: middle;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        color: #fff; /* Just white text */
     }
 
     @keyframes fadeIn {
@@ -118,35 +184,50 @@
         }
     }
 
+    /* ===== STYLIZED TYPING CURSOR ===== */
     #typing-text::after {
         content: "|";
         margin-left: 4px;
-        animation: softBlink 1.2s infinite;
+        font-weight: 700;
+        color: #ff265c;
+        text-shadow: 0 0 8px rgba(255, 38, 92, 0.6);
+        animation: typingCursor 1.2s infinite;
+        display: inline-block;
+        vertical-align: baseline;
     }
 
-    @keyframes softBlink {
-        0%,50% { opacity: 0.8; }
-        51%,100% { opacity: 0.2; }
+    @keyframes typingCursor {
+        0%, 50% { 
+            opacity: 1;
+            text-shadow: 0 0 8px rgba(255, 38, 92, 0.8);
+        }
+        51%, 100% { 
+            opacity: 0.3;
+            text-shadow: 0 0 4px rgba(255, 38, 92, 0.3);
+        }
     }
 
-    /* ===== SOCIAL ICONS ===== */
+    /* ===== OUTLINE FOR SOCIAL ICONS ===== */
     .footer-actions {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: clamp(6px, 2vw, 10px);
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .social-icon {
-        width: 38px;
-        height: 38px;
+        width: clamp(32px, 8vw, 38px);
+        height: clamp(32px, 8vw, 38px);
         display: grid;
         place-items: center;
         border-radius: 50%;
-        font-size: 15px;
+        font-size: clamp(13px, 3vw, 15px);
         color: #ff265c;
         background: rgba(255,255,255,0.08);
         backdrop-filter: blur(6px);
-        transition: all 0.25s ease;
+        -webkit-backdrop-filter: blur(6px);
+        transition: all 0.35s ease;
         cursor: pointer;
         text-decoration: none;
         position: relative;
@@ -154,13 +235,27 @@
         opacity: 0;
         transform: scale(0.9);
         animation: subtlePop 0.4s ease-out forwards;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        
+        /* Gradient outline */
+        border: 1.5px solid transparent;
+        background-clip: padding-box;
+        box-shadow: 
+            0 0 0 1px rgba(255,38,92,0.1),
+            inset 0 0 10px rgba(255,38,92,0.05);
+        
+        /* Outline animation */
+        animation: 
+            subtlePop 0.4s ease-out forwards,
+            borderGlow 2s ease-in-out infinite;
     }
 
-    .social-icon:nth-child(1) { animation-delay: 0.5s; }
-    .social-icon:nth-child(2) { animation-delay: 0.6s; }
-    .social-icon:nth-child(3) { animation-delay: 0.7s; }
-    .social-icon:nth-child(4) { animation-delay: 0.8s; }
-    .social-icon:nth-child(5) { animation-delay: 0.9s; }
+    .social-icon:nth-child(1) { animation-delay: 0.5s, 0.5s; }
+    .social-icon:nth-child(2) { animation-delay: 0.6s, 0.6s; }
+    .social-icon:nth-child(3) { animation-delay: 0.7s, 0.7s; }
+    .social-icon:nth-child(4) { animation-delay: 0.8s, 0.8s; }
+    .social-icon:nth-child(5) { animation-delay: 0.9s, 0.9s; }
 
     @keyframes subtlePop {
         to {
@@ -169,18 +264,63 @@
         }
     }
 
-    .social-icon:hover {
+    @keyframes borderGlow {
+        0%, 100% {
+            box-shadow: 
+                0 0 0 1px rgba(255,38,92,0.1),
+                inset 0 0 10px rgba(255,38,92,0.05),
+                0 0 5px rgba(255,38,92,0.1);
+        }
+        50% {
+            box-shadow: 
+                0 0 0 1px rgba(255,38,92,0.2),
+                inset 0 0 10px rgba(255,38,92,0.1),
+                0 0 10px rgba(255,38,92,0.2);
+        }
+    }
+
+    .social-icon::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, 
+            rgba(255,38,92,0.8), 
+            rgba(255,95,138,0.4), 
+            rgba(255,38,92,0.8));
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .social-icon:hover::before,
+    .social-icon:focus-visible::before,
+    .social-icon:active::before {
+        opacity: 1;
+    }
+
+    .social-icon:hover,
+    .social-icon:focus-visible,
+    .social-icon:active {
         background: rgba(255,38,92,0.9);
         color: #fff;
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 6px 20px rgba(255,38,92,0.3);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 
+            0 8px 25px rgba(255,38,92,0.4),
+            0 0 15px rgba(255,38,92,0.3),
+            inset 0 0 10px rgba(255,255,255,0.2);
+        outline: none;
+        border-color: transparent;
     }
 
     /* ===== BUTTON ===== */
     .multilink-button {
         position: relative;
-        padding: 12px 28px;
-        border-radius: 18px;
+        padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 28px);
+        border-radius: clamp(14px, 3vw, 18px);
         background: linear-gradient(145deg, 
             rgba(255,30,83,0.9) 0%, 
             rgba(255,38,92,0.9) 50%, 
@@ -193,7 +333,6 @@
             0 6px 20px rgba(255, 38, 92, 0.25),
             0 0 0 1px rgba(255, 255, 255, 0.08),
             0 3px 0 0 rgba(180, 25, 68, 0.4);
-        position: relative;
         transition: all 0.3s ease;
         z-index: 3;
         overflow: hidden;
@@ -203,9 +342,16 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        min-width: 140px;
+        gap: 6px;
+        min-width: max-content;
         backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        font-size: clamp(13px, 2.5vw, 15px);
+        border: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        white-space: nowrap;
     }
 
     @keyframes buttonSlideUp {
@@ -230,41 +376,36 @@
     }
 
     .multilink-button .arrow {
-        font-size: 16px;
+        font-size: clamp(14px, 3vw, 16px);
         transition: all 0.3s ease;
         display: inline-block;
     }
 
-    .multilink-button:hover {
+    .multilink-button:hover,
+    .multilink-button:focus-visible,
+    .multilink-button:active {
         transform: translateY(-2px);
         box-shadow: 
             0 10px 25px rgba(255, 38, 92, 0.35),
             0 0 0 1px rgba(255, 255, 255, 0.12),
             0 4px 0 0 rgba(180, 25, 68, 0.5);
+        outline: none;
     }
 
     .multilink-button:hover::before {
         left: 100%;
     }
 
-    .multilink-button:hover .arrow {
+    .multilink-button:hover .arrow,
+    .multilink-button:focus-visible .arrow,
+    .multilink-button:active .arrow {
         transform: translateX(3px);
     }
 
-    .multilink-button:active {
-        transform: translateY(-1px);
-        transition: all 0.1s;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
+    /* ===== RESPONSIVENESS ===== */
+    @media (max-width: 992px) {
         .footer-container {
-            grid-template-columns: 1fr;
-            text-align: center;
-        }
-        .footer-actions {
-            justify-content: center;
-            flex-wrap: wrap;
+            gap: 16px;
         }
         
         .social-icon {
@@ -273,20 +414,337 @@
             font-size: 14px;
         }
         
-        .multilink-button {
-            padding: 10px 24px;
+        #typing-text {
             font-size: 14px;
-            min-width: 130px;
+        }
+        
+        .emoji-container {
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
         }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 20px;
+        }
+        
+        .footer-info p {
+            justify-content: flex-start;
+            text-align: left;
+            gap: 6px;
+        }
+        
+        .footer-actions {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+            border-width: 1px;
+        }
+        
+        .multilink-button {
+            padding: 10px 22px;
+            font-size: 14px;
+            min-width: 120px;
+        }
+        
+        .footer-info h3 {
+            font-size: 20px;
+        }
+        
+        #typing-text {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .emoji-container {
+            width: 26px;
+            height: 26px;
+            font-size: 15px;
+            margin-right: 5px;
+        }
+    }
+
+    @media (max-width: 576px) {
         .footer {
-            padding: 18px 20px;
+            padding: 14px 16px;
+            border-radius: 18px;
+        }
+        
+        .footer-container {
+            gap: 16px;
+        }
+        
+        .footer-info p {
+            font-size: 13px;
+            line-height: 1.4;
+            min-height: 1.6em;
+            gap: 5px;
         }
         
         .footer-actions {
             gap: 8px;
+        }
+        
+        .social-icon {
+            width: 34px;
+            height: 34px;
+            font-size: 13px;
+            border-width: 1px;
+        }
+        
+        .multilink-button {
+            padding: 9px 18px;
+            font-size: 13px;
+            min-width: 110px;
+            border-radius: 16px;
+        }
+        
+        .footer-info h3 {
+            font-size: 18px;
+        }
+        
+        #typing-text {
+            font-size: 12px;
+        }
+        
+        .emoji-container {
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            margin-right: 4px;
+        }
+    }
+
+    @media (max-width: 375px) {
+        .footer {
+            padding: 12px 14px;
+        }
+        
+        .footer-container {
+            gap: 14px;
+        }
+        
+        .footer-info p {
+            font-size: 12px;
+            min-height: 1.5em;
+            gap: 4px;
+        }
+        
+        .footer-actions {
+            gap: 6px;
+        }
+        
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 12px;
+        }
+        
+        .multilink-button {
+            padding: 8px 16px;
+            font-size: 12px;
+            min-width: 100px;
+            gap: 4px;
+        }
+        
+        .multilink-button .arrow {
+            font-size: 13px;
+        }
+        
+        .footer-info h3 {
+            font-size: 17px;
+        }
+        
+        #typing-text {
+            font-size: 11px;
+        }
+        
+        .emoji-container {
+            width: 22px;
+            height: 22px;
+            font-size: 13px;
+            margin-right: 3px;
+        }
+    }
+
+    /* ===== ENHANCED TOUCH DEVICE ADAPTIVENESS ===== */
+    @media (hover: none) and (pointer: coarse) {
+        .emoji-container {
+            animation: emojiEntrance 0.5s ease-out forwards 0.3s;
+        }
+        
+        .emoji-container:active {
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+        
+        #typing-text {
+            animation: fadeIn 0.5s ease-out forwards 0.6s;
+        }
+        
+        .social-icon {
+            animation: 
+                subtlePop 0.4s ease-out forwards,
+                borderGlowMobile 3s ease-in-out infinite;
+        }
+        
+        @keyframes borderGlowMobile {
+            0%, 100% {
+                box-shadow: 
+                    0 0 0 1px rgba(255,38,92,0.15),
+                    inset 0 0 8px rgba(255,38,92,0.05);
+            }
+            50% {
+                box-shadow: 
+                    0 0 0 1px rgba(255,38,92,0.25),
+                    inset 0 0 8px rgba(255,38,92,0.1);
+            }
+        }
+        
+        .social-icon:active {
+            transform: scale(0.95);
+            background: rgba(255,38,92,0.95);
+            color: #fff;
+            box-shadow: 
+                0 4px 15px rgba(255,38,92,0.3),
+                inset 0 0 10px rgba(255,255,255,0.2);
+        }
+        
+        .social-icon:hover,
+        .multilink-button:hover {
+            transform: none;
+        }
+        
+        .social-icon:active,
+        .multilink-button:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        
+        .footer-actions {
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+        
+        .multilink-button {
+            padding: 12px 24px;
+            min-width: 120px;
+        }
+        
+        #typing-text {
+            font-size: 14px;
+        }
+        
+        .emoji-container {
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
+        }
+    }
+
+    /* ===== REDUCED MOTION PREFERENCE ===== */
+    @media (prefers-reduced-motion: reduce) {
+        .footer-wrapper,
+        .footer-info h3,
+        .social-icon,
+        .multilink-button,
+        #typing-text {
+            animation: none !important;
+            opacity: 1;
+            transform: none !important;
+        }
+        
+        .emoji-container {
+            animation: none !important;
+            opacity: 1;
+            transform: none !important;
+        }
+        
+        #typing-text {
+            animation: none !important;
+            opacity: 1;
+        }
+        
+        #typing-text::after {
+            animation: none;
+            opacity: 0.8;
+            color: #ff265c;
+        }
+        
+        .footer-info h3::after {
+            animation: none;
+            width: 100%;
+        }
+        
+        .multilink-button::before {
+            display: none;
+        }
+        
+        .multilink-button:hover .arrow {
+            transform: none;
+        }
+        
+        .social-icon {
+            animation: subtlePop 0.4s ease-out forwards !important;
+        }
+        
+        .social-icon:hover {
+            transform: none;
+        }
+    }
+
+    /* ===== DARK MODE SUPPORT ===== */
+    @media (prefers-color-scheme: dark) {
+        .footer {
+            background: linear-gradient(135deg, rgba(255,38,92,0.15), rgba(0,0,0,0.2));
+            border: 1px solid rgba(255,38,92,0.3);
+        }
+        
+        .social-icon {
+            background: rgba(0,0,0,0.2);
+        }
+        
+        .emoji-container {
+            background: linear-gradient(135deg, rgba(255,38,92,0.25), rgba(0,0,0,0.2));
+            border-color: rgba(255,38,92,0.4);
+        }
+    }
+
+    /* ===== HIGH CONTRAST MODE ===== */
+    @media (prefers-contrast: high) {
+        .footer {
+            border: 2px solid #ff265c;
+        }
+        
+        .social-icon {
+            border: 1px solid #ff265c;
+        }
+        
+        .multilink-button {
+            border: 2px solid #ff265c;
+        }
+        
+        #typing-text {
+            text-shadow: 0 0 2px #000;
+        }
+        
+        #typing-text::after {
+            color: #ff265c;
+            text-shadow: none;
         }
     }
 </style>
@@ -294,118 +752,169 @@
 <!-- ===== FOOTER ===== -->
 <div class="footer-wrapper">
     <footer class="footer">
-
-        <div id="particles-js"></div>
+        <div id="particles-js" aria-hidden="true"></div>
         
         <div class="footer-container">
             <div class="footer-info">
                 <h3 id="title-text">Muhamed Ads</h3>
-                <p>👹 <span id="typing-text"></span></p>
+
+                <p>👹 <span id="typing-text" aria-live="polite"></span></p>
+
             </div>
 
             <div class="footer-actions">
-                <a href="https://muhamedlabs.pro" class="social-icon" title="Website"><i class="fa-brands fa-dribbble"></i></a>
-                <a href="https://instagram.com/admirall_times" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://t.me/muhamedlabs" class="social-icon" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://tiktok.com/@muhamedlabs" class="social-icon" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://github.com/muhamedlabs" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="#" class="multilink-button" title="Multilink">
+                <a href="https://muhamedlabs.pro" class="social-icon" title="Website" aria-label="Visit our website">
+                    <i class="fa-brands fa-dribbble" aria-hidden="true"></i>
+                </a>
+                <a href="https://instagram.com/admirall_times" class="social-icon" title="Instagram" aria-label="Follow us on Instagram">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="https://t.me/muhamedlabs" class="social-icon" title="Telegram" aria-label="Join our Telegram channel">
+                    <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+                </a>
+                <a href="https://tiktok.com/@muhamedlabs" class="social-icon" title="TikTok" aria-label="Follow us on TikTok">
+                    <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/muhamedlabs" class="social-icon" title="GitHub" aria-label="Check our GitHub projects">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="https://link.muhamedlabs.pro" class="multilink-button" title="Multilink" aria-label="Go to multilink page">
                     <span id="button-text">Multilink</span>
-                    <span class="arrow">→</span>
+                    <span class="arrow" aria-hidden="true">→</span>
                 </a>
             </div>
         </div>
     </footer>
 </div>
 
-<!-- ===== FONT AWESOME ===== -->
-<script src="https://kit.fontawesome.com/87b9cd76ed.js" crossorigin="anonymous"></script>
-
-<!-- ===== PARTICLES.JS LIBRARY ===== -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
+<!-- ===== OPTIMIZED SCRIPTS LOADING ===== -->
 <script>
-    // ===== BROWSER LANGUAGE DETECTION =====
-    const userLang = navigator.language || navigator.userLanguage; 
-    console.log('Browser language:', userLang);
-    
-    // ===== TEXTS FOR DIFFERENT LANGUAGES =====
-    let texts = [];
-    let titleText = "";
-    let buttonText = "";
-    
-    // Detect language and select appropriate texts
-    if (userLang.startsWith('uk')) {
-        // Ukrainian
-        texts = ["Круті YouTube-канали, ІТ-проекти та індивідуальні плани від Андрея Мухамеда."];
-        titleText = "Мухамед Ads";
-        buttonText = "Єдине посилання";
-        console.log('Ukrainian language selected');
-    } else if (userLang.startsWith('en')) {
-        // English
-        texts = ["Great YouTube channels, IT projects and personal plans of Andrey Muhamed."];
-        titleText = "Muhamed Ads";
-        buttonText = "Multilink";
-        console.log('English language selected');
-    } else {
-        // DEFAULT - RUSSIAN
-        texts = ["Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда."];
-        titleText = "Мухамед Ads";
-        buttonText = "Мультиссылка";
-        console.log('Language not recognized or not Ukrainian/English, using Russian by default');
-    }
-    
-    // ===== TYPING EFFECT =====
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const el = document.getElementById("typing-text");
-    const titleEl = document.getElementById("title-text");
-    const buttonTextEl = document.getElementById("button-text");
-    const speed = 60, eraseSpeed = 40, pause = 2000;
+    // Load FontAwesome with error handling
+    (function() {
+        const faScript = document.createElement('script');
+        faScript.src = 'https://kit.fontawesome.com/87b9cd76ed.js';
+        faScript.crossOrigin = 'anonymous';
+        faScript.async = true;
+        faScript.onerror = function() {
+            console.warn('FontAwesome failed to load. Using fallback.');
+        };
+        document.head.appendChild(faScript);
+    })();
 
-    // Set texts for title and button
-    titleEl.textContent = titleText;
-    buttonTextEl.textContent = buttonText;
-
-    function typeLoop() {
-        const current = texts[textIndex];
-        if (!isDeleting) {
-            el.textContent = current.slice(0, charIndex++);
-            if (charIndex > current.length) setTimeout(() => isDeleting = true, pause);
-        } else {
-            el.textContent = current.slice(0, charIndex--);
-            if (charIndex === 0) { 
-                isDeleting = false; 
-                textIndex = (textIndex + 1) % texts.length; 
-            }
+    // Load Particles.js only on non-mobile devices for performance
+    (function() {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (!isMobile || window.innerWidth > 768) {
+            const particlesScript = document.createElement('script');
+            particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+            particlesScript.async = true;
+            particlesScript.onload = initParticles;
+            particlesScript.onerror = function() {
+                console.warn('Particles.js failed to load');
+            };
+            document.head.appendChild(particlesScript);
         }
-        setTimeout(typeLoop, isDeleting ? eraseSpeed : speed);
+    })();
+
+    // ===== BROWSER LANGUAGE DETECTION =====
+    function detectLanguage() {
+        const userLang = navigator.language || navigator.userLanguage || 'en';
+        console.log('Browser language detected:', userLang);
+        
+        let texts = [];
+        let titleText = "";
+        let buttonText = "";
+        
+        if (userLang.startsWith('uk')) {
+            texts = ["Круті YouTube-канали, ІТ-проекти та індивідуальні плани від Андрея Мухамеда."];
+            titleText = "Мухамед Ads";
+            buttonText = "Єдине посилання";
+
+        } else if (userLang.startsWith('ru') || userLang.startsWith('be') || userLang.startsWith('kk')) {
+            texts = ["Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда."];
+            titleText = "Мухамед Ads";
+            buttonText = "Мультиссылка";
+
+        } else {
+            texts = ["Great YouTube channels, IT projects and personal plans of Andrey Muhamed."];
+            titleText = "Muhamed Ads";
+            buttonText = "Multilink";
+        }
+        
+        return { texts, titleText, buttonText };
     }
 
-    // ===== PARTICLE EFFECT =====
-    document.addEventListener('DOMContentLoaded', function() {
+    // ===== TYPING EFFECT =====
+    function initTypingEffect() {
+        const { texts, titleText, buttonText } = detectLanguage();
+        const typingElement = document.getElementById("typing-text");
+        const titleEl = document.getElementById("title-text");
+        const buttonTextEl = document.getElementById("button-text");
+        
+        titleEl.textContent = titleText;
+        buttonTextEl.textContent = buttonText;
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let animationId = null;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        function typeLoop() {
+            const current = texts[textIndex];
+            if (!isDeleting) {
+                typingElement.textContent = current.slice(0, charIndex++);
+                if (charIndex > current.length) setTimeout(() => isDeleting = true, 2000);
+            } else {
+                typingElement.textContent = current.slice(0, charIndex--);
+                if (charIndex === 0) { 
+                    isDeleting = false; 
+                    textIndex = (textIndex + 1) % texts.length; 
+                }
+            }
+            
+            const speed = isDeleting ? 40 : 60;
+            animationId = setTimeout(typeLoop, speed);
+        }
+
+        // Handle reduced motion preference
+        if (prefersReducedMotion) {
+            typingElement.textContent = texts[0];
+            return function cleanup() {};
+        }
+        
         // Start typing effect
         setTimeout(typeLoop, 800);
         
-        // Initialize particles
+        // Cleanup function
+        return function cleanup() {
+            if (animationId) clearTimeout(animationId);
+        };
+    }
+
+    // ===== PARTICLE EFFECT INITIALIZATION =====
+    function initParticles() {
+        if (typeof particlesJS === 'undefined') return;
+        
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (prefersReducedMotion) {
+            document.getElementById('particles-js').style.display = 'none';
+            return;
+        }
+        
         particlesJS('particles-js', {
             particles: {
                 number: {
-                    value: 65,
+                    value: window.innerWidth < 768 ? 30 : 65,
                     density: {
                         enable: true,
-                        value_area: 500
+                        value_area: window.innerWidth < 768 ? 300 : 500
                     }
                 },
                 color: {
-                    value: [
-                        "#ff265c",
-                        "#ff5f8a",
-                        "#ffffff",
-                        "#ffa8c2",
-                        "#ff99b8"
-                    ]
+                    value: ["#ff265c", "#ff5f8a", "#ffffff"]
                 },
                 shape: {
                     type: ["circle", "triangle", "edge"],
@@ -428,7 +937,7 @@
                     }
                 },
                 size: {
-                    value: 2.5,
+                    value: window.innerWidth < 768 ? 2 : 2.5,
                     random: true,
                     anim: {
                         enable: true,
@@ -438,7 +947,7 @@
                     }
                 },
                 line_linked: {
-                    enable: true,
+                    enable: window.innerWidth > 480,
                     distance: 120,
                     color: "#ff5f8a",
                     opacity: 0.3,
@@ -451,7 +960,7 @@
                 },
                 move: {
                     enable: true,
-                    speed: 1.5,
+                    speed: window.innerWidth < 768 ? 1 : 1.5,
                     direction: "none",
                     random: true,
                     straight: false,
@@ -468,11 +977,11 @@
                 detect_on: "canvas",
                 events: {
                     onhover: {
-                        enable: true,
+                        enable: window.innerWidth > 768,
                         mode: "grab"
                     },
                     onclick: {
-                        enable: true,
+                        enable: window.innerWidth > 768,
                         mode: "push"
                     },
                     resize: true
@@ -491,86 +1000,67 @@
             },
             retina_detect: true
         });
+    }
 
-        // ===== BUTTON ANIMATION WITH PARTICLES =====
-        const button = document.querySelector('.multilink-button');
+    // ===== TOUCH OPTIMIZED INTERACTIONS =====
+    function initTouchOptimizations() {
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-        // Simple particles on button hover
-        button.addEventListener('mouseenter', function(e) {
-            createButtonParticles(e);
-        });
-        
-        function createButtonParticles(e) {
-            const rect = button.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+        if (isTouchDevice) {
+            // Add touch feedback
+            const elements = document.querySelectorAll('.social-icon, .multilink-button');
             
-            // Create multiple particles
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    createParticle(x, y);
-                }, i * 50);
-            }
-        }
-
-        function createParticle(x, y) {
-            // Create particle
-            const particle = document.createElement('div');
-            particle.style.position = 'absolute';
-            particle.style.width = '3px';
-            particle.style.height = '3px';
-            particle.style.background = '#ff265c';
-            particle.style.borderRadius = '50%';
-            particle.style.boxShadow = '0 0 6px #ff265c';
-            particle.style.left = `${x}px`;
-            particle.style.top = `${y}px`;
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '4';
-            
-            button.appendChild(particle);
-            
-            // Animation
-            const angle = Math.random() * Math.PI * 2;
-            const speed = 2 + Math.random() * 3;
-            const duration = 600 + Math.random() * 400;
-            
-            const animation = particle.animate([
-                {
-                    transform: 'translate(0, 0) scale(1)',
-                    opacity: 1
-                },
-                {
-                    transform: `translate(${Math.cos(angle) * speed * 20}px, ${Math.sin(angle) * speed * 20}px) scale(0)`,
-                    opacity: 0
-                }
-            ], {
-                duration: duration,
-                easing: 'cubic-bezier(0.2, 0.8, 0.4, 1)'
+            elements.forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                }, { passive: true });
+                
+                el.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                }, { passive: true });
             });
-            
-            animation.onfinish = () => particle.remove();
         }
+    }
 
-        // ===== LIGHT PARALLAX EFFECT =====
-        const footer = document.querySelector('.footer');
+    // ===== RESPONSIVE RESIZE HANDLER =====
+    let resizeTimeout;
+    function handleResize() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            // Reinitialize particles on resize for better performance
+            if (typeof particlesJS !== 'undefined') {
+                pJSDom = document.querySelectorAll('.particles-js-canvas-el');
+                for(let i = 0; i < pJSDom.length; i++) {
+                    pJSDom[i].parentNode.removeChild(pJSDom[i]);
+                }
+                initParticles();
+            }
+        }, 250);
+    }
+
+    // ===== INITIALIZE EVERYTHING =====
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize typing effect
+        const cleanupTyping = initTypingEffect();
         
-        document.addEventListener('mousemove', function(e) {
-            const x = (e.clientX / window.innerWidth - 0.5) * 15;
-            const y = (e.clientY / window.innerHeight - 0.5) * 15;
-            
-            // Slight footer movement
-            footer.style.transform = `translate3d(${x * 0.2}px, ${y * 0.2}px, 0)`;
-            
-            // Stronger particle movement for depth effect
-            const particlesContainer = document.getElementById('particles-js');
-            particlesContainer.style.transform = `translate3d(${x * 0.4}px, ${y * 0.4}px, 0)`;
-        });
-
-        // Return to original position when mouse leaves
-        document.addEventListener('mouseleave', function() {
-            footer.style.transform = 'translate3d(0, 0, 0)';
-            document.getElementById('particles-js').style.transform = 'translate3d(0, 0, 0)';
+        // Initialize touch optimizations
+        initTouchOptimizations();
+        
+        // Add resize listener
+        window.addEventListener('resize', handleResize, { passive: true });
+        
+        // Add performance optimization for mobile
+        if (window.innerWidth < 768) {
+            // Reduce animations on mobile
+            document.querySelectorAll('.social-icon').forEach((icon, index) => {
+                icon.style.animationDelay = `${0.3 + (index * 0.1)}s`;
+            });
+        }
+        
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', function() {
+            cleanupTyping();
+            window.removeEventListener('resize', handleResize);
         });
     });
-
 </script>
