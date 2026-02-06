@@ -1,317 +1,316 @@
+<style>
+    /* ===== FOOTER WRAPPER ===== */
+    .footer-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 22px 12px;
 
-    <style>
-        /* ===== FOOTER WRAPPER ===== */
-        .footer-wrapper {
-            display: flex;
-            justify-content: center;
-            padding: 22px 12px;
+        background: url("https://i.ibb.co/Tx697qdQ/4.jpg") center / cover no-repeat;
+        
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: subtleSlideUp 0.6s ease-out forwards;
+        animation-delay: 0.2s;
+    }
 
-            background: url("https://i.ibb.co/Tx697qdQ/4.jpg") center / cover no-repeat;
-            
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: subtleSlideUp 0.6s ease-out forwards;
-            animation-delay: 0.2s;
+    @keyframes subtleSlideUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
+    }
 
-        @keyframes subtleSlideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+    /* ===== FOOTER GLASS ===== */
+    .footer {
+        max-width: 1180px;
+        width: 100%;
+        padding: 22px 30px;
+        border-radius: 24px;
+        backdrop-filter: blur(12px);
+        background: linear-gradient(135deg, rgba(255,38,92,0.12), rgba(255,255,255,0.035));
+        border: 1px solid rgba(255,38,92,0.2);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 0 15px rgba(255,38,92,0.08);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        transform: translateZ(0);
+    }
+
+    /* ===== PARTICLE EFFECT ===== */
+    #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+        border-radius: 24px;
+        opacity: 0.7; 
+    }
+
+    /* ===== CONTAINER ===== */
+    .footer-container {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* ===== NAME ===== */
+    .footer-info h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: #ff265c;
+        text-shadow: 0 1px 5px rgba(255,38,92,0.2);
+        position: relative;
+        display: inline-block;
+        opacity: 0;
+        transform: translateX(-10px);
+        animation: fadeInLeft 0.5s ease-out forwards 0.4s;
+    }
+
+    @keyframes fadeInLeft {
+        to {
+            opacity: 1;
+            transform: translateX(0);
         }
+    }
 
-        /* ===== FOOTER GLASS ===== */
-        .footer {
-            max-width: 1180px;
+    .footer-info h3::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, #ff265c, transparent);
+        animation: underlineGrow 1s ease-out forwards 0.8s;
+    }
+
+    @keyframes underlineGrow {
+        to {
             width: 100%;
-            padding: 22px 30px;
-            border-radius: 24px;
-            backdrop-filter: blur(12px);
-            background: linear-gradient(135deg, rgba(255,38,92,0.12), rgba(255,255,255,0.035));
-            border: 1px solid rgba(255,38,92,0.2);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 0 15px rgba(255,38,92,0.08);
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-            transform: translateZ(0);
         }
+    }
 
-        /* ===== PARTICLE EFFECT - СТИЛЬНЫЙ ===== */
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-            border-radius: 24px;
-            opacity: 0.7; /* Видимые, но не навязчивые */
+    /* ===== TYPING TEXT ===== */
+    .footer-info p {
+        margin-top: 8px;
+        font-size: 13px;
+        opacity: 0.85;
+    }
+
+    #typing-text {
+        font-weight: 500;
+        opacity: 0;
+        animation: fadeIn 0.5s ease-out forwards 0.6s;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
         }
+    }
 
-        /* ===== CONTAINER ===== */
+    #typing-text::after {
+        content: "|";
+        margin-left: 4px;
+        animation: softBlink 1.2s infinite;
+    }
+
+    @keyframes softBlink {
+        0%,50% { opacity: 0.8; }
+        51%,100% { opacity: 0.2; }
+    }
+
+    /* ===== SOCIAL ICONS ===== */
+    .footer-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .social-icon {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        font-size: 15px;
+        color: #ff265c;
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(6px);
+        transition: all 0.25s ease;
+        cursor: pointer;
+        text-decoration: none;
+        position: relative;
+        z-index: 3;
+        opacity: 0;
+        transform: scale(0.9);
+        animation: subtlePop 0.4s ease-out forwards;
+    }
+
+    .social-icon:nth-child(1) { animation-delay: 0.5s; }
+    .social-icon:nth-child(2) { animation-delay: 0.6s; }
+    .social-icon:nth-child(3) { animation-delay: 0.7s; }
+    .social-icon:nth-child(4) { animation-delay: 0.8s; }
+    .social-icon:nth-child(5) { animation-delay: 0.9s; }
+
+    @keyframes subtlePop {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .social-icon:hover {
+        background: rgba(255,38,92,0.9);
+        color: #fff;
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(255,38,92,0.3);
+    }
+
+    /* ===== BUTTON ===== */
+    .multilink-button {
+        position: relative;
+        padding: 12px 28px;
+        border-radius: 18px;
+        background: linear-gradient(145deg, 
+            rgba(255,30,83,0.9) 0%, 
+            rgba(255,38,92,0.9) 50%, 
+            rgba(255,95,138,0.9) 100%);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        box-shadow: 
+            0 6px 20px rgba(255, 38, 92, 0.25),
+            0 0 0 1px rgba(255, 255, 255, 0.08),
+            0 3px 0 0 rgba(180, 25, 68, 0.4);
+        position: relative;
+        transition: all 0.3s ease;
+        z-index: 3;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(8px);
+        animation: buttonSlideUp 0.5s ease-out forwards 1s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-width: 140px;
+        backdrop-filter: blur(4px);
+    }
+
+    @keyframes buttonSlideUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .multilink-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.15), 
+            transparent);
+        transition: left 0.6s;
+    }
+
+    .multilink-button .arrow {
+        font-size: 16px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .multilink-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+            0 10px 25px rgba(255, 38, 92, 0.35),
+            0 0 0 1px rgba(255, 255, 255, 0.12),
+            0 4px 0 0 rgba(180, 25, 68, 0.5);
+    }
+
+    .multilink-button:hover::before {
+        left: 100%;
+    }
+
+    .multilink-button:hover .arrow {
+        transform: translateX(3px);
+    }
+
+    .multilink-button:active {
+        transform: translateY(-1px);
+        transition: all 0.1s;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
         .footer-container {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-            z-index: 2;
+            grid-template-columns: 1fr;
+            text-align: center;
         }
-
-        /* ===== NAME ===== */
-        .footer-info h3 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 700;
-            color: #ff265c;
-            text-shadow: 0 1px 5px rgba(255,38,92,0.2);
-            position: relative;
-            display: inline-block;
-            opacity: 0;
-            transform: translateX(-10px);
-            animation: fadeInLeft 0.5s ease-out forwards 0.4s;
-        }
-
-        @keyframes fadeInLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .footer-info h3::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #ff265c, transparent);
-            animation: underlineGrow 1s ease-out forwards 0.8s;
-        }
-
-        @keyframes underlineGrow {
-            to {
-                width: 100%;
-            }
-        }
-
-        /* ===== TYPING TEXT ===== */
-        .footer-info p {
-            margin-top: 8px;
-            font-size: 13px;
-            opacity: 0.85;
-        }
-
-        #typing-text {
-            font-weight: 500;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out forwards 0.6s;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        #typing-text::after {
-            content: "|";
-            margin-left: 4px;
-            animation: softBlink 1.2s infinite;
-        }
-
-        @keyframes softBlink {
-            0%,50% { opacity: 0.8; }
-            51%,100% { opacity: 0.2; }
-        }
-
-        /* ===== SOCIAL ICONS ===== */
         .footer-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .social-icon {
-            width: 38px;
-            height: 38px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            font-size: 15px;
-            color: #ff265c;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(6px);
-            transition: all 0.25s ease;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-            z-index: 3;
-            opacity: 0;
-            transform: scale(0.9);
-            animation: subtlePop 0.4s ease-out forwards;
-        }
-
-        .social-icon:nth-child(1) { animation-delay: 0.5s; }
-        .social-icon:nth-child(2) { animation-delay: 0.6s; }
-        .social-icon:nth-child(3) { animation-delay: 0.7s; }
-        .social-icon:nth-child(4) { animation-delay: 0.8s; }
-        .social-icon:nth-child(5) { animation-delay: 0.9s; }
-
-        @keyframes subtlePop {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .social-icon:hover {
-            background: rgba(255,38,92,0.9);
-            color: #fff;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(255,38,92,0.3);
-        }
-
-        /* ===== КНОПКА ===== */
-        .multilink-button {
-            position: relative;
-            padding: 12px 28px;
-            border-radius: 18px;
-            background: linear-gradient(145deg, 
-                rgba(255,30,83,0.9) 0%, 
-                rgba(255,38,92,0.9) 50%, 
-                rgba(255,95,138,0.9) 100%);
-            color: #fff;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            box-shadow: 
-                0 6px 20px rgba(255, 38, 92, 0.25),
-                0 0 0 1px rgba(255, 255, 255, 0.08),
-                0 3px 0 0 rgba(180, 25, 68, 0.4);
-            position: relative;
-            transition: all 0.3s ease;
-            z-index: 3;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(8px);
-            animation: buttonSlideUp 0.5s ease-out forwards 1s;
-            display: inline-flex;
-            align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+        }
+        
+        .multilink-button {
+            padding: 10px 24px;
+            font-size: 14px;
+            min-width: 130px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .footer {
+            padding: 18px 20px;
+        }
+        
+        .footer-actions {
             gap: 8px;
-            min-width: 140px;
-            backdrop-filter: blur(4px);
         }
-
-        @keyframes buttonSlideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .multilink-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.15), 
-                transparent);
-            transition: left 0.6s;
-        }
-
-        .multilink-button .arrow {
-            font-size: 16px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .multilink-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 10px 25px rgba(255, 38, 92, 0.35),
-                0 0 0 1px rgba(255, 255, 255, 0.12),
-                0 4px 0 0 rgba(180, 25, 68, 0.5);
-        }
-
-        .multilink-button:hover::before {
-            left: 100%;
-        }
-
-        .multilink-button:hover .arrow {
-            transform: translateX(3px);
-        }
-
-        .multilink-button:active {
-            transform: translateY(-1px);
-            transition: all 0.1s;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .footer-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer-actions {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
-            .social-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
-            
-            .multilink-button {
-                padding: 10px 24px;
-                font-size: 14px;
-                min-width: 130px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .footer {
-                padding: 18px 20px;
-            }
-            
-            .footer-actions {
-                gap: 8px;
-            }
-        }
-    </style>
+    }
+</style>
 
 <!-- ===== FOOTER ===== -->
 <div class="footer-wrapper">
     <footer class="footer">
-        <!-- Частицы вернулись! -->
+
         <div id="particles-js"></div>
         
         <div class="footer-container">
             <div class="footer-info">
-                <h3>Мухамед Ads</h3>
+                <h3 id="title-text">Muhamed Ads</h3>
                 <p>👹 <span id="typing-text"></span></p>
             </div>
 
             <div class="footer-actions">
-                <a href="https://muhamedlabs.pro" class="social-icon" title="Web"><i class="fa-brands fa-dribbble"></i></a>
+                <a href="https://muhamedlabs.pro" class="social-icon" title="Website"><i class="fa-brands fa-dribbble"></i></a>
                 <a href="https://instagram.com/admirall_times" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://t.me/muhamedlabs" class="social-icon" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://tiktok.com/@muhamedlabs" class="social-icon" title="Tiktok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://tiktok.com/@muhamedlabs" class="social-icon" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="https://github.com/muhamedlabs" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
                 <a href="#" class="multilink-button" title="Multilink">
-                    <span>Multilink</span>
+                    <span id="button-text">Multilink</span>
                     <span class="arrow">→</span>
                 </a>
             </div>
@@ -326,13 +325,48 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
+    // ===== BROWSER LANGUAGE DETECTION =====
+    const userLang = navigator.language || navigator.userLanguage; 
+    console.log('Browser language:', userLang);
+    
+    // ===== TEXTS FOR DIFFERENT LANGUAGES =====
+    let texts = [];
+    let titleText = "";
+    let buttonText = "";
+    
+    // Detect language and select appropriate texts
+    if (userLang.startsWith('uk')) {
+        // Ukrainian
+        texts = ["Круті YouTube-канали, ІТ-проекти та індивідуальні плани від Андрея Мухамеда."];
+        titleText = "Мухамед Ads";
+        buttonText = "Єдине посилання";
+        console.log('Ukrainian language selected');
+    } else if (userLang.startsWith('en')) {
+        // English
+        texts = ["Great YouTube channels, IT projects and personal plans of Andrey Muhamed."];
+        titleText = "Muhamed Ads";
+        buttonText = "Multilink";
+        console.log('English language selected');
+    } else {
+        // DEFAULT - RUSSIAN
+        texts = ["Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда."];
+        titleText = "Мухамед Ads";
+        buttonText = "Мультиссылка";
+        console.log('Language not recognized or not Ukrainian/English, using Russian by default');
+    }
+    
     // ===== TYPING EFFECT =====
-    const texts = ["Great YouTube-channels, IT-projects and individual plans Andrey Muhamed."];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
     const el = document.getElementById("typing-text");
+    const titleEl = document.getElementById("title-text");
+    const buttonTextEl = document.getElementById("button-text");
     const speed = 60, eraseSpeed = 40, pause = 2000;
+
+    // Set texts for title and button
+    titleEl.textContent = titleText;
+    buttonTextEl.textContent = buttonText;
 
     function typeLoop() {
         const current = texts[textIndex];
@@ -341,21 +375,24 @@
             if (charIndex > current.length) setTimeout(() => isDeleting = true, pause);
         } else {
             el.textContent = current.slice(0, charIndex--);
-            if (charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % texts.length; }
+            if (charIndex === 0) { 
+                isDeleting = false; 
+                textIndex = (textIndex + 1) % texts.length; 
+            }
         }
         setTimeout(typeLoop, isDeleting ? eraseSpeed : speed);
     }
 
-    // ===== PARTICLE EFFECT - ВЕРНУЛИ СТИЛЬНЫЕ ЧАСТИЦЫ =====
+    // ===== PARTICLE EFFECT =====
     document.addEventListener('DOMContentLoaded', function() {
-        // Запускаем эффект печати
+        // Start typing effect
         setTimeout(typeLoop, 800);
         
-        // Инициализируем стильные частицы
+        // Initialize particles
         particlesJS('particles-js', {
             particles: {
                 number: {
-                    value: 65, // Оптимальное количество
+                    value: 65,
                     density: {
                         enable: true,
                         value_area: 500
@@ -363,15 +400,15 @@
                 },
                 color: {
                     value: [
-                        "#ff265c",      // Основной розовый
-                        "#ff5f8a",      // Светлый розовый
-                        "#ffffff",      // Белый
-                        "#ffa8c2",      // Пастельный розовый
-                        "#ff99b8"       // Средний розовый
+                        "#ff265c",
+                        "#ff5f8a",
+                        "#ffffff",
+                        "#ffa8c2",
+                        "#ff99b8"
                     ]
                 },
                 shape: {
-                    type: ["circle", "triangle", "edge"], // Разные формы
+                    type: ["circle", "triangle", "edge"],
                     stroke: {
                         width: 0,
                         color: "#000000"
@@ -381,7 +418,7 @@
                     }
                 },
                 opacity: {
-                    value: 0.65, // Хорошо видны
+                    value: 0.65,
                     random: true,
                     anim: {
                         enable: true,
@@ -391,7 +428,7 @@
                     }
                 },
                 size: {
-                    value: 2.5, // Оптимальный размер
+                    value: 2.5,
                     random: true,
                     anim: {
                         enable: true,
@@ -404,7 +441,7 @@
                     enable: true,
                     distance: 120,
                     color: "#ff5f8a",
-                    opacity: 0.3, // Видимые линии
+                    opacity: 0.3,
                     width: 1,
                     shadow: {
                         enable: true,
@@ -414,7 +451,7 @@
                 },
                 move: {
                     enable: true,
-                    speed: 1.5, // Приятная скорость
+                    speed: 1.5,
                     direction: "none",
                     random: true,
                     straight: false,
@@ -432,11 +469,11 @@
                 events: {
                     onhover: {
                         enable: true,
-                        mode: "grab" // Частицы реагируют на курсор
+                        mode: "grab"
                     },
                     onclick: {
                         enable: true,
-                        mode: "push" // При клике добавляются частицы
+                        mode: "push"
                     },
                     resize: true
                 },
@@ -455,10 +492,10 @@
             retina_detect: true
         });
 
-        // ===== АНИМАЦИЯ КНОПКИ С ЧАСТИЦАМИ =====
+        // ===== BUTTON ANIMATION WITH PARTICLES =====
         const button = document.querySelector('.multilink-button');
         
-        // Простые частицы при наведении на кнопку
+        // Simple particles on button hover
         button.addEventListener('mouseenter', function(e) {
             createButtonParticles(e);
         });
@@ -468,7 +505,7 @@
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            // Создаем несколько частиц
+            // Create multiple particles
             for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
                     createParticle(x, y);
@@ -477,7 +514,7 @@
         }
 
         function createParticle(x, y) {
-            // Создаем частицу
+            // Create particle
             const particle = document.createElement('div');
             particle.style.position = 'absolute';
             particle.style.width = '3px';
@@ -492,7 +529,7 @@
             
             button.appendChild(particle);
             
-            // Анимация
+            // Animation
             const angle = Math.random() * Math.PI * 2;
             const speed = 2 + Math.random() * 3;
             const duration = 600 + Math.random() * 400;
@@ -514,25 +551,26 @@
             animation.onfinish = () => particle.remove();
         }
 
-        // ===== ЛЕГКИЙ ПАРАЛЛАКС ЭФФЕКТ =====
+        // ===== LIGHT PARALLAX EFFECT =====
         const footer = document.querySelector('.footer');
         
         document.addEventListener('mousemove', function(e) {
             const x = (e.clientX / window.innerWidth - 0.5) * 15;
             const y = (e.clientY / window.innerHeight - 0.5) * 15;
             
-            // Легкое движение футера
+            // Slight footer movement
             footer.style.transform = `translate3d(${x * 0.2}px, ${y * 0.2}px, 0)`;
             
-            // Более сильное движение частиц для эффекта глубины
+            // Stronger particle movement for depth effect
             const particlesContainer = document.getElementById('particles-js');
             particlesContainer.style.transform = `translate3d(${x * 0.4}px, ${y * 0.4}px, 0)`;
         });
 
-        // Возвращаем на место при уходе мыши
+        // Return to original position when mouse leaves
         document.addEventListener('mouseleave', function() {
             footer.style.transform = 'translate3d(0, 0, 0)';
             document.getElementById('particles-js').style.transform = 'translate3d(0, 0, 0)';
         });
     });
+
 </script>
