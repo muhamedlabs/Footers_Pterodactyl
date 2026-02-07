@@ -67,7 +67,7 @@
     min-height: 60px;
 }
 
-/* ===== NAME - FIXED FOR DESKTOP ===== */
+/* ===== NAME ===== */
 .footer-info h3 {
     margin: 0;
     font-size: clamp(18px, 4vw, 24px);
@@ -80,12 +80,7 @@
     transform: translateX(-10px);
     animation: fadeInLeft 0.5s ease-out forwards 0.4s;
     line-height: 1.2;
-    /* Desktop: normal text wrapping */
-    word-break: normal;
-    overflow: visible;
-    text-overflow: clip;
-    white-space: normal;
-    max-width: 100%;
+    word-break: break-word;
 }
 
 @keyframes fadeInLeft {
@@ -135,10 +130,9 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     color: #fff;
     opacity: 0.85;
-    /* Desktop: normal wrapping */
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
@@ -449,7 +443,7 @@
     }
 }
 
-/* ===== MOBILE ADAPTATION ===== */
+/* ===== ADAPTATION FOR NARROW SCREENS ===== */
 @media (max-width: 768px) {
     .footer-container {
         grid-template-columns: 1fr;
@@ -497,12 +491,6 @@
     .footer-info h3 {
         font-size: 18px;
         text-align: center;
-        /* Mobile: add ellipsis protection */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 100%;
-        display: block;
     }
     
     .footer-info h3::after {
@@ -542,114 +530,6 @@
     .footer-actions {
         gap: 8px;
         min-width: 270px;
-    }
-}
-
-/* ===== EXTREME PROTECTION - ONLY IF TEXT OVERFLOWS ===== */
-/* Extreme protection - only if text overflows */
-@media (max-width: 480px) {
-    /* Enhanced protection for very small screens */
-    .footer-info h3 {
-        font-size: 16px !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    #typing-text {
-        font-size: 12px !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-@media (max-width: 360px) {
-    /* Even more aggressive protection */
-    .footer-info h3 {
-        font-size: 14px !important;
-    }
-    
-    #typing-text {
-        font-size: 11px !important;
-    }
-    
-    /* Horizontal scroll for actions if they don't fit */
-    .footer-actions {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        justify-content: flex-start !important;
-        padding-bottom: 4px !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        min-width: auto !important;
-        max-width: 100% !important;
-    }
-    
-    .footer-actions::-webkit-scrollbar {
-        display: none !important;
-    }
-    
-    .social-icon {
-        min-width: 28px !important;
-        min-height: 28px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .multilink-button {
-        min-width: 100px !important;
-        flex-shrink: 0 !important;
-        padding: 6px 10px !important;
-        font-size: 11px !important;
-    }
-    
-    /* In compact mode - centering */
-    .footer.compact-mode .footer-actions {
-        justify-content: center !important;
-        flex-wrap: wrap !important;
-        overflow: visible !important;
-    }
-}
-
-/* MOST EXTREME PROTECTION - for extremely narrow screens */
-@media (max-width: 320px) {
-    .footer {
-        padding: 10px 8px !important;
-    }
-    
-    .footer-info h3 {
-        font-size: 13px !important;
-    }
-    
-    #typing-text {
-        font-size: 10px !important;
-    }
-    
-    .social-icon {
-        min-width: 26px !important;
-        min-height: 26px !important;
-        width: 26px !important;
-        height: 26px !important;
-        font-size: 11px !important;
-    }
-    
-    .multilink-button {
-        min-width: 90px !important;
-        padding: 5px 8px !important;
-        font-size: 10px !important;
-    }
-    
-    /* Complete overflow hiding */
-    .footer-container {
-        overflow: hidden !important;
     }
 }
 
@@ -736,5 +616,195 @@
     #typing-text .typing-cursor {
         color: #ff265c;
         text-shadow: none;
+    }
+}
+
+/* ===== КРАЙНЯЯ МЕРА - ЕСЛИ ТЕКСТ ВЫХОДИТ ЗА ПРЕДЕЛЫ КОНТЕЙНЕРА ===== */
+/* Extreme measure - only if text overflows */
+
+/* Mobile: Add ellipsis protection */
+@media (max-width: 768px) {
+    .footer-info h3 {
+        /* Add ellipsis for mobile */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        display: block;
+    }
+}
+
+/* Extra small screens - ultimate protection */
+@media (max-width: 480px) {
+    .footer-info h3 {
+        font-size: 16px;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    #typing-text {
+        font-size: 12px;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .multilink-button {
+        padding: 8px 16px;
+        font-size: 12px;
+        min-width: 120px;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* Most extreme cases */
+@media (max-width: 360px) {
+    .footer {
+        padding: 12px 10px;
+    }
+    
+    .footer-info h3 {
+        font-size: 14px;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    #typing-text {
+        font-size: 11px;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    .footer-actions {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 4px !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        gap: 4px !important;
+    }
+    
+    .footer-actions::-webkit-scrollbar {
+        display: none !important;
+    }
+    
+    .social-icon {
+        min-width: 28px !important;
+        min-height: 28px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .multilink-button {
+        min-width: 100px !important;
+        flex-shrink: 0 !important;
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+}
+
+/* Ultra extreme */
+@media (max-width: 320px) {
+    .footer {
+        padding: 10px 8px !important;
+    }
+    
+    .footer-info h3 {
+        font-size: 13px !important;
+    }
+    
+    #typing-text {
+        font-size: 10px !important;
+    }
+    
+    .social-icon {
+        min-width: 26px !important;
+        min-height: 26px !important;
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 11px !important;
+    }
+    
+    .multilink-button {
+        min-width: 90px !important;
+        padding: 5px 8px !important;
+        font-size: 10px !important;
+    }
+    
+    /* Complete overflow hiding */
+    .footer-container {
+        overflow: hidden !important;
+    }
+}
+
+/* ===== FIX FOR SOCIAL ICONS SHAKING ===== */
+@media (prefers-reduced-motion: no-preference) {
+    .social-icon {
+        animation: 
+            subtlePop 0.4s ease-out forwards,
+            gentleGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes gentleGlow {
+        0%, 100% {
+            box-shadow: 
+                0 0 0 1px rgba(255,38,92,0.15),
+                inset 0 0 10px rgba(255,38,92,0.05),
+                0 0 6px rgba(255,38,92,0.1);
+        }
+        50% {
+            box-shadow: 
+                0 0 0 1px rgba(255,38,92,0.2),
+                inset 0 0 12px rgba(255,38,92,0.08),
+                0 0 8px rgba(255,38,92,0.15);
+        }
+    }
+}
+
+/* Performance optimization */
+.social-icon,
+.multilink-button {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Mobile optimization to reduce blur effect */
+@media (max-width: 768px) {
+    .social-icon {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .multilink-button {
+        backdrop-filter: blur(3px);
+    }
+}
+
+@media (max-width: 480px) {
+    .social-icon {
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+    }
+    
+    .multilink-button {
+        backdrop-filter: blur(2px);
     }
 }
