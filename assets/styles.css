@@ -100,7 +100,7 @@
     bottom: -4px;
     left: 0;
     width: 0;
-    height: 1px;
+    height: 2px; /* Увеличил толщину для лучшей видимости */
     background: linear-gradient(90deg, #ff265c, transparent);
     animation: underlineGrow 1s ease-out forwards 0.8s;
 }
@@ -455,12 +455,12 @@
     width: 100%;
 }
 
+/* ИСПРАВЛЕНО: удален display: block, оставлен inline-block */
 .footer-info h3 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 100%;
-    display: block;
 }
 
 .footer-text-container {
@@ -523,6 +523,7 @@
     .footer-info h3 {
         font-size: 18px;
         text-align: center;
+        display: inline-block; /* Добавлено для мобильных */
     }
     
     .footer-info h3::after {
@@ -542,6 +543,7 @@
     .footer-info h3 {
         font-size: 20px;
         max-width: 100%;
+        display: inline-block; /* Добавлено для планшетов */
     }
     
     #typing-text {
@@ -579,6 +581,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: inline-block; /* Добавлено */
     }
     
     #typing-text {
@@ -613,6 +616,7 @@
     
     .footer-info h3 {
         font-size: 15px;
+        display: inline-block; /* Добавлено */
     }
     
     #typing-text {
@@ -658,6 +662,7 @@
     
     .footer-info h3 {
         font-size: 14px;
+        display: inline-block; /* Добавлено */
     }
     
     #typing-text {
@@ -683,6 +688,7 @@
 @media (max-width: 280px) {
     .footer-info h3 {
         font-size: 13px;
+        display: inline-block; /* Добавлено */
     }
     
     #typing-text {
