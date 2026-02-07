@@ -81,11 +81,6 @@
     animation: fadeInLeft 0.5s ease-out forwards 0.4s;
     line-height: 1.2;
     word-break: break-word;
-    /* Защита от переполнения */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    white-space: nowrap;
 }
 
 @keyframes fadeInLeft {
@@ -121,7 +116,6 @@
     min-height: 1.8em;
     overflow: hidden;
     width: 100%;
-    max-width: 100%;
 }
 
 /* ===== TYPING TEXT - FIXED WIDTH ===== */
@@ -167,7 +161,6 @@
     vertical-align: middle;
     animation: emojiPulse 2s infinite;
     opacity: 1 !important;
-    flex-shrink: 0;
 }
 
 @keyframes emojiPulse {
@@ -188,7 +181,6 @@
     text-shadow: 0 0 8px rgba(255, 38, 92, 0.6);
     animation: typingCursor 1.2s infinite;
     vertical-align: baseline;
-    flex-shrink: 0;
 }
 
 @keyframes typingCursor {
@@ -216,9 +208,7 @@
     flex-wrap: nowrap;
     justify-content: flex-end;
     flex-shrink: 0;
-    min-width: min(290px, 100%);
-    max-width: 100%;
-    overflow: hidden;
+    min-width: 290px;
 }
 
 .social-icon {
@@ -347,13 +337,14 @@
     min-width: 140px;
     max-width: 165px;
     backdrop-filter: blur(4px);
-    -webkit-tap-highlight-color: transparent;
+    -webkit-backtap-highlight-color: transparent;
     touch-action: manipulation;
     white-space: nowrap;
     flex-shrink: 0;
     font-size: clamp(13px, 2.5vw, 15px);
     border: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
 }
 
@@ -475,7 +466,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100%;
     }
     
     .footer-actions {
@@ -484,7 +474,6 @@
         gap: 8px;
         min-width: auto;
         width: 100%;
-        max-width: 100%;
     }
     
     .social-icon {
@@ -503,11 +492,6 @@
     .footer-info h3 {
         font-size: 18px;
         text-align: center;
-        /* Защита от переполнения */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-        white-space: nowrap;
     }
     
     .footer-info h3::after {
@@ -525,16 +509,10 @@
     
     .footer-info h3 {
         font-size: 20px;
-        /* Защита от переполнения */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-        white-space: nowrap;
     }
     
     #typing-text {
         font-size: 14px;
-        max-width: 100%;
     }
     
     .social-icon {
@@ -552,8 +530,7 @@
     
     .footer-actions {
         gap: 8px;
-        min-width: min(270px, 100%);
-        max-width: 100%;
+        min-width: 270px;
     }
 }
 
@@ -640,5 +617,119 @@
     #typing-text .typing-cursor {
         color: #ff265c;
         text-shadow: none;
+    }
+}
+
+/* ===== КРАЙНЯЯ МЕРА - ЕСЛИ ТЕКСТ ВСЕ РАВНО ВЫХОДИТ ЗА ПРЕДЕЛЫ ===== */
+@media (max-width: 480px) {
+    /* Принудительное обрезание всего что выходит за пределы */
+    .footer * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Защита заголовка */
+    .footer-info h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+        font-size: 16px;
+    }
+    
+    /* Защита текста */
+    #typing-text {
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+    }
+    
+    /* Защита контейнера действий */
+    .footer-actions {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding-bottom: 4px;
+        gap: 6px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .footer-actions::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Минимальные размеры для иконок */
+    .social-icon {
+        min-width: 30px;
+        min-height: 30px;
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+    
+    /* Минимальные размеры для кнопки */
+    .multilink-button {
+        min-width: 110px;
+        padding: 8px 14px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+    
+    /* В компактном режиме - центрирование */
+    .footer.compact-mode .footer-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+        overflow: visible;
+    }
+    
+    .footer.compact-mode .social-icon {
+        flex-shrink: 0;
+    }
+    
+    .footer.compact-mode .multilink-button {
+        flex-shrink: 0;
+    }
+}
+
+/* ===== САМАЯ КРАЙНЯЯ МЕРА ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ===== */
+@media (max-width: 360px) {
+    .footer {
+        padding: 12px 10px;
+    }
+    
+    .footer-info h3 {
+        font-size: 14px;
+    }
+    
+    #typing-text {
+        font-size: 11px;
+    }
+    
+    .social-icon {
+        min-width: 28px;
+        min-height: 28px;
+        width: 28px;
+        height: 28px;
+    }
+    
+    .multilink-button {
+        min-width: 100px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    /* Принудительное скрытие всего что вылезает */
+    .footer-info,
+    .footer-text-container,
+    .footer-actions {
+        overflow: hidden;
     }
 }
