@@ -19,7 +19,9 @@ function detectLanguage() {
     let buttonText = "";
     const emoji = "👹";
     
+    // EXPLICIT CHECK FOR ONLY 3 SUPPORTED LANGUAGES
     if (langCode === 'uk') {
+        // UKRAINIAN
         texts = [
             "Круті YouTube-канали, ІТ-проекти та індивідуальні плани від Андрея Мухамеда.",
             "Креативні YouTube-канали, сміливі IT-проєкти та бачення Андрея Мухамеда.",
@@ -27,15 +29,8 @@ function detectLanguage() {
         ];
         titleText = "Мухамед Ads";
         buttonText = "Єдине посилання";
-    } else if (langCode === 'ru') {
-        texts = [
-            "Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда.",
-            "Креативные YouTube-каналы, смелые IT-проекты и видение Андрея Мухамеда.",
-            "Где объединяются YouTube, технологии и идеи — мир Андрея Мухамеда."
-        ];
-        titleText = "Мухамед Ads";
-        buttonText = "Мультиссылка";
-    } else {
+    } else if (langCode === 'en') {
+        // ENGLISH (only explicitly specified)
         texts = [
             "Great YouTube-channels, IT-projects and individual plans Andrey Muhameda.",
             "Creative YouTube channels, bold IT projects, and the vision of Andrey Muhameda.",
@@ -43,6 +38,15 @@ function detectLanguage() {
         ];
         titleText = "Muhamed Ads";
         buttonText = "Multilink";
+    } else {
+        // ALL OTHER LANGUAGES → RUSSIAN (default)
+        texts = [
+            "Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда.",
+            "Креативные YouTube-каналы, смелые IT-проекты и видение Андрея Мухамеда.",
+            "Где объединяются YouTube, технологии и идеи — мир Андрея Мухамеда."
+        ];
+        titleText = "Мухамед Ads";
+        buttonText = "Мультиссылка";
     }
     
     return { texts, titleText, buttonText, emoji };
