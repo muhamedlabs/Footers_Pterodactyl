@@ -337,14 +337,13 @@
     min-width: 140px;
     max-width: 165px;
     backdrop-filter: blur(4px);
-    -webkit-backtap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     white-space: nowrap;
     flex-shrink: 0;
     font-size: clamp(13px, 2.5vw, 15px);
     border: none;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
 }
 
@@ -620,116 +619,99 @@
     }
 }
 
-/* ===== КРАЙНЯЯ МЕРА - ЕСЛИ ТЕКСТ ВСЕ РАВНО ВЫХОДИТ ЗА ПРЕДЕЛЫ ===== */
-@media (max-width: 480px) {
-    /* Принудительное обрезание всего что выходит за пределы */
-    .footer * {
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-    
-    /* Защита заголовка */
+/* ===== КРАЙНЯЯ МЕРА - ТОЛЬКО ЕСЛИ ТЕКСТ ВЫХОДИТ ЗА ПРЕДЕЛЫ КОНТЕЙНЕРА ===== */
+/* САМАЯ КРАЙНЯЯ МЕРА - только если текст вылазит */
+@media (max-width: 360px) {
+    /* Принудительное обрезание ВСЕГО текста */
     .footer-info h3 {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: block;
-        width: 100%;
-        font-size: 16px;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        width: 100% !important;
+        font-size: 14px !important;
+        max-width: 100% !important;
     }
     
-    /* Защита текста */
     #typing-text {
-        font-size: 12px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: block;
-        width: 100%;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        width: 100% !important;
+        font-size: 11px !important;
+        max-width: 100% !important;
     }
     
-    /* Защита контейнера действий */
+    /* Горизонтальная прокрутка для действий если не помещаются */
     .footer-actions {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        justify-content: flex-start;
-        padding-bottom: 4px;
-        gap: 6px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 4px !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        min-width: auto !important;
+        max-width: 100% !important;
     }
     
     .footer-actions::-webkit-scrollbar {
-        display: none;
+        display: none !important;
     }
     
-    /* Минимальные размеры для иконок */
     .social-icon {
-        min-width: 30px;
-        min-height: 30px;
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
-        flex-shrink: 0;
+        min-width: 28px !important;
+        min-height: 28px !important;
+        flex-shrink: 0 !important;
     }
     
-    /* Минимальные размеры для кнопки */
     .multilink-button {
-        min-width: 110px;
-        padding: 8px 14px;
-        font-size: 12px;
-        flex-shrink: 0;
+        min-width: 100px !important;
+        flex-shrink: 0 !important;
+        padding: 6px 10px !important;
+        font-size: 11px !important;
     }
     
     /* В компактном режиме - центрирование */
     .footer.compact-mode .footer-actions {
-        justify-content: center;
-        flex-wrap: wrap;
-        overflow: visible;
-    }
-    
-    .footer.compact-mode .social-icon {
-        flex-shrink: 0;
-    }
-    
-    .footer.compact-mode .multilink-button {
-        flex-shrink: 0;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        overflow: visible !important;
     }
 }
 
-/* ===== САМАЯ КРАЙНЯЯ МЕРА ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ===== */
-@media (max-width: 360px) {
+/* ЕЩЕ БОЛЕЕ КРАЙНЯЯ МЕРА - для экстремально узких экранов */
+@media (max-width: 320px) {
     .footer {
-        padding: 12px 10px;
+        padding: 10px 8px !important;
     }
     
     .footer-info h3 {
-        font-size: 14px;
+        font-size: 13px !important;
     }
     
     #typing-text {
-        font-size: 11px;
+        font-size: 10px !important;
     }
     
     .social-icon {
-        min-width: 28px;
-        min-height: 28px;
-        width: 28px;
-        height: 28px;
+        min-width: 26px !important;
+        min-height: 26px !important;
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 11px !important;
     }
     
     .multilink-button {
-        min-width: 100px;
-        padding: 6px 10px;
-        font-size: 11px;
+        min-width: 90px !important;
+        padding: 5px 8px !important;
+        font-size: 10px !important;
     }
     
-    /* Принудительное скрытие всего что вылезает */
-    .footer-info,
-    .footer-text-container,
-    .footer-actions {
-        overflow: hidden;
+    /* Полное скрытие переполнения */
+    .footer-container {
+        overflow: hidden !important;
     }
 }
