@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     padding: clamp(16px, 4vw, 22px) clamp(8px, 2vw, 12px);
-
+    
     /* background: url("https://i.ibb.co/Tx697qdQ/4.jpg") center / cover no-repeat; */
     
     position: relative;
@@ -67,7 +67,7 @@
     min-height: 60px;
 }
 
-/* ===== NAME ===== */
+/* ===== NAME - FIXED FOR DESKTOP ===== */
 .footer-info h3 {
     margin: 0;
     font-size: clamp(18px, 4vw, 24px);
@@ -80,7 +80,12 @@
     transform: translateX(-10px);
     animation: fadeInLeft 0.5s ease-out forwards 0.4s;
     line-height: 1.2;
-    word-break: break-word;
+    /* Desktop: normal text wrapping */
+    word-break: normal;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    max-width: 100%;
 }
 
 @keyframes fadeInLeft {
@@ -130,13 +135,20 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     color: #fff;
     opacity: 0.85;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* Desktop: normal wrapping */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     position: relative;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
 
 /* ===== HIDDEN TEXT FOR SIZE FIXING ===== */
@@ -191,12 +203,6 @@
     51%, 100% { 
         opacity: 0.3;
         text-shadow: 0 0 4px rgba(255, 38, 92, 0.3);
-    }
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
     }
 }
 
@@ -443,7 +449,7 @@
     }
 }
 
-/* ===== ADAPTATION FOR NARROW SCREENS ===== */
+/* ===== MOBILE ADAPTATION ===== */
 @media (max-width: 768px) {
     .footer-container {
         grid-template-columns: 1fr;
@@ -491,6 +497,12 @@
     .footer-info h3 {
         font-size: 18px;
         text-align: center;
+        /* Mobile: add ellipsis protection */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        display: block;
     }
     
     .footer-info h3::after {
@@ -530,6 +542,114 @@
     .footer-actions {
         gap: 8px;
         min-width: 270px;
+    }
+}
+
+/* ===== EXTREME PROTECTION - ONLY IF TEXT OVERFLOWS ===== */
+/* Extreme protection - only if text overflows */
+@media (max-width: 480px) {
+    /* Enhanced protection for very small screens */
+    .footer-info h3 {
+        font-size: 16px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    #typing-text {
+        font-size: 12px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 360px) {
+    /* Even more aggressive protection */
+    .footer-info h3 {
+        font-size: 14px !important;
+    }
+    
+    #typing-text {
+        font-size: 11px !important;
+    }
+    
+    /* Horizontal scroll for actions if they don't fit */
+    .footer-actions {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 4px !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        min-width: auto !important;
+        max-width: 100% !important;
+    }
+    
+    .footer-actions::-webkit-scrollbar {
+        display: none !important;
+    }
+    
+    .social-icon {
+        min-width: 28px !important;
+        min-height: 28px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .multilink-button {
+        min-width: 100px !important;
+        flex-shrink: 0 !important;
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+    }
+    
+    /* In compact mode - centering */
+    .footer.compact-mode .footer-actions {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        overflow: visible !important;
+    }
+}
+
+/* MOST EXTREME PROTECTION - for extremely narrow screens */
+@media (max-width: 320px) {
+    .footer {
+        padding: 10px 8px !important;
+    }
+    
+    .footer-info h3 {
+        font-size: 13px !important;
+    }
+    
+    #typing-text {
+        font-size: 10px !important;
+    }
+    
+    .social-icon {
+        min-width: 26px !important;
+        min-height: 26px !important;
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 11px !important;
+    }
+    
+    .multilink-button {
+        min-width: 90px !important;
+        padding: 5px 8px !important;
+        font-size: 10px !important;
+    }
+    
+    /* Complete overflow hiding */
+    .footer-container {
+        overflow: hidden !important;
     }
 }
 
@@ -616,102 +736,5 @@
     #typing-text .typing-cursor {
         color: #ff265c;
         text-shadow: none;
-    }
-}
-
-/* ===== КРАЙНЯЯ МЕРА - ТОЛЬКО ЕСЛИ ТЕКСТ ВЫХОДИТ ЗА ПРЕДЕЛЫ КОНТЕЙНЕРА ===== */
-/* САМАЯ КРАЙНЯЯ МЕРА - только если текст вылазит */
-@media (max-width: 360px) {
-    /* Принудительное обрезание ВСЕГО текста */
-    .footer-info h3 {
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: block !important;
-        width: 100% !important;
-        font-size: 14px !important;
-        max-width: 100% !important;
-    }
-    
-    #typing-text {
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: block !important;
-        width: 100% !important;
-        font-size: 11px !important;
-        max-width: 100% !important;
-    }
-    
-    /* Горизонтальная прокрутка для действий если не помещаются */
-    .footer-actions {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        justify-content: flex-start !important;
-        padding-bottom: 4px !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        min-width: auto !important;
-        max-width: 100% !important;
-    }
-    
-    .footer-actions::-webkit-scrollbar {
-        display: none !important;
-    }
-    
-    .social-icon {
-        min-width: 28px !important;
-        min-height: 28px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .multilink-button {
-        min-width: 100px !important;
-        flex-shrink: 0 !important;
-        padding: 6px 10px !important;
-        font-size: 11px !important;
-    }
-    
-    /* В компактном режиме - центрирование */
-    .footer.compact-mode .footer-actions {
-        justify-content: center !important;
-        flex-wrap: wrap !important;
-        overflow: visible !important;
-    }
-}
-
-/* ЕЩЕ БОЛЕЕ КРАЙНЯЯ МЕРА - для экстремально узких экранов */
-@media (max-width: 320px) {
-    .footer {
-        padding: 10px 8px !important;
-    }
-    
-    .footer-info h3 {
-        font-size: 13px !important;
-    }
-    
-    #typing-text {
-        font-size: 10px !important;
-    }
-    
-    .social-icon {
-        min-width: 26px !important;
-        min-height: 26px !important;
-        width: 26px !important;
-        height: 26px !important;
-        font-size: 11px !important;
-    }
-    
-    .multilink-button {
-        min-width: 90px !important;
-        padding: 5px 8px !important;
-        font-size: 10px !important;
-    }
-    
-    /* Полное скрытие переполнения */
-    .footer-container {
-        overflow: hidden !important;
     }
 }
