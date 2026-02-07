@@ -9,7 +9,7 @@ window.SCREEN_HEIGHT = height;
 
 // ===== ENHANCED LANGUAGE DETECTION AND LOCALIZATION =====
 function detectLanguage() {
-    const userLang = navigator.language || navigator.userLanguage || 'en';
+    const userLang = navigator.language || navigator.userLanguage || 'ru';
     const langCode = userLang.split('-')[0].toLowerCase();
     
     console.log('Detected browser language:', userLang, 'code:', langCode);
