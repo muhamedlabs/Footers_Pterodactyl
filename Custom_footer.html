@@ -6,7 +6,7 @@
         padding: clamp(16px, 4vw, 22px) clamp(8px, 2vw, 12px);
 
         background: url("https://i.ibb.co/Tx697qdQ/4.jpg") center / cover no-repeat;
-        
+
         position: relative;
         overflow: hidden;
         opacity: 0;
@@ -23,15 +23,15 @@
         }
     }
 
-    /* ===== FOOTER GLASS ===== */
+    /* ===== FOOTER GLASS - ADDED TRANSPARENCY ===== */
     .footer {
-        max-width: min(1180px, 90vw);
         width: 100%;
+        max-width: min(100%, 1180px);
         padding: clamp(16px, 3vw, 22px) clamp(16px, 3vw, 30px);
         border-radius: clamp(16px, 3vw, 24px);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        background: linear-gradient(135deg, rgba(255,38,92,0.12), rgba(255,255,255,0.035));
+        background: linear-gradient(135deg, rgba(255,38,92,0.12), rgba(255,255,255,0.07));
         border: 1px solid rgba(255,38,92,0.2);
         box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 0 15px rgba(255,38,92,0.08);
         color: #fff;
@@ -39,6 +39,8 @@
         overflow: hidden;
         transform: translateZ(0);
         box-sizing: border-box;
+        margin: 0 auto;
+        opacity: 0.95;
     }
 
     /* ===== PARTICLE EFFECT ===== */
@@ -55,7 +57,7 @@
         will-change: transform;
     }
 
-    /* ===== CONTAINER ===== */
+    /* ===== CONTAINER - ADAPTIVE GRID WITH FIXED WIDTH ===== */
     .footer-container {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -63,6 +65,7 @@
         gap: clamp(12px, 3vw, 20px);
         position: relative;
         z-index: 2;
+        min-height: 60px;
     }
 
     /* ===== NAME ===== */
@@ -105,94 +108,79 @@
         }
     }
 
-    /* ===== TEXT WITH EMOJI ===== */
-    .footer-info p {
+    /* ===== TEXT CONTAINER WITH FIXED WIDTH ===== */
+    .footer-text-container {
         margin-top: clamp(4px, 1vw, 8px);
-        font-size: clamp(13px, 2.5vw, 15px);
-        opacity: 0.85;
-        line-height: 1.5;
+        position: relative;
         display: flex;
         align-items: center;
         min-height: 1.8em;
-        flex-wrap: wrap;
-        gap: 8px;
-        position: relative;
+        overflow: hidden;
+        width: 100%;
     }
 
-    /* ===== STYLED EMOJI ===== */
-    .emoji-container {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        background: linear-gradient(135deg, rgba(255,38,92,0.15), rgba(255,255,255,0.05));
-        border-radius: 50%;
-        border: 2px solid rgba(255,38,92,0.4);
-        font-size: 18px;
-        margin-right: 8px;
-        flex-shrink: 0;
-        box-shadow: 
-            0 2px 10px rgba(255,38,92,0.25),
-            inset 0 0 5px rgba(255,255,255,0.1);
-        position: relative;
-        z-index: 2;
-        opacity: 0;
-        transform: scale(0.8) rotate(-10deg);
-        animation: emojiEntrance 0.5s ease-out forwards 0.3s,
-                   emojiPulse 2s infinite alternate 0.8s;
-    }
-
-    @keyframes emojiEntrance {
-        to {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-        }
-    }
-
-    @keyframes emojiPulse {
-        0% {
-            transform: scale(1);
-            box-shadow: 
-                0 2px 10px rgba(255,38,92,0.25),
-                inset 0 0 5px rgba(255,255,255,0.1);
-        }
-        100% {
-            transform: scale(1.08);
-            box-shadow: 
-                0 4px 16px rgba(255,38,92,0.35),
-                inset 0 0 8px rgba(255,255,255,0.15);
-        }
-    }
-
-    /* ===== TYPING TEXT (no highlighting) ===== */
+    /* ===== TYPING TEXT - FIXED WIDTH ===== */
     #typing-text {
+        font-size: clamp(13px, 2.5vw, 15px);
         font-weight: 500;
         opacity: 0;
         animation: fadeIn 0.5s ease-out forwards 0.6s;
         display: inline-block;
-        min-height: 1.5em;
-        line-height: 1.5;
+        line-height: 1.4;
         vertical-align: middle;
         text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        color: #fff; /* Just white text */
+        color: #fff;
+        opacity: 0.85;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        position: relative;
     }
 
-    @keyframes fadeIn {
-        to {
-            opacity: 1;
+    /* ===== HIDDEN TEXT FOR SIZE FIXING ===== */
+    .hidden-text-sizer {
+        position: absolute !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        width: auto !important;
+        white-space: nowrap !important;
+        font-size: clamp(13px, 2.5vw, 15px) !important;
+        font-weight: 500 !important;
+        line-height: 1.4 !important;
+    }
+
+    /* ===== EMOJI INSIDE TEXT - SIMPLE ANIMATION ===== */
+    #typing-text .emoji-inline {
+        display: inline-block;
+        margin-right: 6px;
+        font-size: 1.1em;
+        vertical-align: middle;
+        animation: emojiPulse 2s infinite;
+        opacity: 1 !important;
+    }
+
+    @keyframes emojiPulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
         }
     }
 
-    /* ===== STYLIZED TYPING CURSOR ===== */
-    #typing-text::after {
-        content: "|";
+    /* ===== TYPING CURSOR - SINGLE CURSOR ===== */
+    #typing-text .typing-cursor {
+        display: inline-block;
         margin-left: 4px;
         font-weight: 700;
         color: #ff265c;
         text-shadow: 0 0 8px rgba(255, 38, 92, 0.6);
         animation: typingCursor 1.2s infinite;
-        display: inline-block;
         vertical-align: baseline;
     }
 
@@ -207,13 +195,21 @@
         }
     }
 
-    /* ===== OUTLINE FOR SOCIAL ICONS ===== */
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* ===== SOCIAL ICONS - FIXED WIDTH ===== */
     .footer-actions {
         display: flex;
         align-items: center;
         gap: clamp(6px, 2vw, 10px);
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        flex-shrink: 0;
+        min-width: 290px;
     }
 
     .social-icon {
@@ -234,21 +230,17 @@
         z-index: 3;
         opacity: 0;
         transform: scale(0.9);
-        animation: subtlePop 0.4s ease-out forwards;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
-        
-        /* Gradient outline */
         border: 1.5px solid transparent;
         background-clip: padding-box;
         box-shadow: 
             0 0 0 1px rgba(255,38,92,0.1),
             inset 0 0 10px rgba(255,38,92,0.05);
-        
-        /* Outline animation */
         animation: 
             subtlePop 0.4s ease-out forwards,
             borderGlow 2s ease-in-out infinite;
+        flex-shrink: 0;
     }
 
     .social-icon:nth-child(1) { animation-delay: 0.5s, 0.5s; }
@@ -316,10 +308,10 @@
         border-color: transparent;
     }
 
-    /* ===== BUTTON ===== */
+    /* ===== BUTTON - MADE WIDER ===== */
     .multilink-button {
         position: relative;
-        padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 28px);
+        padding: clamp(10px, 2vw, 12px) clamp(24px, 5vw, 32px);
         border-radius: clamp(14px, 3vw, 18px);
         background: linear-gradient(145deg, 
             rgba(255,30,83,0.9) 0%, 
@@ -342,16 +334,19 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        min-width: max-content;
+        gap: 8px;
+        min-width: 140px;
+        max-width: 165px;
         backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+        -webkit-backtap-highlight-color: transparent;
+        touch-action: manipulation;
+        white-space: nowrap;
+        flex-shrink: 0;
         font-size: clamp(13px, 2.5vw, 15px);
         border: none;
         cursor: pointer;
         -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-        white-space: nowrap;
+        box-sizing: border-box;
     }
 
     @keyframes buttonSlideUp {
@@ -402,59 +397,115 @@
         transform: translateX(3px);
     }
 
-    /* ===== RESPONSIVENESS ===== */
-    @media (max-width: 992px) {
-        .footer-container {
-            gap: 16px;
-        }
-        
-        .social-icon {
-            width: 36px;
-            height: 36px;
-            font-size: 14px;
-        }
-        
-        #typing-text {
-            font-size: 14px;
-        }
-        
-        .emoji-container {
-            width: 28px;
-            height: 28px;
-            font-size: 16px;
+    /* ===== COMPACT MODE ===== */
+    .footer.compact-mode .footer-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .footer.compact-mode .footer-text-container {
+        justify-content: center;
+        text-align: center;
+        margin-top: 8px;
+    }
+
+    .footer.compact-mode #typing-text {
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+    }
+
+    .footer.compact-mode .footer-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        min-width: auto;
+        width: 100%;
+    }
+
+    .footer.compact-mode .footer-info h3 {
+        text-align: center;
+    }
+
+    .footer.compact-mode .footer-info h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        animation: underlineGrowCenter 1s ease-out forwards 0.8s;
+    }
+
+    @keyframes underlineGrowCenter {
+        to {
+            width: 60%;
         }
     }
 
+    /* ===== ADAPTATION FOR NARROW SCREENS ===== */
     @media (max-width: 768px) {
         .footer-container {
             grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            gap: 16px;
             text-align: center;
-            gap: 20px;
+            min-height: auto;
         }
         
-        .footer-info p {
-            justify-content: flex-start;
-            text-align: left;
-            gap: 6px;
+        .footer-text-container {
+            justify-content: center;
+            text-align: center;
+            margin-top: 6px;
+        }
+        
+        #typing-text {
+            text-align: center;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .footer-actions {
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
+            min-width: auto;
+            width: 100%;
         }
         
         .social-icon {
-            width: 36px;
-            height: 36px;
-            font-size: 14px;
-            border-width: 1px;
+            width: 34px;
+            height: 34px;
+            font-size: 13px;
         }
         
         .multilink-button {
-            padding: 10px 22px;
-            font-size: 14px;
-            min-width: 120px;
+            padding: 9px 20px;
+            font-size: 13px;
+            min-width: 130px;
+            max-width: 150px;
+        }
+        
+        .footer-info h3 {
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .footer-info h3::after {
+            left: 50%;
+            transform: translateX(-50%);
+            animation: underlineGrowCenter 1s ease-out forwards 0.8s;
+        }
+    }
+
+    /* ===== TABLET ADAPTATION ===== */
+    @media (min-width: 769px) and (max-width: 992px) {
+        .footer-container {
+            gap: 16px;
         }
         
         .footer-info h3 {
@@ -462,227 +513,58 @@
         }
         
         #typing-text {
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 14px;
         }
         
-        .emoji-container {
-            width: 26px;
-            height: 26px;
-            font-size: 15px;
-            margin-right: 5px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .footer {
-            padding: 14px 16px;
-            border-radius: 18px;
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
         }
         
-        .footer-container {
-            gap: 16px;
-        }
-        
-        .footer-info p {
-            font-size: 13px;
-            line-height: 1.4;
-            min-height: 1.6em;
-            gap: 5px;
+        .multilink-button {
+            padding: 10px 22px;
+            font-size: 14px;
+            min-width: 130px;
+            max-width: 155px;
         }
         
         .footer-actions {
             gap: 8px;
-        }
-        
-        .social-icon {
-            width: 34px;
-            height: 34px;
-            font-size: 13px;
-            border-width: 1px;
-        }
-        
-        .multilink-button {
-            padding: 9px 18px;
-            font-size: 13px;
-            min-width: 110px;
-            border-radius: 16px;
-        }
-        
-        .footer-info h3 {
-            font-size: 18px;
-        }
-        
-        #typing-text {
-            font-size: 12px;
-        }
-        
-        .emoji-container {
-            width: 24px;
-            height: 24px;
-            font-size: 14px;
-            margin-right: 4px;
-        }
-    }
-
-    @media (max-width: 375px) {
-        .footer {
-            padding: 12px 14px;
-        }
-        
-        .footer-container {
-            gap: 14px;
-        }
-        
-        .footer-info p {
-            font-size: 12px;
-            min-height: 1.5em;
-            gap: 4px;
-        }
-        
-        .footer-actions {
-            gap: 6px;
-        }
-        
-        .social-icon {
-            width: 32px;
-            height: 32px;
-            font-size: 12px;
-        }
-        
-        .multilink-button {
-            padding: 8px 16px;
-            font-size: 12px;
-            min-width: 100px;
-            gap: 4px;
-        }
-        
-        .multilink-button .arrow {
-            font-size: 13px;
-        }
-        
-        .footer-info h3 {
-            font-size: 17px;
-        }
-        
-        #typing-text {
-            font-size: 11px;
-        }
-        
-        .emoji-container {
-            width: 22px;
-            height: 22px;
-            font-size: 13px;
-            margin-right: 3px;
-        }
-    }
-
-    /* ===== ENHANCED TOUCH DEVICE ADAPTIVENESS ===== */
-    @media (hover: none) and (pointer: coarse) {
-        .emoji-container {
-            animation: emojiEntrance 0.5s ease-out forwards 0.3s;
-        }
-        
-        .emoji-container:active {
-            transform: scale(0.95);
-            transition: transform 0.1s;
-        }
-        
-        #typing-text {
-            animation: fadeIn 0.5s ease-out forwards 0.6s;
-        }
-        
-        .social-icon {
-            animation: 
-                subtlePop 0.4s ease-out forwards,
-                borderGlowMobile 3s ease-in-out infinite;
-        }
-        
-        @keyframes borderGlowMobile {
-            0%, 100% {
-                box-shadow: 
-                    0 0 0 1px rgba(255,38,92,0.15),
-                    inset 0 0 8px rgba(255,38,92,0.05);
-            }
-            50% {
-                box-shadow: 
-                    0 0 0 1px rgba(255,38,92,0.25),
-                    inset 0 0 8px rgba(255,38,92,0.1);
-            }
-        }
-        
-        .social-icon:active {
-            transform: scale(0.95);
-            background: rgba(255,38,92,0.95);
-            color: #fff;
-            box-shadow: 
-                0 4px 15px rgba(255,38,92,0.3),
-                inset 0 0 10px rgba(255,255,255,0.2);
-        }
-        
-        .social-icon:hover,
-        .multilink-button:hover {
-            transform: none;
-        }
-        
-        .social-icon:active,
-        .multilink-button:active {
-            transform: translateY(-1px) scale(0.98);
-        }
-        
-        .footer-actions {
-            gap: 10px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            font-size: 16px;
-        }
-        
-        .multilink-button {
-            padding: 12px 24px;
-            min-width: 120px;
-        }
-        
-        #typing-text {
-            font-size: 14px;
-        }
-        
-        .emoji-container {
-            width: 28px;
-            height: 28px;
-            font-size: 16px;
+            min-width: 270px;
         }
     }
 
     /* ===== REDUCED MOTION PREFERENCE ===== */
     @media (prefers-reduced-motion: reduce) {
-        .footer-wrapper,
-        .footer-info h3,
-        .social-icon,
-        .multilink-button,
-        #typing-text {
+        * {
             animation: none !important;
-            opacity: 1;
-            transform: none !important;
+            transition: none !important;
         }
         
-        .emoji-container {
-            animation: none !important;
-            opacity: 1;
-            transform: none !important;
-        }
-        
-        #typing-text {
-            animation: none !important;
-            opacity: 1;
-        }
-        
-        #typing-text::after {
+        #typing-text .typing-cursor {
             animation: none;
             opacity: 0.8;
-            color: #ff265c;
+        }
+        
+        #typing-text .emoji-inline {
+            animation: none;
+        }
+        
+        .social-icon {
+            animation: subtlePop 0.4s ease-out forwards !important;
+        }
+        
+        .multilink-button {
+            animation: buttonSlideUp 0.5s ease-out forwards 1s !important;
+        }
+        
+        .footer-wrapper {
+            animation: subtleSlideUp 0.6s ease-out forwards !important;
+        }
+        
+        .footer-info h3 {
+            animation: fadeInLeft 0.5s ease-out forwards 0.4s !important;
         }
         
         .footer-info h3::after {
@@ -696,10 +578,6 @@
         
         .multilink-button:hover .arrow {
             transform: none;
-        }
-        
-        .social-icon {
-            animation: subtlePop 0.4s ease-out forwards !important;
         }
         
         .social-icon:hover {
@@ -716,11 +594,6 @@
         
         .social-icon {
             background: rgba(0,0,0,0.2);
-        }
-        
-        .emoji-container {
-            background: linear-gradient(135deg, rgba(255,38,92,0.25), rgba(0,0,0,0.2));
-            border-color: rgba(255,38,92,0.4);
         }
     }
 
@@ -742,7 +615,7 @@
             text-shadow: 0 0 2px #000;
         }
         
-        #typing-text::after {
+        #typing-text .typing-cursor {
             color: #ff265c;
             text-shadow: none;
         }
@@ -751,15 +624,15 @@
 
 <!-- ===== FOOTER ===== -->
 <div class="footer-wrapper">
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div id="particles-js" aria-hidden="true"></div>
         
         <div class="footer-container">
             <div class="footer-info">
                 <h3 id="title-text">Muhamed Ads</h3>
-
-                <p>👹 <span id="typing-text" aria-live="polite"></span></p>
-
+                <div class="footer-text-container">
+                    <span id="typing-text" aria-live="polite"></span>
+                </div>
             </div>
 
             <div class="footer-actions">
@@ -787,280 +660,639 @@
     </footer>
 </div>
 
-<!-- ===== OPTIMIZED SCRIPTS LOADING ===== -->
+<!-- ===== EXTENDED JAVASCRIPT WITH ENHANCED TYPING EFFECT ===== -->
 <script>
-    // Load FontAwesome with error handling
-    (function() {
-        const faScript = document.createElement('script');
-        faScript.src = 'https://kit.fontawesome.com/87b9cd76ed.js';
-        faScript.crossOrigin = 'anonymous';
-        faScript.async = true;
-        faScript.onerror = function() {
-            console.warn('FontAwesome failed to load. Using fallback.');
-        };
-        document.head.appendChild(faScript);
-    })();
-
-    // Load Particles.js only on non-mobile devices for performance
-    (function() {
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        if (!isMobile || window.innerWidth > 768) {
-            const particlesScript = document.createElement('script');
-            particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-            particlesScript.async = true;
-            particlesScript.onload = initParticles;
-            particlesScript.onerror = function() {
-                console.warn('Particles.js failed to load');
-            };
-            document.head.appendChild(particlesScript);
-        }
-    })();
-
-    // ===== BROWSER LANGUAGE DETECTION =====
+    // Detect screen dimensions
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    console.log("Viewport dimensions:", width, "x", height);
+    
+    // Store in global scope for accessibility
+    window.SCREEN_WIDTH = width;
+    window.SCREEN_HEIGHT = height;
+    
+    // ===== ENHANCED LANGUAGE DETECTION AND LOCALIZATION =====
     function detectLanguage() {
         const userLang = navigator.language || navigator.userLanguage || 'en';
-        console.log('Browser language detected:', userLang);
+        const langCode = userLang.split('-')[0].toLowerCase();
+        
+        console.log('Detected browser language:', userLang, 'code:', langCode);
         
         let texts = [];
         let titleText = "";
         let buttonText = "";
+        const emoji = "👹";
         
-        if (userLang.startsWith('uk')) {
-            texts = ["Круті YouTube-канали, ІТ-проекти та індивідуальні плани від Андрея Мухамеда."];
+        if (langCode === 'uk') {
+            texts = [
+                "Круті YouTube-канали, ІТ-проекти та індивідуальні плани від Андрея Мухамеда.",
+                "Креативні YouTube-канали, сміливі IT-проєкти та бачення Андрея Мухамеда.",
+                "Де поєднуються YouTube, технології та ідеї — світ Андрея Мухамеда."
+            ];
             titleText = "Мухамед Ads";
             buttonText = "Єдине посилання";
-
-        } else if (userLang.startsWith('ru') || userLang.startsWith('be') || userLang.startsWith('kk')) {
-            texts = ["Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда."];
+        } else if (langCode === 'ru') {
+            texts = [
+                "Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда.",
+                "Креативные YouTube-каналы, смелые IT-проекты и видение Андрея Мухамеда.",
+                "Где объединяются YouTube, технологии и идеи — мир Андрея Мухамеда."
+            ];
             titleText = "Мухамед Ads";
             buttonText = "Мультиссылка";
-
         } else {
-            texts = ["Great YouTube channels, IT projects and personal plans of Andrey Muhamed."];
+            texts = [
+                "Great YouTube-channels, IT-projects and individual plans Andrey Muhameda.",
+                "Creative YouTube channels, bold IT projects, and the vision of Andrey Muhameda.",
+                "Where YouTube, technology, and ideas unite — the world of Andrey Muhameda."
+            ];
             titleText = "Muhamed Ads";
             buttonText = "Multilink";
         }
         
-        return { texts, titleText, buttonText };
+        return { texts, titleText, buttonText, emoji };
     }
-
-    // ===== TYPING EFFECT =====
-    function initTypingEffect() {
-        const { texts, titleText, buttonText } = detectLanguage();
-        const typingElement = document.getElementById("typing-text");
-        const titleEl = document.getElementById("title-text");
-        const buttonTextEl = document.getElementById("button-text");
+    
+    // ===== ADVANCED TYPEWRITER EFFECT WITH FULL CYCLE =====
+    class TypewriterEffect {
+        constructor() {
+            this.typingElement = document.getElementById("typing-text");
+            this.titleElement = document.getElementById("title-text");
+            this.buttonTextElement = document.getElementById("button-text");
+            this.data = detectLanguage();
+            
+            // Animation states
+            this.textIndex = 0;
+            this.charIndex = 0;
+            this.isDeleting = false;
+            this.isPaused = false;
+            this.animationId = null;
+            this.typingSpeed = 50;
+            this.deletingSpeed = 30;
+            this.pauseBetweenTexts = 1500;
+            this.pauseAfterTyping = 2000;
+            
+            // Performance settings
+            this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            this.initialize();
+        }
         
-        titleEl.textContent = titleText;
-        buttonTextEl.textContent = buttonText;
+        initialize() {
+            // Set initial text
+            this.titleElement.textContent = this.data.titleText;
+            this.buttonTextElement.textContent = this.data.buttonText;
+            
+            // Create initial display
+            this.createInitialDisplay();
+            
+            // Start animation if motion is not reduced
+            if (!this.prefersReducedMotion) {
+                this.startTyping();
+            }
+        }
         
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let animationId = null;
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        function typeLoop() {
-            const current = texts[textIndex];
-            if (!isDeleting) {
-                typingElement.textContent = current.slice(0, charIndex++);
-                if (charIndex > current.length) setTimeout(() => isDeleting = true, 2000);
+        createInitialDisplay() {
+            this.typingElement.innerHTML = '';
+            
+            const emojiSpan = this.createEmojiSpan();
+            const cursorSpan = this.createCursorSpan();
+            
+            if (this.prefersReducedMotion) {
+                cursorSpan.style.animation = 'none';
+                cursorSpan.style.opacity = '0.8';
+                // Show first text immediately
+                const textSpan = document.createElement('span');
+                textSpan.textContent = this.data.texts[0];
+                this.typingElement.appendChild(emojiSpan);
+                this.typingElement.appendChild(textSpan);
+                this.typingElement.appendChild(cursorSpan);
             } else {
-                typingElement.textContent = current.slice(0, charIndex--);
-                if (charIndex === 0) { 
-                    isDeleting = false; 
-                    textIndex = (textIndex + 1) % texts.length; 
-                }
+                // Show only emoji and cursor initially
+                this.typingElement.appendChild(emojiSpan);
+                this.typingElement.appendChild(cursorSpan);
+            }
+        }
+        
+        createEmojiSpan() {
+            const emojiSpan = document.createElement('span');
+            emojiSpan.className = 'emoji-inline';
+            emojiSpan.textContent = this.data.emoji + ' ';
+            emojiSpan.setAttribute('aria-hidden', 'true');
+            return emojiSpan;
+        }
+        
+        createCursorSpan() {
+            const cursorSpan = document.createElement('span');
+            cursorSpan.className = 'typing-cursor';
+            cursorSpan.textContent = '|';
+            cursorSpan.setAttribute('aria-hidden', 'true');
+            return cursorSpan;
+        }
+        
+        startTyping() {
+            console.log('Starting typewriter effect...');
+            setTimeout(() => this.typeLoop(), 800);
+        }
+        
+        typeLoop() {
+            if (this.isPaused) {
+                this.animationId = setTimeout(() => this.typeLoop(), 100);
+                return;
             }
             
-            const speed = isDeleting ? 40 : 60;
-            animationId = setTimeout(typeLoop, speed);
-        }
-
-        // Handle reduced motion preference
-        if (prefersReducedMotion) {
-            typingElement.textContent = texts[0];
-            return function cleanup() {};
+            const currentText = this.data.texts[this.textIndex];
+            
+            // Calculate display text based on current state
+            let displayText = '';
+            if (this.isDeleting) {
+                displayText = currentText.substring(0, this.charIndex - 1);
+            } else {
+                displayText = currentText.substring(0, this.charIndex + 1);
+            }
+            
+            // Update display
+            this.updateDisplay(displayText);
+            
+            // Calculate speed
+            let speed = this.typingSpeed;
+            if (this.isDeleting) {
+                speed = this.deletingSpeed;
+            }
+            
+            // Handle state transitions
+            if (!this.isDeleting && this.charIndex === currentText.length) {
+                // Finished typing - pause before deleting
+                this.isPaused = true;
+                setTimeout(() => {
+                    this.isPaused = false;
+                    this.isDeleting = true;
+                    this.animationId = setTimeout(() => this.typeLoop(), 500);
+                }, this.pauseAfterTyping);
+                return;
+            }
+            
+            if (this.isDeleting && this.charIndex === 0) {
+                // Finished deleting - move to next text
+                this.isDeleting = false;
+                this.textIndex = (this.textIndex + 1) % this.data.texts.length;
+                this.isPaused = true;
+                setTimeout(() => {
+                    this.isPaused = false;
+                    this.animationId = setTimeout(() => this.typeLoop(), 500);
+                }, this.pauseBetweenTexts);
+                return;
+            }
+            
+            // Update character index
+            if (this.isDeleting) {
+                this.charIndex--;
+            } else {
+                this.charIndex++;
+            }
+            
+            // Continue loop
+            this.animationId = setTimeout(() => this.typeLoop(), speed);
         }
         
-        // Start typing effect
-        setTimeout(typeLoop, 800);
+        updateDisplay(text) {
+            this.typingElement.innerHTML = '';
+            
+            const emojiSpan = this.createEmojiSpan();
+            const textSpan = document.createElement('span');
+            textSpan.textContent = text;
+            const cursorSpan = this.createCursorSpan();
+            
+            this.typingElement.appendChild(emojiSpan);
+            this.typingElement.appendChild(textSpan);
+            this.typingElement.appendChild(cursorSpan);
+        }
         
-        // Cleanup function
-        return function cleanup() {
-            if (animationId) clearTimeout(animationId);
-        };
+        // Public method to restart the effect
+        restart() {
+            this.destroy();
+            this.textIndex = 0;
+            this.charIndex = 0;
+            this.isDeleting = false;
+            this.isPaused = false;
+            this.createInitialDisplay();
+            this.startTyping();
+        }
+        
+        // Public method to change texts
+        updateTexts(newTexts) {
+            this.data.texts = newTexts;
+            this.restart();
+        }
+        
+        destroy() {
+            if (this.animationId) {
+                clearTimeout(this.animationId);
+                this.animationId = null;
+            }
+        }
     }
-
-    // ===== PARTICLE EFFECT INITIALIZATION =====
-    function initParticles() {
-        if (typeof particlesJS === 'undefined') return;
-        
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        if (prefersReducedMotion) {
-            document.getElementById('particles-js').style.display = 'none';
-            return;
+    
+    // ===== SIMPLIFIED PARTICLE SYSTEM =====
+    class ParticleSystem {
+        constructor() {
+            this.containerId = 'particles-js';
+            this.isMobile = window.innerWidth <= 768;
+            this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            this.initialized = false;
         }
         
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: window.innerWidth < 768 ? 30 : 65,
-                    density: {
-                        enable: true,
-                        value_area: window.innerWidth < 768 ? 300 : 500
-                    }
-                },
-                color: {
-                    value: ["#ff265c", "#ff5f8a", "#ffffff"]
-                },
-                shape: {
-                    type: ["circle", "triangle", "edge"],
-                    stroke: {
-                        width: 0,
-                        color: "#000000"
-                    },
-                    polygon: {
-                        nb_sides: 5
-                    }
-                },
-                opacity: {
-                    value: 0.65,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.2,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: window.innerWidth < 768 ? 2 : 2.5,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 3,
-                        size_min: 1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: window.innerWidth > 480,
-                    distance: 120,
-                    color: "#ff5f8a",
-                    opacity: 0.3,
-                    width: 1,
-                    shadow: {
-                        enable: true,
-                        color: "#ff265c",
-                        blur: 3
-                    }
-                },
-                move: {
-                    enable: true,
-                    speed: window.innerWidth < 768 ? 1 : 1.5,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "bounce",
-                    bounce: true,
-                    attract: {
-                        enable: true,
-                        rotateX: 800,
-                        rotateY: 1600
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: window.innerWidth > 768,
-                        mode: "grab"
-                    },
-                    onclick: {
-                        enable: window.innerWidth > 768,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 150,
-                        line_linked: {
-                            opacity: 0.5
+        shouldInitialize() {
+            return !this.isMobile && !this.prefersReducedMotion;
+        }
+        
+        async initialize() {
+            if (!this.shouldInitialize()) {
+                document.getElementById(this.containerId).style.display = 'none';
+                return;
+            }
+            
+            // Load particles.js if not already loaded
+            if (typeof particlesJS === 'undefined') {
+                await this.loadParticlesJS();
+            }
+            
+            if (typeof particlesJS !== 'undefined') {
+                this.createParticles();
+                this.initialized = true;
+            }
+        }
+        
+        loadParticlesJS() {
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+                script.onload = () => {
+                    console.log('Particles.js loaded successfully');
+                    resolve();
+                };
+                script.onerror = () => {
+                    console.warn('Failed to load particles.js');
+                    resolve();
+                };
+                document.head.appendChild(script);
+            });
+        }
+        
+        createParticles() {
+            particlesJS(this.containerId, {
+                particles: {
+                    number: {
+                        value: 45,
+                        density: {
+                            enable: true,
+                            value_area: 400
                         }
                     },
-                    push: {
-                        particles_nb: 4
+                    color: {
+                        value: ["#ff265c", "#ff5f8a", "#ffffff"]
+                    },
+                    shape: {
+                        type: "circle"
+                    },
+                    opacity: {
+                        value: 0.6,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 1,
+                            opacity_min: 0.2,
+                            sync: false
+                        }
+                    },
+                    size: {
+                        value: 2.2,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 1,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 100,
+                        color: "#ff5f8a",
+                        opacity: 0.3,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1.2,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "bounce",
+                        bounce: true
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "grab"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push"
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 120,
+                            line_linked: {
+                                opacity: 0.4
+                            }
+                        },
+                        push: {
+                            particles_nb: 3
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+        }
+        
+        destroy() {
+            if (this.initialized && typeof pJSDom !== 'undefined') {
+                const canvases = document.querySelectorAll('.particles-js-canvas-el');
+                canvases.forEach(canvas => canvas.remove());
+                this.initialized = false;
+            }
+        }
+    }
+    
+    // ===== RESPONSIVE LAYOUT MANAGER =====
+    class LayoutManager {
+        constructor() {
+            this.footer = document.getElementById('footer');
+            this.actionsElement = document.querySelector('.footer-actions');
+            this.resizeTimeout = null;
+            this.previousWidth = window.innerWidth;
+        }
+        
+        calculateAndSetFixedWidth() {
+            const screenWidth = window.innerWidth;
+            
+            // Get the longest text
+            const { texts, emoji } = detectLanguage();
+            const longestText = texts.reduce((a, b) => a.length > b.length ? a : b);
+            const fullText = emoji + ' ' + longestText;
+            
+            // Create hidden element for measurement
+            const sizer = document.createElement('span');
+            sizer.className = 'hidden-text-sizer';
+            sizer.textContent = fullText;
+            document.body.appendChild(sizer);
+            
+            const maxTextWidth = sizer.offsetWidth;
+            document.body.removeChild(sizer);
+            
+            // Calculate actions width based on screen size
+            let actionsWidth;
+            if (screenWidth <= 768) {
+                actionsWidth = 5 * 34 + 4 * 8 + 130 + 20;
+            } else if (screenWidth <= 992) {
+                actionsWidth = 5 * 36 + 4 * 8 + 130 + 20;
+            } else {
+                actionsWidth = 5 * 38 + 4 * 10 + 165 + 20;
+            }
+            
+            // Calculate available width
+            const availableWidth = Math.min(1180, screenWidth * 0.9) - 60;
+            
+            // Determine if content fits
+            const totalWidth = maxTextWidth + actionsWidth + 40;
+            const fits = totalWidth <= availableWidth;
+            
+            // Apply appropriate mode
+            if (screenWidth <= 768) {
+                this.footer.classList.add('compact-mode');
+            } else if (fits) {
+                this.footer.classList.remove('compact-mode');
+                if (this.actionsElement) {
+                    this.actionsElement.style.minWidth = actionsWidth + 'px';
+                }
+            } else {
+                this.footer.classList.add('compact-mode');
+                if (this.actionsElement) {
+                    this.actionsElement.style.minWidth = 'auto';
+                }
+            }
+            
+            return fits;
+        }
+        
+        handleResize() {
+            clearTimeout(this.resizeTimeout);
+            this.resizeTimeout = setTimeout(() => {
+                const currentWidth = window.innerWidth;
+                const widthChanged = Math.abs(currentWidth - this.previousWidth) > 50;
+                
+                if (widthChanged) {
+                    window.SCREEN_WIDTH = currentWidth;
+                    window.SCREEN_HEIGHT = window.innerHeight;
+                    
+                    this.calculateAndSetFixedWidth();
+                    this.previousWidth = currentWidth;
+                }
+            }, 250);
+        }
+        
+        destroy() {
+            clearTimeout(this.resizeTimeout);
+        }
+    }
+    
+    // ===== SOCIAL ICONS ANIMATION CONTROLLER =====
+    class SocialIconsController {
+        constructor() {
+            this.icons = document.querySelectorAll('.social-icon');
+            this.initialize();
+        }
+        
+        initialize() {
+            // Add hover effect enhancements
+            this.icons.forEach(icon => {
+                icon.addEventListener('mouseenter', () => this.onIconHover(icon));
+                icon.addEventListener('mouseleave', () => this.onIconLeave(icon));
+                icon.addEventListener('focus', () => this.onIconHover(icon));
+                icon.addEventListener('blur', () => this.onIconLeave(icon));
+            });
+        }
+        
+        onIconHover(icon) {
+            icon.style.transform = 'translateY(-3px) scale(1.05)';
+            icon.style.boxShadow = 
+                '0 8px 25px rgba(255,38,92,0.4), 0 0 15px rgba(255,38,92,0.3), inset 0 0 10px rgba(255,255,255,0.2)';
+        }
+        
+        onIconLeave(icon) {
+            icon.style.transform = 'translateY(0) scale(1)';
+            icon.style.boxShadow = 
+                '0 0 0 1px rgba(255,38,92,0.1), inset 0 0 10px rgba(255,38,92,0.05)';
+        }
+        
+        destroy() {
+            this.icons.forEach(icon => {
+                icon.removeEventListener('mouseenter', () => this.onIconHover(icon));
+                icon.removeEventListener('mouseleave', () => this.onIconLeave(icon));
+                icon.removeEventListener('focus', () => this.onIconHover(icon));
+                icon.removeEventListener('blur', () => this.onIconLeave(icon));
+            });
+        }
+    }
+    
+    // ===== MAIN FOOTER CONTROLLER =====
+    class FooterController {
+        constructor() {
+            this.typewriter = null;
+            this.particleSystem = null;
+            this.layoutManager = null;
+            this.socialIconsController = null;
+            this.isInitialized = false;
+        }
+        
+        async initialize() {
+            if (this.isInitialized) return;
+            
+            console.log('=== INITIALIZING FOOTER ===');
+            
+            // Load FontAwesome
+            this.loadFontAwesome();
+            
+            // Initialize layout manager
+            this.layoutManager = new LayoutManager();
+            this.layoutManager.calculateAndSetFixedWidth();
+            
+            // Initialize typewriter effect
+            this.typewriter = new TypewriterEffect();
+            
+            // Initialize particle system
+            this.particleSystem = new ParticleSystem();
+            await this.particleSystem.initialize();
+            
+            // Initialize social icons controller
+            this.socialIconsController = new SocialIconsController();
+            
+            // Setup event listeners
+            this.setupEventListeners();
+            
+            this.isInitialized = true;
+            console.log('=== FOOTER INITIALIZED SUCCESSFULLY ===');
+        }
+        
+        loadFontAwesome() {
+            if (document.querySelector('script[src*="fontawesome"]')) return;
+            
+            const script = document.createElement('script');
+            script.src = 'https://kit.fontawesome.com/87b9cd76ed.js';
+            script.crossOrigin = 'anonymous';
+            script.async = true;
+            script.onerror = () => console.warn('FontAwesome failed to load');
+            document.head.appendChild(script);
+        }
+        
+        setupEventListeners() {
+            // Handle resize events
+            window.addEventListener('resize', () => this.layoutManager.handleResize());
+            
+            // Handle page visibility changes
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    this.typewriter.isPaused = true;
+                } else {
+                    this.typewriter.isPaused = false;
+                    if (!this.typewriter.animationId) {
+                        this.typewriter.typeLoop();
                     }
                 }
-            },
-            retina_detect: true
-        });
-    }
-
-    // ===== TOUCH OPTIMIZED INTERACTIONS =====
-    function initTouchOptimizations() {
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        
-        if (isTouchDevice) {
-            // Add touch feedback
-            const elements = document.querySelectorAll('.social-icon, .multilink-button');
+            });
             
-            elements.forEach(el => {
-                el.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.95)';
-                }, { passive: true });
-                
-                el.addEventListener('touchend', function() {
-                    this.style.transform = '';
-                }, { passive: true });
-            });
-        }
-    }
-
-    // ===== RESPONSIVE RESIZE HANDLER =====
-    let resizeTimeout;
-    function handleResize() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            // Reinitialize particles on resize for better performance
-            if (typeof particlesJS !== 'undefined') {
-                pJSDom = document.querySelectorAll('.particles-js-canvas-el');
-                for(let i = 0; i < pJSDom.length; i++) {
-                    pJSDom[i].parentNode.removeChild(pJSDom[i]);
-                }
-                initParticles();
+            // Handle multilink button click
+            const multilinkButton = document.querySelector('.multilink-button');
+            if (multilinkButton) {
+                multilinkButton.addEventListener('click', (e) => {
+                    console.log('Multilink button clicked');
+                    // Add any tracking or additional behavior here
+                });
             }
-        }, 250);
-    }
-
-    // ===== INITIALIZE EVERYTHING =====
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize typing effect
-        const cleanupTyping = initTypingEffect();
-        
-        // Initialize touch optimizations
-        initTouchOptimizations();
-        
-        // Add resize listener
-        window.addEventListener('resize', handleResize, { passive: true });
-        
-        // Add performance optimization for mobile
-        if (window.innerWidth < 768) {
-            // Reduce animations on mobile
-            document.querySelectorAll('.social-icon').forEach((icon, index) => {
-                icon.style.animationDelay = `${0.3 + (index * 0.1)}s`;
-            });
         }
         
-        // Cleanup on page unload
-        window.addEventListener('beforeunload', function() {
-            cleanupTyping();
-            window.removeEventListener('resize', handleResize);
+        // Public method to restart typewriter
+        restartTypewriter() {
+            if (this.typewriter) {
+                this.typewriter.restart();
+            }
+        }
+        
+        // Public method to update texts
+        updateTypewriterTexts(newTexts) {
+            if (this.typewriter) {
+                this.typewriter.updateTexts(newTexts);
+            }
+        }
+        
+        destroy() {
+            if (this.typewriter) {
+                this.typewriter.destroy();
+            }
+            
+            if (this.particleSystem) {
+                this.particleSystem.destroy();
+            }
+            
+            if (this.layoutManager) {
+                this.layoutManager.destroy();
+            }
+            
+            if (this.socialIconsController) {
+                this.socialIconsController.destroy();
+            }
+            
+            this.isInitialized = false;
+        }
+    }
+    
+    // ===== GLOBAL INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', () => {
+        // Create and initialize the footer controller
+        window.footerController = new FooterController();
+        window.footerController.initialize();
+        
+        // Add global utilities
+        window.footerUtils = {
+            restartTyping: () => window.footerController?.restartTypewriter(),
+            updateTexts: (texts) => window.footerController?.updateTypewriterTexts(texts),
+            detectLanguage: detectLanguage
+        };
+        
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            if (window.footerController) {
+                window.footerController.destroy();
+            }
         });
     });
+    
+    // ===== UTILITY FUNCTIONS =====
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
 </script>
