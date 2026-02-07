@@ -3,10 +3,10 @@
     display: flex;
     justify-content: center;
     padding: clamp(16px, 4vw, 22px) clamp(8px, 2vw, 12px);
+    position: relative;
 
     /* background: url("https://i.ibb.co/Tx697qdQ/4.jpg") center / cover no-repeat; */
     
-    position: relative;
     overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
@@ -81,6 +81,10 @@
     animation: fadeInLeft 0.5s ease-out forwards 0.4s;
     line-height: 1.2;
     word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    white-space: nowrap;
 }
 
 @keyframes fadeInLeft {
@@ -116,6 +120,7 @@
     min-height: 1.8em;
     overflow: hidden;
     width: 100%;
+    max-width: 100%;
 }
 
 /* ===== TYPING TEXT - FIXED WIDTH ===== */
@@ -161,6 +166,7 @@
     vertical-align: middle;
     animation: emojiPulse 2s infinite;
     opacity: 1 !important;
+    flex-shrink: 0;
 }
 
 @keyframes emojiPulse {
@@ -181,6 +187,7 @@
     text-shadow: 0 0 8px rgba(255, 38, 92, 0.6);
     animation: typingCursor 1.2s infinite;
     vertical-align: baseline;
+    flex-shrink: 0;
 }
 
 @keyframes typingCursor {
@@ -208,7 +215,9 @@
     flex-wrap: nowrap;
     justify-content: flex-end;
     flex-shrink: 0;
-    min-width: 290px;
+    min-width: min(290px, 100%);
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .social-icon {
@@ -337,15 +346,16 @@
     min-width: 140px;
     max-width: 165px;
     backdrop-filter: blur(4px);
-    -webkit-backtap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     white-space: nowrap;
     flex-shrink: 0;
     font-size: clamp(13px, 2.5vw, 15px);
     border: none;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 @keyframes buttonSlideUp {
@@ -373,6 +383,7 @@
     font-size: clamp(14px, 3vw, 16px);
     transition: all 0.3s ease;
     display: inline-block;
+    flex-shrink: 0;
 }
 
 .multilink-button:hover,
@@ -466,6 +477,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        max-width: 100%;
     }
     
     .footer-actions {
@@ -474,6 +486,7 @@
         gap: 8px;
         min-width: auto;
         width: 100%;
+        max-width: 100%;
     }
     
     .social-icon {
@@ -487,17 +500,82 @@
         font-size: 13px;
         min-width: 130px;
         max-width: 150px;
+        width: auto;
     }
     
     .footer-info h3 {
         font-size: 18px;
         text-align: center;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     .footer-info h3::after {
         left: 50%;
         transform: translateX(-50%);
         animation: underlineGrowCenter 1s ease-out forwards 0.8s;
+    }
+}
+
+/* ===== EXTRA SMALL SCREENS - ULTIMATE PROTECTION ===== */
+@media (max-width: 480px) {
+    .footer-container {
+        gap: 12px;
+    }
+    
+    .footer-info h3 {
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        width: 100%;
+    }
+    
+    #typing-text {
+        font-size: 12px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .footer-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+    
+    .social-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    
+    .multilink-button {
+        padding: 8px 16px;
+        font-size: 12px;
+        min-width: 120px;
+        max-width: 140px;
+        margin-top: 4px;
+    }
+    
+    /* Крайняя мера - если всё равно не помещается */
+    .footer.compact-mode .footer-actions {
+        flex-wrap: nowrap;
+        overflow: hidden;
+        justify-content: space-between;
+    }
+    
+    .footer.compact-mode .social-icon {
+        flex-shrink: 1;
+        min-width: 30px;
+    }
+    
+    .footer.compact-mode .multilink-button {
+        flex-shrink: 1;
+        min-width: 100px;
+        padding: 8px 12px;
     }
 }
 
@@ -509,10 +587,14 @@
     
     .footer-info h3 {
         font-size: 20px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     #typing-text {
         font-size: 14px;
+        max-width: 100%;
     }
     
     .social-icon {
@@ -530,7 +612,8 @@
     
     .footer-actions {
         gap: 8px;
-        min-width: 270px;
+        min-width: min(270px, 100%);
+        max-width: 100%;
     }
 }
 
@@ -617,5 +700,65 @@
     #typing-text .typing-cursor {
         color: #ff265c;
         text-shadow: none;
+    }
+}
+
+/* ===== EMERGENCY OVERFLOW PROTECTION ===== */
+/* Крайняя мера - если всё равно что-то выходит за пределы */
+.footer * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-info,
+.footer-text-container,
+.footer-actions {
+    overflow: hidden;
+}
+
+/* Принудительное ограничение в самых крайних случаях */
+@media (max-width: 360px) {
+    .footer {
+        padding: 12px 10px;
+    }
+    
+    .footer-info h3 {
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    #typing-text {
+        font-size: 11px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .footer-actions {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .footer-actions::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .social-icon {
+        min-width: 28px;
+        min-height: 28px;
+    }
+    
+    .multilink-button {
+        min-width: 100px;
+        padding: 6px 10px;
+        font-size: 11px;
     }
 }
