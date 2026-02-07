@@ -81,6 +81,10 @@
     animation: fadeInLeft 0.5s ease-out forwards 0.4s;
     line-height: 1.2;
     word-break: break-word;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @keyframes fadeInLeft {
@@ -443,7 +447,36 @@
     }
 }
 
-/* ===== ADAPTATION FOR NARROW SCREENS ===== */
+/* ===== ЗАЩИТА ОТ ПЕРЕПОЛНЕНИЯ - НАЧАЛО ===== */
+
+/* Базовая защита для всех экранов */
+.footer-info {
+    overflow: hidden;
+    width: 100%;
+}
+
+.footer-info h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    display: block;
+}
+
+.footer-text-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+#typing-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
+}
+
+/* ===== АДАПТАЦИЯ ДЛЯ УЗКИХ ЭКРАНОВ ===== */
 @media (max-width: 768px) {
     .footer-container {
         grid-template-columns: 1fr;
@@ -451,6 +484,7 @@
         gap: 16px;
         text-align: center;
         min-height: auto;
+        overflow: hidden;
     }
     
     .footer-text-container {
@@ -462,9 +496,6 @@
     #typing-text {
         text-align: center;
         font-size: 13px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
     
     .footer-actions {
@@ -473,6 +504,7 @@
         gap: 8px;
         min-width: auto;
         width: 100%;
+        overflow: hidden;
     }
     
     .social-icon {
@@ -504,10 +536,12 @@
 @media (min-width: 769px) and (max-width: 992px) {
     .footer-container {
         gap: 16px;
+        overflow: hidden;
     }
     
     .footer-info h3 {
         font-size: 20px;
+        max-width: 100%;
     }
     
     #typing-text {
@@ -530,6 +564,154 @@
     .footer-actions {
         gap: 8px;
         min-width: 270px;
+    }
+}
+
+/* ===== МАЛЕНЬКИЕ ЭКРАНЫ (480px и меньше) ===== */
+@media (max-width: 480px) {
+    .footer {
+        padding: 14px 12px !important;
+        border-radius: 16px !important;
+    }
+    
+    .footer-info h3 {
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    #typing-text {
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .multilink-button {
+        padding: 8px 16px;
+        font-size: 12px;
+        min-width: 120px;
+        max-width: 140px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .social-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+}
+
+/* ===== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (360px и меньше) ===== */
+@media (max-width: 360px) {
+    .footer {
+        padding: 12px 10px !important;
+    }
+    
+    .footer-info h3 {
+        font-size: 15px;
+    }
+    
+    #typing-text {
+        font-size: 11px;
+    }
+    
+    .footer-actions {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        gap: 6px;
+    }
+    
+    .footer-actions::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .social-icon {
+        min-width: 30px;
+        min-height: 30px;
+        flex-shrink: 0;
+    }
+    
+    .multilink-button {
+        min-width: 110px;
+        flex-shrink: 0;
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}
+
+/* ===== КРАЙНЯЯ МЕРА (320px и меньше) ===== */
+@media (max-width: 320px) {
+    .footer {
+        padding: 10px 8px !important;
+        border-radius: 14px !important;
+    }
+    
+    .footer-info h3 {
+        font-size: 14px;
+    }
+    
+    #typing-text {
+        font-size: 10px;
+    }
+    
+    .social-icon {
+        min-width: 28px;
+        min-height: 28px;
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 11px;
+    }
+    
+    .multilink-button {
+        min-width: 100px;
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+}
+
+/* ===== САМАЯ КРАЙНЯЯ МЕРА (280px и меньше) ===== */
+@media (max-width: 280px) {
+    .footer-info h3 {
+        font-size: 13px;
+    }
+    
+    #typing-text {
+        font-size: 9px;
+    }
+    
+    /* Превращаем кнопку в иконку */
+    .multilink-button span {
+        display: none;
+    }
+    
+    .multilink-button {
+        min-width: 40px;
+        max-width: 40px;
+        width: 40px;
+        padding: 5px !important;
+        justify-content: center;
+    }
+    
+    .multilink-button .arrow {
+        margin: 0;
+        font-size: 14px;
+    }
+    
+    .social-icon {
+        min-width: 26px;
+        min-height: 26px;
+        width: 26px !important;
+        height: 26px !important;
     }
 }
 
@@ -616,140 +798,6 @@
     #typing-text .typing-cursor {
         color: #ff265c;
         text-shadow: none;
-    }
-}
-
-/* ===== КРАЙНЯЯ МЕРА - ЕСЛИ ТЕКСТ ВЫХОДИТ ЗА ПРЕДЕЛЫ КОНТЕЙНЕРА ===== */
-/* Extreme measure - only if text overflows */
-
-/* Mobile: Add ellipsis protection */
-@media (max-width: 768px) {
-    .footer-info h3 {
-        /* Add ellipsis for mobile */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 100%;
-        display: block;
-    }
-}
-
-/* Extra small screens - ultimate protection */
-@media (max-width: 480px) {
-    .footer-info h3 {
-        font-size: 16px;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    #typing-text {
-        font-size: 12px;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    .multilink-button {
-        padding: 8px 16px;
-        font-size: 12px;
-        min-width: 120px;
-        max-width: 140px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-}
-
-/* Most extreme cases */
-@media (max-width: 360px) {
-    .footer {
-        padding: 12px 10px;
-    }
-    
-    .footer-info h3 {
-        font-size: 14px;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    
-    #typing-text {
-        font-size: 11px;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    
-    .footer-actions {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        justify-content: flex-start !important;
-        padding-bottom: 4px !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        gap: 4px !important;
-    }
-    
-    .footer-actions::-webkit-scrollbar {
-        display: none !important;
-    }
-    
-    .social-icon {
-        min-width: 28px !important;
-        min-height: 28px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .multilink-button {
-        min-width: 100px !important;
-        flex-shrink: 0 !important;
-        padding: 6px 10px !important;
-        font-size: 11px !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-}
-
-/* Ultra extreme */
-@media (max-width: 320px) {
-    .footer {
-        padding: 10px 8px !important;
-    }
-    
-    .footer-info h3 {
-        font-size: 13px !important;
-    }
-    
-    #typing-text {
-        font-size: 10px !important;
-    }
-    
-    .social-icon {
-        min-width: 26px !important;
-        min-height: 26px !important;
-        width: 26px !important;
-        height: 26px !important;
-        font-size: 11px !important;
-    }
-    
-    .multilink-button {
-        min-width: 90px !important;
-        padding: 5px 8px !important;
-        font-size: 10px !important;
-    }
-    
-    /* Complete overflow hiding */
-    .footer-container {
-        overflow: hidden !important;
     }
 }
 
