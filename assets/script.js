@@ -28,7 +28,7 @@ function detectLanguage() {
             "Де поєднуються YouTube, технології та ідеї — світ Андрея Мухамеда."
         ];
         titleText = "Мухамед Ads";
-        buttonText = "Єдине посилання";
+        buttonText = "Е-посилання";
     } else if (langCode === 'en') {
         // ENGLISH (only explicitly specified)
         texts = [
