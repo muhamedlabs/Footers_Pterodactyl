@@ -1,4 +1,4 @@
-# Footers Pterodactyl
+# Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
 <p align="center">
   <img width="1920" height="957" alt="preview" src="https://github.com/user-attachments/assets/f6636d36-399c-4b99-9874-1a8b22ddd879" />
@@ -19,44 +19,47 @@
 
 ---
 
-## ✨ Возможности
+## Возможности
 
-* 🎨 Glassmorphism-дизайн
-* 🌈 Анимированные частицы внутри футера
-* 🌍 Автоматическое определение языка браузера
-* 📱 Полная адаптивность под любые экраны
-* ⚡ Оптимизированная производительность
-* 🎭 Плавные ненавязчивые анимации
-* ♿ Поддержка accessibility и reduced-motion
-* 🔗 Социальные иконки с hover-эффектами
+* Glassmorphism-дизайн
+* Анимированные частицы внутри футера
+* Автоматическое определение языка браузера
+* Полная адаптивность под любые экраны
+* Оптимизированная производительность
+* Плавные ненавязчивые анимации
+* Поддержка accessibility и reduced-motion
+* Социальные иконки с hover-эффектами
 
 ---
 
-## 🌍 Поддержка языков
+## Поддержка языков
 
 Футер поддерживает **только три языка**:
 
 | Язык            | Код  | Поведение                     |
 | --------------- | ---- | ----------------------------- |
-| 🇷🇺 Русский    | `ru` | **используется по умолчанию** |
-| 🇺🇦 Украинский | `uk` | определяется автоматически    |
-| 🇬🇧 Английский | `en` | определяется автоматически    |
+| Русский         | `ru` | **используется по умолчанию** |
+| Украинский      | `uk` | определяется автоматически    |
+| Английский      | `en` | определяется автоматически    |
 
 Если язык браузера не распознан — отображается **русская версия**.
 
 ---
 
-## 🖼 Примеры отображения
+## Примеры отображения
 
-**Украинский** <img width="1371" height="180" src="https://github.com/user-attachments/assets/2da536ba-ac9e-4794-be73-1e5b2bbfe297" />
+**Украинский**  
+<img width="1371" height="180" src="https://github.com/user-attachments/assets/2da536ba-ac9e-4794-be73-1e5b2bbfe297" />
 
-**Русский** <img width="1320" height="195" src="https://github.com/user-attachments/assets/79730c7c-30f3-4b9a-8fb3-cf2fb172583e" />
+**Русский**  
+<img width="1320" height="195" src="https://github.com/user-attachments/assets/79730c7c-30f3-4b9a-8fb3-cf2fb172583e" />
 
-**Английский** <img width="1290" height="150" src="https://github.com/user-attachments/assets/f4cfdea1-6232-4a9d-8d33-a3f6a26e4296" />
+**Английский**  
+<img width="1290" height="150" src="https://github.com/user-attachments/assets/f4cfdea1-6232-4a9d-8d33-a3f6a26e4296" />
 
 ---
 
-## 🚀 Установка
+## Установка
 
 1. Скопируйте HTML-код футера
 2. Вставьте его перед закрывающим тегом `</body>`
@@ -66,7 +69,7 @@
 
 ---
 
-## 📦 Технологии
+## Технологии
 
 * **HTML5** — семантическая структура
 * **CSS3** — grid, flexbox, blur, clamp, gradients
@@ -76,7 +79,7 @@
 
 ---
 
-## ⚙️ Настройка
+## Настройка
 
 ### Социальные ссылки
 
@@ -85,8 +88,6 @@
 ```html
 <a href="https://muhamedlabs.pro" class="social-icon">
 ```
-
----
 
 ### Изменение текстов и языков
 
@@ -104,7 +105,7 @@ detectLanguage()
 
 ---
 
-## 📱 Совместимость и адаптивность
+## Совместимость и адаптивность
 
 Футер корректно отображается на разных типах устройств:
 
@@ -127,7 +128,7 @@ detectLanguage()
 
 ---
 
-## ♿ Доступность
+## Доступность
 
 * поддержка `prefers-reduced-motion`
 * корректные ARIA-атрибуты
@@ -138,7 +139,7 @@ detectLanguage()
 
 ---
 
-## 🔧 Совместимость браузеров
+## Совместимость браузеров
 
 Поддерживаются современные браузеры:
 
@@ -148,3 +149,17 @@ detectLanguage()
 * Safari 14+
 * iOS Safari 14+
 * Chrome Android 90+
+
+## Связь и поддержка
+
+Мы всегда открыты к общению, новым идеям и сотрудничеству. По всем вопросам обращайтесь:
+
+- Telegram-канал: https://t.me/muhamedlabs
+- Email: partners@muhamedlabs.pro
+- Discord: https://discord.com/users/768782555171782667
+
+<br>
+
+<div align="center">
+  <sub><img src="https://github.com/muhamedlabs/MuhamedTrash/raw/main/Avatars/Muhamed_IT.png" width="20" style="vertical-align: middle;"> 2023-2028 Muhamed IT <img src="https://github.com/muhamedlabs/MuhamedTrash/raw/main/Avatars/Muhamed_IT.png" width="20" style="vertical-align: middle;"> </sub>
+</div>
