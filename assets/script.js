@@ -490,6 +490,46 @@ class SocialIconsController {
     }
 }
 
+// ===== COPY PROTECTION CONTROLLER =====
+class CopyProtectionController {
+    constructor() {
+        this.footer = document.querySelector('.footer');
+        this.blockedEvents = ['contextmenu', 'copy', 'cut', 'selectstart', 'dragstart'];
+        this.onBlockedEvent = this.onBlockedEvent.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+    }
+    
+    initialize() {
+        if (!this.footer) return;
+        
+        this.blockedEvents.forEach(evt => {
+            this.footer.addEventListener(evt, this.onBlockedEvent);
+        });
+        
+        this.footer.addEventListener('keydown', this.onKeyDown);
+    }
+    
+    onBlockedEvent(e) {
+        e.preventDefault();
+    }
+    
+    onKeyDown(e) {
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'x')) {
+            e.preventDefault();
+        }
+    }
+    
+    destroy() {
+        if (!this.footer) return;
+        
+        this.blockedEvents.forEach(evt => {
+            this.footer.removeEventListener(evt, this.onBlockedEvent);
+        });
+        
+        this.footer.removeEventListener('keydown', this.onKeyDown);
+    }
+}
+
 // ===== MAIN FOOTER CONTROLLER =====
 class FooterController {
     constructor() {
@@ -497,6 +537,7 @@ class FooterController {
         this.particleSystem = null;
         this.layoutManager = null;
         this.socialIconsController = null;
+        this.copyProtectionController = null;
         this.isInitialized = false;
     }
     
@@ -521,6 +562,10 @@ class FooterController {
         
         // Initialize social icons controller
         this.socialIconsController = new SocialIconsController();
+        
+        // Initialize copy protection
+        this.copyProtectionController = new CopyProtectionController();
+        this.copyProtectionController.initialize();
         
         // Setup event listeners
         this.setupEventListeners();
@@ -595,6 +640,10 @@ class FooterController {
         
         if (this.socialIconsController) {
             this.socialIconsController.destroy();
+        }
+        
+        if (this.copyProtectionController) {
+            this.copyProtectionController.destroy();
         }
         
         this.isInitialized = false;
