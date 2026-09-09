@@ -859,8 +859,19 @@
         backdrop-filter: blur(3px);
         -webkit-backdrop-filter: blur(3px);
     }
-    
-    .multilink-button {
-        backdrop-filter: blur(2px);
-    }
+}
+
+/* ===== COPY PROTECTION - DISABLE TEXT SELECTION ===== */
+.footer,
+.footer * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.footer a,
+.footer button {
+    -webkit-user-drag: none;
 }
