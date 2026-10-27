@@ -13,7 +13,11 @@ function detectLanguage() {
                 "Де поєднуються YouTube, технології та ідеї — світ Андрія Мухамеда."
             ],
             brand: "Мухамед",
-            buttonText: "Мультипосилання"
+            buttonText: "Мультипосилання",
+            copyright: "Усі права захищено",
+            protect: "Захист від копіювання",
+            bgLabel: "Фон", bgOn: "Вкл", bgOff: "Викл",
+            toast: "Копіювання вимкнено"
         };
     }
     if (langCode === 'en') {
@@ -24,7 +28,11 @@ function detectLanguage() {
                 "Where YouTube, technology, and ideas unite — the world of Andrey Muhamed."
             ],
             brand: "Muhamed",
-            buttonText: "Multilink"
+            buttonText: "Multilink",
+            copyright: "All rights reserved",
+            protect: "Copy protection",
+            bgLabel: "Background", bgOn: "On", bgOff: "Off",
+            toast: "Copying is disabled"
         };
     }
     return {
@@ -34,7 +42,11 @@ function detectLanguage() {
             "Где объединяются YouTube, технологии и идеи — мир Андрея Мухамеда."
         ],
         brand: "Мухамед",
-        buttonText: "Мультиссылка"
+        buttonText: "Мультиссылка",
+        copyright: "Все права защищены",
+        protect: "Защита от копирования",
+        bgLabel: "Фон", bgOn: "Вкл", bgOff: "Выкл",
+        toast: "Копирование отключено"
     };
 }
 
@@ -63,6 +75,10 @@ class TypewriterEffect {
     initialize() {
         if (this.titleElement) this.titleElement.innerHTML = this.data.brand + ' <b>Ads</b>';
         if (this.buttonTextElement) this.buttonTextElement.textContent = this.data.buttonText;
+        const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        setText('ft-copy-text', '\u00a9 ' + new Date().getFullYear() + ' ' + this.data.brand + ' Ads \u00b7 ' + this.data.copyright);
+        setText('ft-protect-text', this.data.protect);
+        setText('bg-label', this.data.bgLabel);
 
         if (this.prefersReducedMotion) {
             this.render(this.data.texts[0]);
@@ -205,11 +221,160 @@ class ParticleSystem {
     }
 }
 
+// ===== ЗАЩИТА ОТ КОПИРОВАНИЯ =====
+// Режимы (data-protect на .footer-wrapper или window.FooterConfig.protect):
+//   "page"   — вся страница (по умолчанию)
+//   "footer" — только сам футер
+//   "off"    — выключено
+// ВАЖНО: это защита на стороне браузера — она отсекает обычное копирование,
+// выделение, ПКМ, перетаскивание и горячие клавиши, но не может остановить
+// скриншот, «просмотр кода» через другие средства или скачивание HTML напрямую.
+class ProtectionSystem {
+    constructor(wrapper, data) {
+        this.wrapper = wrapper;
+        this.data = data;
+        this.mode = (window.FooterConfig && window.FooterConfig.protect) || (wrapper && wrapper.dataset.protect) || 'page';
+        this.toastEl = null;
+        this.toastTimer = null;
+        this.handlers = [];
+    }
+
+    scope() {
+        return this.mode === 'footer' && this.wrapper ? this.wrapper : document;
+    }
+
+    inScope(target) {
+        if (this.mode !== 'footer') return true;
+        return !!(this.wrapper && target && this.wrapper.contains(target));
+    }
+
+    isEditable(el) {
+        return !!(el && el.closest && el.closest('input, textarea, select, [contenteditable="true"]'));
+    }
+
+    on(target, type, fn, opts) {
+        target.addEventListener(type, fn, opts);
+        this.handlers.push([target, type, fn, opts]);
+    }
+
+    toast() {
+        if (!this.toastEl) {
+            this.toastEl = document.createElement('div');
+            this.toastEl.className = 'ft-toast';
+            this.toastEl.setAttribute('role', 'status');
+            document.body.appendChild(this.toastEl);
+        }
+        this.toastEl.textContent = this.data.toast;
+        this.toastEl.classList.add('show');
+        clearTimeout(this.toastTimer);
+        this.toastTimer = setTimeout(() => this.toastEl && this.toastEl.classList.remove('show'), 1600);
+    }
+
+    block(e) {
+        if (!this.inScope(e.target) || this.isEditable(e.target)) return;
+        e.preventDefault();
+        e.stopPropagation();
+        this.toast();
+    }
+
+    initialize() {
+        if (this.mode === 'off') return;
+        if (this.mode === 'page') document.documentElement.classList.add('ft-protect');
+        if (this.wrapper) this.wrapper.dataset.protected = 'true';
+
+        const root = document;
+        ['contextmenu', 'copy', 'cut', 'dragstart'].forEach(t => this.on(root, t, e => this.block(e), true));
+
+        this.on(root, 'selectstart', e => {
+            if (!this.inScope(e.target) || this.isEditable(e.target)) return;
+            e.preventDefault();
+        }, true);
+
+        // копирование через буфер → подменяем содержимое
+        this.on(root, 'copy', e => {
+            if (!this.inScope(e.target) || this.isEditable(e.target)) return;
+            try { e.clipboardData.setData('text/plain', '\u00a9 Muhamed Ads'); } catch (_) {}
+        }, true);
+
+        this.on(root, 'keydown', e => {
+            if (this.isEditable(e.target)) return;
+            const k = (e.key || '').toLowerCase();
+            const mod = e.ctrlKey || e.metaKey;
+            const devtools = e.key === 'F12' ||
+                (mod && e.shiftKey && ['i', 'j', 'c', 'k'].includes(k)) ||
+                (e.metaKey && e.altKey && ['i', 'j', 'c', 'u'].includes(k));
+            const shortcut = mod && !e.shiftKey && ['c', 'x', 'a', 's', 'u', 'p'].includes(k);
+            if (devtools || shortcut) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toast();
+            }
+        }, true);
+
+        // PrintScreen: очищаем буфер обмена (скриншот остановить нельзя)
+        this.on(root, 'keyup', e => {
+            if (e.key === 'PrintScreen') {
+                try { navigator.clipboard.writeText('\u00a9 Muhamed Ads'); } catch (_) {}
+                this.toast();
+            }
+        }, true);
+
+        document.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
+    }
+
+    destroy() {
+        this.handlers.forEach(([t, type, fn, o]) => t.removeEventListener(type, fn, o));
+        this.handlers = [];
+        document.documentElement.classList.remove('ft-protect');
+        if (this.wrapper) delete this.wrapper.dataset.protected;
+        if (this.toastEl) { this.toastEl.remove(); this.toastEl = null; }
+    }
+}
+
+// ===== ВСТРОЕННЫЙ ФОН (вкл / выкл) =====
+// Состояние: data-bg на .footer-wrapper ("on" | "off"), по умолчанию "off".
+// Выбор посетителя/владельца запоминается в localStorage ("ft-bg").
+class BackgroundController {
+    constructor(wrapper, data) {
+        this.wrapper = wrapper;
+        this.data = data;
+        this.button = document.getElementById('bg-toggle');
+        this.stateEl = document.getElementById('bg-state');
+        this.key = 'ft-bg';
+    }
+
+    read() {
+        try { const v = localStorage.getItem(this.key); if (v === 'on' || v === 'off') return v; } catch (_) {}
+        return null;
+    }
+
+    initialize() {
+        if (!this.wrapper) return;
+        const visitorToggle = this.wrapper.dataset.bgToggle === 'show';
+        const initial = (visitorToggle && this.read()) || (window.FooterConfig && window.FooterConfig.background) || this.wrapper.dataset.bg || 'off';
+        this.set(initial === 'on', false);
+        if (this.button && visitorToggle) this.button.addEventListener('click', () => this.toggle());
+    }
+
+    isOn() { return this.wrapper.dataset.bg === 'on'; }
+
+    set(on, remember = true) {
+        this.wrapper.dataset.bg = on ? 'on' : 'off';
+        if (this.button) this.button.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (this.stateEl) this.stateEl.textContent = on ? this.data.bgOn : this.data.bgOff;
+        if (remember && this.wrapper.dataset.bgToggle === 'show') { try { localStorage.setItem(this.key, on ? 'on' : 'off'); } catch (_) {} }
+    }
+
+    toggle() { this.set(!this.isOn()); }
+}
+
 // ===== CONTROLLER =====
 class FooterController {
     constructor() {
         this.typewriter = null;
         this.particleSystem = null;
+        this.protection = null;
+        this.background = null;
         this.isInitialized = false;
     }
 
@@ -217,6 +382,11 @@ class FooterController {
         if (this.isInitialized) return;
         this.loadFontAwesome();
         this.typewriter = new TypewriterEffect();
+        const wrapper = document.querySelector('.footer-wrapper');
+        this.background = new BackgroundController(wrapper, this.typewriter.data);
+        this.background.initialize();
+        this.protection = new ProtectionSystem(wrapper, this.typewriter.data);
+        this.protection.initialize();
         this.particleSystem = new ParticleSystem();
         await this.particleSystem.initialize();
 
@@ -242,6 +412,7 @@ class FooterController {
     destroy() {
         if (this.typewriter) this.typewriter.destroy();
         if (this.particleSystem) this.particleSystem.destroy();
+        if (this.protection) this.protection.destroy();
         this.isInitialized = false;
     }
 }
@@ -253,6 +424,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.footerUtils = {
         restartTyping: () => window.footerController?.restartTypewriter(),
         updateTexts: (texts) => window.footerController?.updateTypewriterTexts(texts),
+        setBackground: (on) => window.footerController?.background?.set(!!on),
+        toggleBackground: () => window.footerController?.background?.toggle(),
         detectLanguage
     };
 
