@@ -1,8 +1,11 @@
-    <!-- ===== FOOTER ===== -->
 
-    <div class="footer-wrapper" data-bg="off" data-bg-toggle="hide" data-protect="footer">
+    <!-- ===== FOOTER ===== -->
+    <!-- data-bg="on|off"  — встроенный фон (по умолчанию off, прозрачно)
+         data-protect="page|footer|off" — защита от копирования -->
+    <div class="footer-wrapper" data-bg="off" data-protect="page">
         <footer class="footer" id="footer">
             <div class="footer-bg" aria-hidden="true"></div>
+            <span class="footer-line" aria-hidden="true"></span>
             <div id="particles-js" aria-hidden="true"></div>
 
             <div class="footer-container">
@@ -39,21 +42,6 @@
                         <span id="button-text">Multilink</span>
                         <span class="arrow" aria-hidden="true">→</span>
                     </a>
-                </div>
-
-                <div class="footer-meta">
-                    <div class="footer-meta-left">
-                        <span class="ft-copy"><i class="ft-dot" aria-hidden="true"></i><span id="ft-copy-text"></span></span>
-                        <span class="ft-protect">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                            <span id="ft-protect-text"></span>
-                        </span>
-                    </div>
-                    <button type="button" class="bg-toggle" id="bg-toggle" aria-pressed="false" aria-label="Background">
-                        <span id="bg-label">Фон</span>
-                        <span class="bg-track" aria-hidden="true"></span>
-                        <span class="bg-state" id="bg-state">Выкл</span>
-                    </button>
                 </div>
             </div>
         </footer>

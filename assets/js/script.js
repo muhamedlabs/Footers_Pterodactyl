@@ -75,10 +75,6 @@ class TypewriterEffect {
     initialize() {
         if (this.titleElement) this.titleElement.innerHTML = this.data.brand + ' <b>Ads</b>';
         if (this.buttonTextElement) this.buttonTextElement.textContent = this.data.buttonText;
-        const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-        setText('ft-copy-text', '\u00a9 ' + new Date().getFullYear() + ' ' + this.data.brand + ' Ads \u00b7 ' + this.data.copyright);
-        setText('ft-protect-text', this.data.protect);
-        setText('bg-label', this.data.bgLabel);
 
         if (this.prefersReducedMotion) {
             this.render(this.data.texts[0]);
@@ -88,16 +84,28 @@ class TypewriterEffect {
         setTimeout(() => this.typeLoop(), 800);
     }
 
+    longest() {
+        return this.data.texts.reduce((a, b) => (b.length > a.length ? b : a), '');
+    }
+
     render(text) {
         this.typingElement.innerHTML = '';
+        const sizer = document.createElement('span');
+        sizer.className = 'ft-sizer';
+        sizer.setAttribute('aria-hidden', 'true');
+        sizer.textContent = this.longest();
+        const live = document.createElement('span');
+        live.className = 'ft-live';
         const textSpan = document.createElement('span');
         textSpan.className = 'ft-t';
         textSpan.textContent = text;
         const cursor = document.createElement('span');
         cursor.className = 'typing-cursor';
         cursor.setAttribute('aria-hidden', 'true');
-        this.typingElement.appendChild(textSpan);
-        this.typingElement.appendChild(cursor);
+        live.appendChild(textSpan);
+        live.appendChild(cursor);
+        this.typingElement.appendChild(sizer);
+        this.typingElement.appendChild(live);
     }
 
     typeLoop() {
