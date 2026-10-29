@@ -8,45 +8,39 @@ function detectLanguage() {
     if (langCode === 'uk') {
         return {
             texts: [
-                "Круті YouTube-канали, ІТ-проєкти та індивідуальні плани Андрія Мухамеда.",
-                "Креативні YouTube-канали, сміливі IT-проєкти та бачення Андрія Мухамеда.",
-                "Де поєднуються YouTube, технології та ідеї — світ Андрія Мухамеда."
+                "Креативні YouTube-канали та IT-проєкти",
+                "Технології, ідеї й бачення Андрія Мухамеда",
+                "Світ Андрія Мухамеда"
             ],
+            tagline: "Креативна та технологічна мережа",
             brand: "Мухамед",
-            buttonText: "Мультипосилання",
-            copyright: "Усі права захищено",
-            protect: "Захист від копіювання",
-            bgLabel: "Фон", bgOn: "Вкл", bgOff: "Викл",
-            toast: "Копіювання вимкнено"
+            status: "Мережа активна",
+            buttonText: "Мультипосилання"
         };
     }
     if (langCode === 'en') {
         return {
             texts: [
-                "Great YouTube channels, IT projects and individual plans by Andrey Muhamed.",
-                "Creative YouTube channels, bold IT projects, and the vision of Andrey Muhamed.",
-                "Where YouTube, technology, and ideas unite — the world of Andrey Muhamed."
+                "Creative YouTube channels & IT projects",
+                "Technology, ideas and the vision of Andrey Muhamed",
+                "The world of Andrey Muhamed"
             ],
+            tagline: "Creative & Technology Network",
             brand: "Muhamed",
-            buttonText: "Multilink",
-            copyright: "All rights reserved",
-            protect: "Copy protection",
-            bgLabel: "Background", bgOn: "On", bgOff: "Off",
-            toast: "Copying is disabled"
+            status: "Network online",
+            buttonText: "Multilink"
         };
     }
     return {
         texts: [
-            "Отличные YouTube-каналы, IT-проекты и индивидуальные планы Андрея Мухамеда.",
-            "Креативные YouTube-каналы, смелые IT-проекты и видение Андрея Мухамеда.",
-            "Где объединяются YouTube, технологии и идеи — мир Андрея Мухамеда."
+            "Креативные YouTube-каналы и IT-проекты",
+            "Технологии, идеи и видение Андрея Мухамеда",
+            "Мир Андрея Мухамеда"
         ],
+        tagline: "Креативная и технологическая сеть",
         brand: "Мухамед",
-        buttonText: "Мультиссылка",
-        copyright: "Все права защищены",
-        protect: "Защита от копирования",
-        bgLabel: "Фон", bgOn: "Вкл", bgOff: "Выкл",
-        toast: "Копирование отключено"
+        status: "Сеть активна",
+        buttonText: "Мультиссылка"
     };
 }
 
@@ -73,39 +67,84 @@ class TypewriterEffect {
     }
 
     initialize() {
-        if (this.titleElement) this.titleElement.innerHTML = this.data.brand + ' <b>Ads</b>';
-        if (this.buttonTextElement) this.buttonTextElement.textContent = this.data.buttonText;
+        if (this.titleElement) {
+            this.titleElement.innerHTML = this.data.brand + ' <b>Ads</b>';
+            this.titleElement.dataset.text = this.data.brand + ' Ads'; // копия текста для RGB-глитча (CSS)
+        }
+        if (this.buttonTextElement) {
+            this.buttonTextElement.textContent = this.data.buttonText;
+            const btn = this.buttonTextElement.closest('a');
+            if (btn) btn.title = this.data.buttonText; // подсказка на языке посетителя
+        }
+        const sub = document.getElementById('brand-sub');
+        if (sub) sub.textContent = this.data.tagline;
+
+        // статус сети + живое время UTC+3 (не зависит от часового пояса посетителя)
+        const status = document.getElementById('meta-status');
+        if (status) status.textContent = this.data.status;
+        this.startClock();
 
         if (this.prefersReducedMotion) {
             this.render(this.data.texts[0]);
             return;
         }
         this.render('');
-        setTimeout(() => this.typeLoop(), 800);
+        const start = () => setTimeout(() => this.typeLoop(), 800);
+        if (document.fonts && document.fonts.load) {
+            document.fonts.load('16px muhamedlads').then(start, start);
+        } else {
+            start();
+        }
+    }
+
+    startClock() {
+        const h = document.getElementById('meta-h');
+        const m = document.getElementById('meta-m');
+        const s = document.getElementById('meta-s');
+        const bar = document.getElementById('meta-bar');
+        if (!h || !m || !s) return;
+        const pad = n => (n < 10 ? '0' : '') + n;
+        const tick = () => {
+            const d = new Date(Date.now() + 3 * 3600 * 1000);
+            h.textContent = pad(d.getUTCHours());
+            m.textContent = pad(d.getUTCMinutes());
+            const sec = d.getUTCSeconds();
+            s.textContent = pad(sec);
+            if (bar) {
+                bar.style.transition = sec === 0 ? 'none' : '';
+                bar.style.transform = 'scaleX(' + ((sec + 1) / 60).toFixed(4) + ')';
+            }
+        };
+        tick();
+        clearInterval(this.clock);
+        this.clock = setInterval(tick, 1000);
     }
 
     longest() {
         return this.data.texts.reduce((a, b) => (b.length > a.length ? b : a), '');
     }
 
+    // структура строится один раз, дальше меняется только текст — без перерисовки и миганий
     render(text) {
-        this.typingElement.innerHTML = '';
-        const sizer = document.createElement('span');
-        sizer.className = 'ft-sizer';
-        sizer.setAttribute('aria-hidden', 'true');
-        sizer.textContent = this.longest();
-        const live = document.createElement('span');
-        live.className = 'ft-live';
-        const textSpan = document.createElement('span');
-        textSpan.className = 'ft-t';
-        textSpan.textContent = text;
-        const cursor = document.createElement('span');
-        cursor.className = 'typing-cursor';
-        cursor.setAttribute('aria-hidden', 'true');
-        live.appendChild(textSpan);
-        live.appendChild(cursor);
-        this.typingElement.appendChild(sizer);
-        this.typingElement.appendChild(live);
+        if (!this.liveText) {
+            this.typingElement.innerHTML = '';
+            const sizer = document.createElement('span');
+            sizer.className = 'ft-sizer';
+            sizer.setAttribute('aria-hidden', 'true');
+            sizer.textContent = this.longest();
+            const live = document.createElement('span');
+            live.className = 'ft-live';
+            this.liveText = document.createElement('span');
+            this.liveText.className = 'ft-t';
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            cursor.setAttribute('aria-hidden', 'true');
+            live.appendChild(this.liveText);
+            live.appendChild(cursor);
+            this.typingElement.appendChild(sizer);
+            this.typingElement.appendChild(live);
+        }
+        this.liveText.textContent = text;
     }
 
     typeLoop() {
@@ -161,6 +200,7 @@ class TypewriterEffect {
     }
 
     destroy() {
+        if (this.clock) { clearInterval(this.clock); this.clock = null; }
         if (this.animationId) {
             clearTimeout(this.animationId);
             this.animationId = null;
@@ -168,64 +208,150 @@ class TypewriterEffect {
     }
 }
 
-// ===== PARTICLES (только на десктопе и без reduced-motion) =====
+// ===== ФОН-СЕТЬ: красные узлы и тонкие линии, как на фоне law-сайта =====
+// Свой canvas без внешних библиотек. Пауза, когда футер не виден; при reduced-motion — один статичный кадр.
 class ParticleSystem {
     constructor() {
-        this.containerId = 'particles-js';
-        this.isMobile = window.innerWidth <= 768;
-        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.box = document.getElementById('particles-js');
+        this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.nodes = [];
+        this.w = 0;
+        this.h = 0;
+        this.dpr = 1;
+        this.raf = 0;
+        this.last = 0;
+        this.visible = true;
+        this.mouse = { x: -999, y: -999 };
+        this.link = 125;
         this.initialized = false;
     }
 
     async initialize() {
-        const box = document.getElementById(this.containerId);
-        if (!box) return;
-        if (this.isMobile || this.prefersReducedMotion) {
-            box.style.display = 'none';
-            return;
-        }
-        if (typeof particlesJS === 'undefined') await this.loadParticlesJS();
-        if (typeof particlesJS !== 'undefined') {
-            this.createParticles();
-            this.initialized = true;
-        }
+        if (!this.box) return;
+        this.canvas = document.createElement('canvas');
+        this.canvas.setAttribute('aria-hidden', 'true');
+        this.canvas.style.cssText = 'display:block;width:100%;height:100%';
+        this.box.appendChild(this.canvas);
+        this.ctx = this.canvas.getContext('2d');
+        if (!this.ctx) return;
+        this.initialized = true;
+
+        this.resize();
+        this.ro = new ResizeObserver(() => { this.resize(); if (this.reduced) this.draw(0); });
+        this.ro.observe(this.box);
+
+        if (this.reduced) { this.draw(0); return; }
+
+        this.io = new IntersectionObserver(es => {
+            this.visible = es[0].isIntersecting;
+            this.visible ? this.start() : this.stop();
+        });
+        this.io.observe(this.box);
+
+        this.onVis = () => (document.hidden ? this.stop() : (this.visible && this.start()));
+        document.addEventListener('visibilitychange', this.onVis);
+
+        const host = this.box.closest('.footer') || this.box;
+        this.host = host;
+        this.onMove = e => {
+            const r = this.box.getBoundingClientRect();
+            this.mouse.x = e.clientX - r.left;
+            this.mouse.y = e.clientY - r.top;
+        };
+        this.onLeave = () => { this.mouse.x = this.mouse.y = -999; };
+        host.addEventListener('pointermove', this.onMove, { passive: true });
+        host.addEventListener('pointerleave', this.onLeave, { passive: true });
+        this.start();
     }
 
-    loadParticlesJS() {
-        return new Promise((resolve) => {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-            script.onload = resolve;
-            script.onerror = () => { console.warn('Failed to load particles.js'); resolve(); };
-            document.head.appendChild(script);
-        });
+    resize() {
+        const w = this.box.clientWidth, h = this.box.clientHeight;
+        if (!w || !h) return;
+        this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+        this.w = w;
+        this.h = h;
+        this.canvas.width = Math.round(w * this.dpr);
+        this.canvas.height = Math.round(h * this.dpr);
+        const want = Math.max(14, Math.min(70, Math.round((w * h) / (w < 520 ? 7000 : 8500))));
+        while (this.nodes.length < want) this.nodes.push(this.makeNode());
+        this.nodes.length = want;
+        this.nodes.forEach(n => { n.x = Math.min(n.x, w); n.y = Math.min(n.y, h); });
     }
 
-    createParticles() {
-        particlesJS(this.containerId, {
-            particles: {
-                number: { value: 38, density: { enable: true, value_area: 400 } },
-                color: { value: ["#ff265c", "#ff5f8a", "#ffffff"] },
-                shape: { type: "edge" },
-                opacity: { value: 0.55, random: true, anim: { enable: true, speed: 1, opacity_min: 0.15, sync: false } },
-                size: { value: 2.4, random: true, anim: { enable: true, speed: 2, size_min: 1, sync: false } },
-                line_linked: { enable: true, distance: 100, color: "#ff5f8a", opacity: 0.25, width: 1 },
-                move: { enable: true, speed: 1.1, direction: "none", random: true, straight: false, out_mode: "bounce", bounce: true }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
-                modes: { grab: { distance: 120, line_linked: { opacity: 0.4 } }, push: { particles_nb: 3 } }
-            },
-            retina_detect: true
-        });
+    makeNode() {
+        const a = Math.random() * Math.PI * 2, s = 0.05 + Math.random() * 0.2;
+        const big = Math.random() < 0.16;
+        return {
+            x: Math.random() * (this.w || 400), y: Math.random() * (this.h || 120),
+            vx: Math.cos(a) * s, vy: Math.sin(a) * s,
+            r: big ? 2.2 + Math.random() * 1.2 : 0.9 + Math.random() * 1.1,
+            big, ph: Math.random() * 6.28, sp: 0.0006 + Math.random() * 0.0012
+        };
+    }
+
+    start() { if (!this.raf && this.initialized && !this.reduced) { this.last = performance.now(); this.raf = requestAnimationFrame(t => this.tick(t)); } }
+    stop() { if (this.raf) { cancelAnimationFrame(this.raf); this.raf = 0; } }
+
+    tick(t) {
+        const dt = Math.min(3, (t - this.last) / 16.67) || 1;
+        this.last = t;
+        const { w, h } = this;
+        for (const n of this.nodes) {
+            n.x += n.vx * dt; n.y += n.vy * dt;
+            if (n.x < 0 || n.x > w) { n.vx *= -1; n.x = Math.max(0, Math.min(w, n.x)); }
+            if (n.y < 0 || n.y > h) { n.vy *= -1; n.y = Math.max(0, Math.min(h, n.y)); }
+        }
+        this.draw(t);
+        this.raf = requestAnimationFrame(tt => this.tick(tt));
+    }
+
+    draw(t) {
+        const ctx = this.ctx, { w, h, nodes, link } = this;
+        ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+        ctx.clearRect(0, 0, w, h);
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i < nodes.length; i++) {
+            const a = nodes[i];
+            for (let k = i + 1; k < nodes.length; k++) {
+                const b = nodes[k], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+                if (d < link) {
+                    ctx.strokeStyle = 'rgba(255,70,110,' + ((1 - d / link) * 0.42).toFixed(3) + ')';
+                    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                }
+            }
+            const md = Math.hypot(a.x - this.mouse.x, a.y - this.mouse.y);
+            if (md < 150) {
+                ctx.strokeStyle = 'rgba(255,120,150,' + ((1 - md / 150) * 0.8).toFixed(3) + ')';
+                ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(this.mouse.x, this.mouse.y); ctx.stroke();
+            }
+        }
+
+        for (const n of nodes) {
+            const tw = 0.55 + 0.45 * Math.sin(t * n.sp + n.ph);
+            if (n.big) {
+                const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 11);
+                g.addColorStop(0, 'rgba(255,38,92,' + (0.6 * tw).toFixed(3) + ')');
+                g.addColorStop(1, 'rgba(255,38,92,0)');
+                ctx.fillStyle = g;
+                ctx.beginPath(); ctx.arc(n.x, n.y, 11, 0, 6.2832); ctx.fill();
+            }
+            ctx.fillStyle = 'rgba(255,' + (n.big ? 95 : 130) + ',' + (n.big ? 138 : 165) + ',' + (0.45 + 0.5 * tw).toFixed(3) + ')';
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
+        }
     }
 
     destroy() {
-        if (this.initialized) {
-            document.querySelectorAll('.particles-js-canvas-el').forEach(c => c.remove());
-            this.initialized = false;
+        this.stop();
+        if (this.ro) this.ro.disconnect();
+        if (this.io) this.io.disconnect();
+        if (this.onVis) document.removeEventListener('visibilitychange', this.onVis);
+        if (this.host) {
+            this.host.removeEventListener('pointermove', this.onMove);
+            this.host.removeEventListener('pointerleave', this.onLeave);
         }
+        if (this.canvas) this.canvas.remove();
+        this.initialized = false;
     }
 }
 
@@ -242,8 +368,6 @@ class ProtectionSystem {
         this.wrapper = wrapper;
         this.data = data;
         this.mode = (window.FooterConfig && window.FooterConfig.protect) || (wrapper && wrapper.dataset.protect) || 'page';
-        this.toastEl = null;
-        this.toastTimer = null;
         this.handlers = [];
     }
 
@@ -265,24 +389,10 @@ class ProtectionSystem {
         this.handlers.push([target, type, fn, opts]);
     }
 
-    toast() {
-        if (!this.toastEl) {
-            this.toastEl = document.createElement('div');
-            this.toastEl.className = 'ft-toast';
-            this.toastEl.setAttribute('role', 'status');
-            document.body.appendChild(this.toastEl);
-        }
-        this.toastEl.textContent = this.data.toast;
-        this.toastEl.classList.add('show');
-        clearTimeout(this.toastTimer);
-        this.toastTimer = setTimeout(() => this.toastEl && this.toastEl.classList.remove('show'), 1600);
-    }
-
     block(e) {
         if (!this.inScope(e.target) || this.isEditable(e.target)) return;
         e.preventDefault();
         e.stopPropagation();
-        this.toast();
     }
 
     initialize() {
@@ -298,10 +408,10 @@ class ProtectionSystem {
             e.preventDefault();
         }, true);
 
-        // копирование через буфер → подменяем содержимое
+        // копирование через буфер → буфер остаётся пустым
         this.on(root, 'copy', e => {
             if (!this.inScope(e.target) || this.isEditable(e.target)) return;
-            try { e.clipboardData.setData('text/plain', '\u00a9 Muhamed Ads'); } catch (_) {}
+            try { e.clipboardData.setData('text/plain', ''); } catch (_) {}
         }, true);
 
         this.on(root, 'keydown', e => {
@@ -315,15 +425,13 @@ class ProtectionSystem {
             if (devtools || shortcut) {
                 e.preventDefault();
                 e.stopPropagation();
-                this.toast();
             }
         }, true);
 
-        // PrintScreen: очищаем буфер обмена (скриншот остановить нельзя)
+        // PrintScreen: очищаем буфер обмена
         this.on(root, 'keyup', e => {
             if (e.key === 'PrintScreen') {
-                try { navigator.clipboard.writeText('\u00a9 Muhamed Ads'); } catch (_) {}
-                this.toast();
+                try { navigator.clipboard.writeText(''); } catch (_) {}
             }
         }, true);
 
@@ -335,7 +443,6 @@ class ProtectionSystem {
         this.handlers = [];
         document.documentElement.classList.remove('ft-protect');
         if (this.wrapper) delete this.wrapper.dataset.protected;
-        if (this.toastEl) { this.toastEl.remove(); this.toastEl = null; }
     }
 }
 
@@ -391,6 +498,7 @@ class FooterController {
         this.loadFontAwesome();
         this.typewriter = new TypewriterEffect();
         const wrapper = document.querySelector('.footer-wrapper');
+        this.detectSurface(wrapper);
         this.background = new BackgroundController(wrapper, this.typewriter.data);
         this.background.initialize();
         this.protection = new ProtectionSystem(wrapper, this.typewriter.data);
@@ -402,6 +510,23 @@ class FooterController {
             this.typewriter.isPaused = document.hidden;
         });
         this.isInitialized = true;
+    }
+
+    // Светлая страница → панель плотнее (иначе «стекло» выглядит грязно-серым).
+    // Принудительно: data-surface="light|dark" на .footer-wrapper.
+    detectSurface(wrapper) {
+        if (!wrapper || wrapper.dataset.surface) return;
+        let el = wrapper.parentElement, rgb = null;
+        while (el) {
+            const cs = getComputedStyle(el);
+            if (cs.backgroundImage && cs.backgroundImage !== 'none') { rgb = [0, 0, 0]; break; } // фон-картинка: считаем тёмным
+            const m = cs.backgroundColor.match(/[\d.]+/g);
+            if (m && (m.length < 4 || parseFloat(m[3]) > 0.5)) { rgb = m.map(Number); break; }
+            el = el.parentElement;
+        }
+        if (!rgb) rgb = [255, 255, 255]; // нет своего фона → белый холст браузера
+        const lum = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255;
+        wrapper.dataset.surface = lum > 0.5 ? 'light' : 'dark';
     }
 
     loadFontAwesome() {
