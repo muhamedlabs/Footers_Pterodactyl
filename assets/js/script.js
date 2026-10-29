@@ -1,5 +1,4 @@
-// ===== FOOTER: Muhamed Ads =====
-// Язык: uk / en явно, всё остальное — русский.
+
 
 function detectLanguage() {
     const userLang = navigator.language || navigator.userLanguage || 'ru';
@@ -44,7 +43,6 @@ function detectLanguage() {
     };
 }
 
-// ===== TYPEWRITER =====
 class TypewriterEffect {
     constructor() {
         this.typingElement = document.getElementById("typing-text");
@@ -69,17 +67,15 @@ class TypewriterEffect {
     initialize() {
         if (this.titleElement) {
             this.titleElement.innerHTML = this.data.brand + ' <b>Ads</b>';
-            this.titleElement.dataset.text = this.data.brand + ' Ads'; // копия текста для RGB-глитча (CSS)
+            this.titleElement.dataset.text = this.data.brand + ' Ads';
         }
         if (this.buttonTextElement) {
             this.buttonTextElement.textContent = this.data.buttonText;
             const btn = this.buttonTextElement.closest('a');
-            if (btn) btn.title = this.data.buttonText; // подсказка на языке посетителя
         }
         const sub = document.getElementById('brand-sub');
         if (sub) sub.textContent = this.data.tagline;
 
-        // статус сети + живое время UTC+3 (не зависит от часового пояса посетителя)
         const status = document.getElementById('meta-status');
         if (status) status.textContent = this.data.status;
         this.startClock();
@@ -124,7 +120,6 @@ class TypewriterEffect {
         return this.data.texts.reduce((a, b) => (b.length > a.length ? b : a), '');
     }
 
-    // структура строится один раз, дальше меняется только текст — без перерисовки и миганий
     render(text) {
         if (!this.liveText) {
             this.typingElement.innerHTML = '';
@@ -208,8 +203,6 @@ class TypewriterEffect {
     }
 }
 
-// ===== ФОН-СЕТЬ: красные узлы и тонкие линии, как на фоне law-сайта =====
-// Свой canvas без внешних библиотек. Пауза, когда футер не виден; при reduced-motion — один статичный кадр.
 class ParticleSystem {
     constructor() {
         this.box = document.getElementById('particles-js');
@@ -355,14 +348,6 @@ class ParticleSystem {
     }
 }
 
-// ===== ЗАЩИТА ОТ КОПИРОВАНИЯ =====
-// Режимы (data-protect на .footer-wrapper или window.FooterConfig.protect):
-//   "page"   — вся страница (по умолчанию)
-//   "footer" — только сам футер
-//   "off"    — выключено
-// ВАЖНО: это защита на стороне браузера — она отсекает обычное копирование,
-// выделение, ПКМ, перетаскивание и горячие клавиши, но не может остановить
-// скриншот, «просмотр кода» через другие средства или скачивание HTML напрямую.
 class ProtectionSystem {
     constructor(wrapper, data) {
         this.wrapper = wrapper;
@@ -408,7 +393,6 @@ class ProtectionSystem {
             e.preventDefault();
         }, true);
 
-        // копирование через буфер → буфер остаётся пустым
         this.on(root, 'copy', e => {
             if (!this.inScope(e.target) || this.isEditable(e.target)) return;
             try { e.clipboardData.setData('text/plain', ''); } catch (_) {}
@@ -428,7 +412,6 @@ class ProtectionSystem {
             }
         }, true);
 
-        // PrintScreen: очищаем буфер обмена
         this.on(root, 'keyup', e => {
             if (e.key === 'PrintScreen') {
                 try { navigator.clipboard.writeText(''); } catch (_) {}
@@ -446,9 +429,6 @@ class ProtectionSystem {
     }
 }
 
-// ===== ВСТРОЕННЫЙ ФОН (вкл / выкл) =====
-// Состояние: data-bg на .footer-wrapper ("on" | "off"), по умолчанию "off".
-// Выбор посетителя/владельца запоминается в localStorage ("ft-bg").
 class BackgroundController {
     constructor(wrapper, data) {
         this.wrapper = wrapper;
@@ -483,7 +463,6 @@ class BackgroundController {
     toggle() { this.set(!this.isOn()); }
 }
 
-// ===== CONTROLLER =====
 class FooterController {
     constructor() {
         this.typewriter = null;
@@ -512,19 +491,17 @@ class FooterController {
         this.isInitialized = true;
     }
 
-    // Светлая страница → панель плотнее (иначе «стекло» выглядит грязно-серым).
-    // Принудительно: data-surface="light|dark" на .footer-wrapper.
     detectSurface(wrapper) {
         if (!wrapper || wrapper.dataset.surface) return;
         let el = wrapper.parentElement, rgb = null;
         while (el) {
             const cs = getComputedStyle(el);
-            if (cs.backgroundImage && cs.backgroundImage !== 'none') { rgb = [0, 0, 0]; break; } // фон-картинка: считаем тёмным
+            if (cs.backgroundImage && cs.backgroundImage !== 'none') { rgb = [0, 0, 0]; break; }
             const m = cs.backgroundColor.match(/[\d.]+/g);
             if (m && (m.length < 4 || parseFloat(m[3]) > 0.5)) { rgb = m.map(Number); break; }
             el = el.parentElement;
         }
-        if (!rgb) rgb = [255, 255, 255]; // нет своего фона → белый холст браузера
+        if (!rgb) rgb = [255, 255, 255];
         const lum = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255;
         wrapper.dataset.surface = lum > 0.5 ? 'light' : 'dark';
     }
