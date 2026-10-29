@@ -1,11 +1,12 @@
 
     <!-- ===== FOOTER ===== -->
     <!-- data-bg="on|off"  — встроенный фон (по умолчанию off, прозрачно)
-         data-protect="page|footer|off" — защита от копирования -->
+         data-protect="page|footer|off" — тихая защита от копирования (без сообщений) -->
     <div class="footer-wrapper" data-bg="off" data-protect="page">
         <footer class="footer" id="footer">
             <div class="footer-bg" aria-hidden="true"></div>
             <span class="footer-line" aria-hidden="true"></span>
+            <span class="footer-ticks" aria-hidden="true"></span>
             <div id="particles-js" aria-hidden="true"></div>
 
             <div class="footer-container">
@@ -15,12 +16,14 @@
                             <img src="assets/icons/icon-m-pink.webp" alt="" onerror="this.parentNode.classList.add('no-img');this.remove()">
                             <i>M</i>
                         </span>
-                        <h3 id="title-text">Muhamed <b>Ads</b></h3>
+                        <span class="brand-text">
+                            <strong class="brand-title" id="title-text" data-text="Muhamed Ads">Muhamed <b>Ads</b></strong>
+                            <span class="brand-sub" id="brand-sub">Creative &amp; Technology Network</span>
+                        </span>
                     </a>
-                    <div class="footer-text-container">
-                        <span id="typing-text" aria-live="polite"></span>
-                    </div>
                 </div>
+
+                <span class="footer-link" aria-hidden="true"><i></i></span>
 
                 <div class="footer-actions">
                     <a href="https://muhamedlabs.pro" class="social-icon" title="Website" aria-label="Visit our website">
@@ -38,14 +41,30 @@
                     <a href="https://github.com/muhamedlabs" class="social-icon" title="GitHub" aria-label="Check our GitHub projects">
                         <i class="fa-brands fa-github" aria-hidden="true"></i>
                     </a>
-                    <a href="https://link.muhamedlabs.pro" class="multilink-button" title="Multilink" aria-label="Go to multilink page">
-                        <span id="button-text">Multilink</span>
-                        <span class="arrow" aria-hidden="true">→</span>
-                    </a>
+                    <span class="multilink-wrap">
+                        <a href="https://link.muhamedlabs.pro" class="multilink-button" title="Multilink" aria-label="Go to multilink page">
+                            <span id="button-text">Multilink</span>
+                            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg></span>
+                        </a>
+                    </span>
+                </div>
+
+                <div class="footer-rule" aria-hidden="true"><i class="rd a"></i><i class="rm"></i><i class="rd b"></i></div>
+
+                <div class="footer-status">
+                    <div class="footer-text-container">
+                        <span id="typing-text" aria-live="polite"></span>
+                    </div>
+                    <div class="footer-meta" aria-live="off">
+                        <span class="meta-status"><i class="live-dot" aria-hidden="true"></i><span id="meta-status">Сеть активна</span></span>
+                        <span class="meta-sep" aria-hidden="true"></span>
+                        <span class="meta-clock"><time id="meta-h">--</time><b aria-hidden="true">:</b><time id="meta-m">--</time><b aria-hidden="true">:</b><time class="s" id="meta-s">--</time><em>UTC+3</em></span>
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
 
+    <link rel="preload" href="assets/fonts/kharkiv_tone.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/js/script.js"></script>

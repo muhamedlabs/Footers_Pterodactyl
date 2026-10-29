@@ -1,3 +1,7 @@
+
+> **v9** — thin bar cursor, erasing without colour change, larger text, copyright block on the right, one font across the whole footer.
+
+> **Final version (v5)** — the best of v2, v3 and v4 in one: chamfered panel with a travelling spark (v2), logo tile and separate social tiles (v4), shining button, typing text, copyright, ticker and tick marks (v2).
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
 <p align="center">

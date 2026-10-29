@@ -1,3 +1,7 @@
+
+> **v9** — тонкий курсор-риска, стирання без зміни кольору, більший текст, блок копірайту праворуч, один шрифт на весь футер.
+
+> **Фінальна версія (v5)** — збірка найкращого з v2, v3 і v4: панель зі зрізаними кутами та біжучою іскрою (v2), плитка-логотип і окремі плитки соцмереж (v4), кнопка з відблиском, текст, що друкується, копірайт, біжучий рядок і «засічки» (v2).
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
 <p align="center">
