@@ -14,7 +14,7 @@ function detectLanguage() {
             tagline: "Креативна та технологічна мережа",
             brand: "Мухамед",
             status: "Мережа активна",
-            buttonText: "Є — посилання"
+            buttonText: "Єпосилання"
         };
     }
     if (langCode === 'en') {
