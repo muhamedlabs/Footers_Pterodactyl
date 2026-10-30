@@ -1,6 +1,6 @@
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
-<img width="1920" height="957" alt="chrome_CEJ9p0kcgB" src="https://github.com/user-attachments/assets/3e4c39ae-10a7-4624-9183-fcf58fa1d5af" />
+<img width="1920" height="957" alt="chrome_CEJ9p0kcgB" src="https://github.com/user-attachments/assets/0782196d-79af-4d3a-a296-2879ea148d5a" />
 
 ## Описание
 
@@ -94,13 +94,15 @@ Footers_Pterodactyl/
 ## Примеры отображения
 
 **Украинский**  
-<img width="1357" height="177" alt="chrome_vdqe2j7L1u" src="https://github.com/user-attachments/assets/88fbe0dc-83b4-45d8-954d-28f0cdb0ef6a" />
+<img width="1357" height="177" alt="chrome_vdqe2j7L1u" src="https://github.com/user-attachments/assets/ef825597-9722-41a2-994c-dd8094ff9def" />
+
 
 **Русский**  
-<img width="1266" height="126" alt="chrome_QYNoShnJdy" src="https://github.com/user-attachments/assets/d0967740-d3bb-4f36-8114-a00d5eefa0f1" />
+<img width="1266" height="126" alt="chrome_QYNoShnJdy" src="https://github.com/user-attachments/assets/19bec695-6ce8-4b42-9bfb-85957f9ba2e4" />
 
 **Английский**  
-<img width="1296" height="160" alt="chrome_Z3T1JHu0Zc" src="https://github.com/user-attachments/assets/87fda919-f04c-454d-ac94-3ed3160eaec6" />
+<img width="1296" height="160" alt="chrome_Z3T1JHu0Zc" src="https://github.com/user-attachments/assets/2cad14f2-8106-467f-a662-2a6ea2f0ed61" />
+
 
 ---
 
@@ -281,15 +283,15 @@ footerUtils.detectLanguage();                // получить тексты т
 <table align="center">
   <tr>
     <td align="center">
-      <img width="581" height="892" alt="chrome_B1AAI7eRqi" src="https://github.com/user-attachments/assets/60155fb0-c52a-44d2-9e0b-bd8f4de1b6f0" alt="Mobile view 1" /><br/>
+      <img width="581" height="892" alt="chrome_B1AAI7eRqi" src="https://github.com/user-attachments/assets/88580a2f-e31c-49c9-9eae-4e17e21578ac" alt="Mobile view 1" /><br/>
       <sub>Смартфон</sub>
     </td>
     <td align="center">
-      <img width="1466" height="872" alt="chrome_653xxqbE42" src="https://github.com/user-attachments/assets/03dd5e18-3650-4e63-b448-88fd0102bc1c" alt="Desktop view" /><br/>
+      <img width="1466" height="872" alt="chrome_653xxqbE42" src="https://github.com/user-attachments/assets/a1ef80f6-7005-4fb7-ae9d-befd4d1a47ab" alt="Desktop view" /><br/>
       <sub>Десктоп</sub>
     </td>
     <td align="center">
-      <img width="489" height="913" alt="chrome_HHbuyAhQDb" src="https://github.com/user-attachments/assets/8a1336e3-23f9-4ef9-94d0-5dd434120405" alt="Mobile view 2" /><br/>
+      <img width="489" height="913" alt="chrome_HHbuyAhQDb" src="https://github.com/user-attachments/assets/65b6ba0d-cbe2-4a64-8abd-ac62d39fcb1a" alt="Mobile view 2" /><br/>
       <sub>Смартфон (альтернативный вид)</sub>
     </td>
   </tr>
