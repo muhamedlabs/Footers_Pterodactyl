@@ -9,12 +9,14 @@ function detectLanguage() {
             texts: [
                 "Креативні YouTube-канали та IT-проєкти",
                 "Технології, ідеї й бачення Андрія Мухамеда",
-                "Світ Андрія Мухамеда"
+                "Світ Андрія Мухамеда",
+                "Ідеї, що стають проєктами",
+                "Долучайся до нашої спільноти"
             ],
             tagline: "Креативна та технологічна мережа",
             brand: "Мухамед",
             status: "Мережа активна",
-            buttonText: "Мультипосилання"
+            buttonText: "Є — посилання"
         };
     }
     if (langCode === 'en') {
@@ -22,7 +24,9 @@ function detectLanguage() {
             texts: [
                 "Creative YouTube channels & IT projects",
                 "Technology, ideas and the vision of Andrey Muhamed",
-                "The world of Andrey Muhamed"
+                "The world of Andrey Muhamed",
+                "Ideas that become projects",
+                "Join our community"
             ],
             tagline: "Creative & Technology Network",
             brand: "Muhamed",
@@ -34,7 +38,9 @@ function detectLanguage() {
         texts: [
             "Креативные YouTube-каналы и IT-проекты",
             "Технологии, идеи и видение Андрея Мухамеда",
-            "Мир Андрея Мухамеда"
+            "Мир Андрея Мухамеда",
+            "Идеи, которые становятся проектами",
+            "Присоединяйся к нашему сообществу"
         ],
         tagline: "Креативная и технологическая сеть",
         brand: "Мухамед",
@@ -395,7 +401,7 @@ class ProtectionSystem {
 
         this.on(root, 'copy', e => {
             if (!this.inScope(e.target) || this.isEditable(e.target)) return;
-            try { e.clipboardData.setData('text/plain', ''); } catch (_) {}
+            try { e.clipboardData.setData('text/plain', ''); } catch (_) { }
         }, true);
 
         this.on(root, 'keydown', e => {
@@ -414,7 +420,7 @@ class ProtectionSystem {
 
         this.on(root, 'keyup', e => {
             if (e.key === 'PrintScreen') {
-                try { navigator.clipboard.writeText(''); } catch (_) {}
+                try { navigator.clipboard.writeText(''); } catch (_) { }
             }
         }, true);
 
@@ -439,7 +445,7 @@ class BackgroundController {
     }
 
     read() {
-        try { const v = localStorage.getItem(this.key); if (v === 'on' || v === 'off') return v; } catch (_) {}
+        try { const v = localStorage.getItem(this.key); if (v === 'on' || v === 'off') return v; } catch (_) { }
         return null;
     }
 
@@ -457,7 +463,7 @@ class BackgroundController {
         this.wrapper.dataset.bg = on ? 'on' : 'off';
         if (this.button) this.button.setAttribute('aria-pressed', on ? 'true' : 'false');
         if (this.stateEl) this.stateEl.textContent = on ? this.data.bgOn : this.data.bgOff;
-        if (remember && this.wrapper.dataset.bgToggle === 'show') { try { localStorage.setItem(this.key, on ? 'on' : 'off'); } catch (_) {} }
+        if (remember && this.wrapper.dataset.bgToggle === 'show') { try { localStorage.setItem(this.key, on ? 'on' : 'off'); } catch (_) { } }
     }
 
     toggle() { this.set(!this.isOn()); }
