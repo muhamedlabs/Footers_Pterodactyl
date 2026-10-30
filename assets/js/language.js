@@ -5,9 +5,11 @@ function detectLanguage() {
     if (langCode === 'uk') {
         return {
             texts: [
-                "Креативні YouTube-канали та IT-проєкти",
+                "Креативні YouTube - канали та IT - проєкти",
                 "Технології, ідеї й бачення Андрія Мухамеда",
-                "Світ Андрія Мухамеда"
+                "Світ Андрея Мухамеда",
+                "Ідеї, що стають проєктами",
+                "Долучайся до нашої спільноти"
             ],
             tagline: "Креативна та технологічна мережа",
             brand: "Мухамед",
@@ -20,7 +22,9 @@ function detectLanguage() {
             texts: [
                 "Creative YouTube channels & IT projects",
                 "Technology, ideas and the vision of Andrey Muhamed",
-                "The world of Andrey Muhamed"
+                "The world of Andrey Muhamed",
+                "Ideas that become projects",
+                "Join our community"
             ],
             tagline: "Creative & Technology Network",
             brand: "Muhamed",
@@ -32,7 +36,9 @@ function detectLanguage() {
         texts: [
             "Креативные YouTube-каналы и IT-проекты",
             "Технологии, идеи и видение Андрея Мухамеда",
-            "Мир Андрея Мухамеда"
+            "Мир Андрея Мухамеда",
+            "Идеи, которые становятся проектами",
+            "Присоединяйся к нашему сообществу"
         ],
         tagline: "Креативная и технологическая сеть",
         brand: "Мухамед",
