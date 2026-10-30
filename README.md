@@ -1,8 +1,6 @@
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
-<p align="center">
-  <img width="1920" height="957" alt="preview" src="https://github.com/user-attachments/assets/f6636d36-399c-4b99-9874-1a8b22ddd879" />
-</p>
+<img width="1920" height="957" alt="chrome_CEJ9p0kcgB" src="https://github.com/user-attachments/assets/3e4c39ae-10a7-4624-9183-fcf58fa1d5af" />
 
 ## Описание
 
@@ -49,19 +47,19 @@
 ## Примеры отображения
 
 **Украинский**  
-<img width="1371" height="180" src="https://github.com/user-attachments/assets/2da536ba-ac9e-4794-be73-1e5b2bbfe297" />
+<img width="1357" height="177" alt="chrome_vdqe2j7L1u" src="https://github.com/user-attachments/assets/88fbe0dc-83b4-45d8-954d-28f0cdb0ef6a" />
 
 **Русский**  
-<img width="1320" height="195" src="https://github.com/user-attachments/assets/79730c7c-30f3-4b9a-8fb3-cf2fb172583e" />
+<img width="1266" height="126" alt="chrome_QYNoShnJdy" src="https://github.com/user-attachments/assets/d0967740-d3bb-4f36-8114-a00d5eefa0f1" />
 
 **Английский**  
-<img width="1290" height="150" src="https://github.com/user-attachments/assets/f4cfdea1-6232-4a9d-8d33-a3f6a26e4296" />
+<img width="1296" height="160" alt="chrome_Z3T1JHu0Zc" src="https://github.com/user-attachments/assets/87fda919-f04c-454d-ac94-3ed3160eaec6" />
 
 ---
 
 ## Установка
 
-1. Скопируйте HTML-код футера
+1. Скопируйте HTML-код футера панель
 2. Вставьте его перед закрывающим тегом `</body>`
 3. Готово
 
@@ -112,15 +110,15 @@ detectLanguage()
 <table align="center">
   <tr>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/b75d9461-02c2-4ba7-99b0-d5efaa61c51f" width="260" alt="Mobile view 1" /><br/>
+      <img width="581" height="892" alt="chrome_B1AAI7eRqi" src="https://github.com/user-attachments/assets/60155fb0-c52a-44d2-9e0b-bd8f4de1b6f0" alt="Mobile view 1" /><br/>
       <sub>Смартфон</sub>
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/bcce8488-b2f9-41fc-8bbf-46ba1f585145" width="420" alt="Desktop view" /><br/>
+      <img width="1466" height="872" alt="chrome_653xxqbE42" src="https://github.com/user-attachments/assets/03dd5e18-3650-4e63-b448-88fd0102bc1c" alt="Desktop view" /><br/>
       <sub>Десктоп</sub>
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/d0d1a28d-5552-4c5c-8236-2d4bbd0c286b" width="260" alt="Mobile view 2" /><br/>
+      <img width="489" height="913" alt="chrome_HHbuyAhQDb" src="https://github.com/user-attachments/assets/8a1336e3-23f9-4ef9-94d0-5dd434120405" alt="Mobile view 2" /><br/>
       <sub>Смартфон (альтернативный вид)</sub>
     </td>
   </tr>
