@@ -1,5 +1,3 @@
-
-
 function detectLanguage() {
     const userLang = navigator.language || navigator.userLanguage || 'ru';
     const langCode = userLang.split('-')[0].toLowerCase();
@@ -358,17 +356,15 @@ class ProtectionSystem {
     constructor(wrapper, data) {
         this.wrapper = wrapper;
         this.data = data;
-        this.mode = (window.FooterConfig && window.FooterConfig.protect) || (wrapper && wrapper.dataset.protect) || 'page';
+        const cfg = (window.FooterConfig && window.FooterConfig.protect) || (wrapper && wrapper.dataset.protect) || 'footer';
+        // Захист працює ТІЛЬКИ в футері (або вимкнений повністю).
+        this.mode = cfg === 'off' ? 'off' : 'footer';
         this.handlers = [];
     }
 
-    scope() {
-        return this.mode === 'footer' && this.wrapper ? this.wrapper : document;
-    }
-
     inScope(target) {
-        if (this.mode !== 'footer') return true;
-        return !!(this.wrapper && target && this.wrapper.contains(target));
+        const el = target && target.nodeType === 3 ? target.parentElement : target;
+        return !!(this.wrapper && el && this.wrapper.contains(el));
     }
 
     isEditable(el) {
@@ -387,9 +383,8 @@ class ProtectionSystem {
     }
 
     initialize() {
-        if (this.mode === 'off') return;
-        if (this.mode === 'page') document.documentElement.classList.add('ft-protect');
-        if (this.wrapper) this.wrapper.dataset.protected = 'true';
+        if (this.mode === 'off' || !this.wrapper) return;
+        this.wrapper.dataset.protected = 'true';
 
         const root = document;
         ['contextmenu', 'copy', 'cut', 'dragstart'].forEach(t => this.on(root, t, e => this.block(e), true));
@@ -404,33 +399,23 @@ class ProtectionSystem {
             try { e.clipboardData.setData('text/plain', ''); } catch (_) { }
         }, true);
 
+        // Гарячі клавіші блокуються лише коли фокус усередині футера.
         this.on(root, 'keydown', e => {
-            if (this.isEditable(e.target)) return;
-            const k = (e.key || '').toLowerCase();
+            if (!this.inScope(e.target) || this.isEditable(e.target)) return;
             const mod = e.ctrlKey || e.metaKey;
-            const devtools = e.key === 'F12' ||
-                (mod && e.shiftKey && ['i', 'j', 'c', 'k'].includes(k)) ||
-                (e.metaKey && e.altKey && ['i', 'j', 'c', 'u'].includes(k));
-            const shortcut = mod && !e.shiftKey && ['c', 'x', 'a', 's', 'u', 'p'].includes(k);
-            if (devtools || shortcut) {
+            const k = (e.key || '').toLowerCase();
+            if (mod && !e.shiftKey && ['c', 'x', 'a'].includes(k)) {
                 e.preventDefault();
                 e.stopPropagation();
             }
         }, true);
 
-        this.on(root, 'keyup', e => {
-            if (e.key === 'PrintScreen') {
-                try { navigator.clipboard.writeText(''); } catch (_) { }
-            }
-        }, true);
-
-        document.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
+        this.wrapper.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
     }
 
     destroy() {
         this.handlers.forEach(([t, type, fn, o]) => t.removeEventListener(type, fn, o));
         this.handlers = [];
-        document.documentElement.classList.remove('ft-protect');
         if (this.wrapper) delete this.wrapper.dataset.protected;
     }
 }
