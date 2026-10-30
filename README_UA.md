@@ -1,32 +1,35 @@
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
-<img width="1920" height="957" alt="chrome_CEJ9p0kcgB" src="https://github.com/user-attachments/assets/3e4c39ae-10a7-4624-9183-fcf58fa1d5af" />
+<img width="1920" height="957" alt="chrome_gw9W4tSBCN" src="https://github.com/user-attachments/assets/3ede5f1e-4405-4cd0-804d-5a9fab83e834" />
 
 ## Опис
 
-**Footers Pterodactyl** — сучасний адаптивний футер зі скляним морфізмом, м'якою анімацією частинок та вбудованою багатомовною підтримкою.
+**Footers Pterodactyl** — готовий футер у рожевій фірмовій стилістиці: скляний фон, інтерактивні частинки на canvas, ефект друкарської машинки, живий годинник і вбудована багатомовність.
 
 Підходить для:
 
-* веб-застосунків
+* вебзастосунків
 * портфоліо
-* лендінгів
+* лендингів
 * комерційних сайтів
 
-Легкий, акуратний і готовий до використання без складного налаштування.
+Без збирачів і npm-пакетів: підключаєте файли (або одну CDN-вставку) — і футер працює.
 
 ---
 
 ## Можливості
 
-* Glassmorphism-дизайн
-* Анімовані частинки всередині футера
-* Автоматичне визначення мови браузера
-* Повна адаптивність під будь-які екрани
-* Оптимізована продуктивність
-* Плавні ненав'язливі анімації
-* Підтримка accessibility та reduced-motion
-* Соціальні іконки з hover-ефектами
+* Фірмовий дизайн зі скляним ефектом і зрізаними кутами
+* Власна система частинок на `<canvas>` (без Particles.js), реагує на курсор
+* Ефект друкарської машинки з ротацією фраз
+* Живий годинник (UTC+3) та індикатор статусу мережі
+* Автоматичне визначення мови браузера (RU / UK / EN)
+* Автовизначення світлої та темної підкладки сайту
+* Опційний фоновий малюнок
+* Опційний захист від копіювання
+* Повна адаптивність
+* Підтримка `prefers-reduced-motion` і `prefers-contrast`
+* Соціальні іконки та кнопка «Мультипосилання» з hover-ефектами
 
 ---
 
@@ -34,83 +37,125 @@
 
 ```text
 Footers_Pterodactyl/
-├── index.html      # демо-сторінка з готовим футером
-├── footer.css      # стилі футера (glassmorphism, адаптивність)
-├── footer.js       # визначення мови та анімація частинок
-├── README.md       # документація (RU)
-├── README_UA.md    # документація (UA)
-└── README_EN.md    # документація (EN)
+├── Index_footer.html       # підключення локальних файлів
+├── footer-panel.html       # підключення через CDN (jsDelivr, гілка complete)
+├── README.md               # документація (RU)
+├── README_UA.md            # документація (UA)
+├── README_EN.md            # документація (EN)
+└── assets/
+    ├── logo.webp
+    ├── images/
+    │   └── picture.webp            # фонове зображення
+    ├── icons/
+    │   ├── icon-m-pink.webp
+    │   ├── icon-m-white.webp
+    │   └── icon-m-black.webp
+    ├── fonts/
+    │   ├── kharkiv_tone.ttf
+    │   └── ermilov_bold.otf
+    ├── css/
+    │   ├── base.css        # змінні та основа
+    │   ├── layout.css      # сітка й розташування
+    │   ├── brand.css       # логотип і назва
+    │   ├── actions.css     # соцмережі та кнопка мультипосилання
+    │   ├── status.css      # друкарська машинка, статус, годинник
+    │   ├── effects.css     # фон, лінії, світла/темна підкладка
+    │   ├── protect.css     # стилі захисту від копіювання
+    │   ├── a11y.css        # доступність
+    │   ├── responsive.css  # адаптивність
+    │   ├── font.css        # шрифт, вбудований у base64
+    │   └── styles.css      # усі стилі одним файлом
+    └── js/
+        ├── language.js     # визначення мови та тексти
+        ├── typewriter.js   # друкарська машинка, годинник, підстановка текстів
+        ├── particles.js    # система частинок
+        ├── protection.js   # захист від копіювання
+        ├── background.js   # керування фоновим малюнком
+        ├── main.js         # ініціалізація та API
+        └── script.js       # весь JS одним файлом
 ```
-
-Відкрийте `index.html` у браузері — і ви одразу побачите футер у роботі.
 
 ---
 
 ## Підтримка мов
 
-Футер підтримує **лише три мови**:
+Футер підтримує **три мови**:
 
-| Мова         | Код  | Поведінка                             |
-| ------------ | ---- | ------------------------------------- |
-| Російська    | `ru` | **використовується за замовчуванням** |
-| Українська   | `uk` | визначається автоматично              |
-| Англійська   | `en` | визначається автоматично              |
+| Мова       | Код  | Поведінка                      |
+| ---------- | ---- | ------------------------------ |
+| Російська  | `ru` | **використовується за замовчуванням** |
+| Українська | `uk` | визначається автоматично       |
+| Англійська | `en` | визначається автоматично       |
 
-Якщо мову браузера не розпізнано — відображається **російська версія**.
+Мова береться з `navigator.language`. Якщо її не розпізнано — відображається **російська версія**.
 
 ---
 
 ## Приклади відображення
 
+
 **Українська**  
-<img width="1357" height="177" alt="chrome_vdqe2j7L1u" src="https://github.com/user-attachments/assets/88fbe0dc-83b4-45d8-954d-28f0cdb0ef6a" />
+<img width="1337" height="215" alt="chrome_jAjjGor5yJ" src="https://github.com/user-attachments/assets/eca4462f-c9e6-47e1-97f3-c7d8ac2f36a1" />
 
 **Російська**  
-<img width="1266" height="126" alt="chrome_QYNoShnJdy" src="https://github.com/user-attachments/assets/d0967740-d3bb-4f36-8114-a00d5eefa0f1" />
+<img width="1413" height="241" alt="chrome_P42jY1INGV" src="https://github.com/user-attachments/assets/1b0fb935-5d08-4310-9b19-5f3d48fa50b7" />
 
 **Англійська**  
-<img width="1296" height="160" alt="chrome_Z3T1JHu0Zc" src="https://github.com/user-attachments/assets/87fda919-f04c-454d-ac94-3ed3160eaec6" />
+<img width="1267" height="197" alt="chrome_f7bmc30PF0" src="https://github.com/user-attachments/assets/b0cf987d-b4ad-41c0-936c-43dee0b622f6" />
 
 ---
 
 ## Встановлення
 
-1. Скопіюйте `footer.css` та `footer.js` у свій проєкт
-2. Скопіюйте блок `<footer class="pt-footer">…</footer>` з `index.html` і вставте його перед закривним тегом `</body>`
-3. Підключіть стилі та скрипти:
+Є два способи.
+
+### Варіант 1. Локальні файли
+
+1. Скопіюйте папку `assets` у свій проєкт
+2. Скопіюйте блок `<div class="footer-wrapper">…</div>` з `Index_footer.html` перед закривальним тегом `</body>`
+3. Підключіть стилі та скрипти (вони вже є внизу `Index_footer.html`):
 
 ```html
-<head>
-  <!-- Font Awesome (соціальні іконки) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Стилі футера -->
-  <link rel="stylesheet" href="footer.css">
-</head>
-<body>
-  <!-- ... ваш сайт ... -->
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/brand.css">
+<link rel="stylesheet" href="assets/css/actions.css">
+<link rel="stylesheet" href="assets/css/status.css">
+<link rel="stylesheet" href="assets/css/effects.css">
+<link rel="stylesheet" href="assets/css/protect.css">
+<link rel="stylesheet" href="assets/css/a11y.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
 
-  <footer class="pt-footer"> ... </footer>
-
-  <!-- Particles.js (анімація частинок) -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <!-- Логіка футера: мова та частинки -->
-  <script src="footer.js"></script>
-</body>
+<script src="assets/js/language.js"></script>
+<script src="assets/js/typewriter.js"></script>
+<script src="assets/js/particles.js"></script>
+<script src="assets/js/protection.js"></script>
+<script src="assets/js/background.js"></script>
+<script src="assets/js/main.js"></script>
 ```
 
-4. Готово
+Порядок скриптів важливий: `main.js` має йти **останнім**.
 
-Без збирачів і npm-пакетів. Particles.js має завантажуватися **раніше** за `footer.js`.
+### Варіант 2. Через CDN
+
+Скопіюйте вміст `footer-panel.html` на свою сторінку. Вбудований скрипт сам підтягне всі стилі, скрипти та логотип із jsDelivr:
+
+```text
+https://cdn.jsdelivr.net/gh/muhamedlabs/Footers_Pterodactyl@complete/
+```
+
+Нічого завантажувати не потрібно.
+
+Font Awesome підключати вручну не потрібно — `main.js` завантажує його сам.
 
 ---
 
 ## Технології
 
 * **HTML5** — семантична структура
-* **CSS3** — grid, flexbox, blur, clamp, gradients
-* **JavaScript** — анімації та мовна логіка
-* **Particles.js** — візуальні частинки
-* **Font Awesome** — соціальні іконки
+* **CSS3** — grid, flexbox, clamp, градієнти, змінні
+* **JavaScript (vanilla)** — частинки на canvas, друкарська машинка, мовна логіка
+* **Font Awesome** — соціальні іконки (підвантажується автоматично)
 
 ---
 
@@ -118,61 +163,115 @@ Footers_Pterodactyl/
 
 ### Соціальні посилання
 
-Замініть URL усередині тегів в `index.html`:
+Замініть URL у блоці `footer-actions` в HTML:
 
 ```html
-<a href="https://muhamedlabs.pro" class="social-icon">
+<a href="https://t.me/muhamedlabs" target="_blank" class="social-icon" aria-label="Вступайте до нашого Telegram-каналу">
+    <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+</a>
 ```
+
+Посилання кнопки мультипосилання змінюйте в `<a class="multilink-button" href="...">`.
 
 ### Логотип
 
-Замініть адресу картинки в тезі:
+Іконка бренду лежить у `assets/icons/`: доступні рожева, біла та чорна версії. Вкажіть потрібну в тезі:
 
 ```html
-<img class="pt-footer__logo" src="шлях/до/вашого/логотипу.png" alt="">
+<img src="assets/icons/icon-m-pink.webp" alt="">
 ```
+
+Якщо зображення не завантажиться, автоматично показується літера «M».
 
 ### Зміна текстів і мов
 
-Відкрийте `footer.js`. Тексти зберігаються в об'єкті `TRANSLATIONS`, а мову визначає функція:
+Відкрийте `assets/js/language.js`. Функція `detectLanguage()` повертає для кожної мови:
 
-```js
-detectLanguage()
-```
+| Поле         | Призначення                         |
+| ------------ | ----------------------------------- |
+| `texts`      | фрази для друкарської машинки       |
+| `tagline`    | підпис під назвою бренду            |
+| `brand`      | назва бренду                        |
+| `status`     | текст статусу мережі                |
+| `buttonText` | текст кнопки мультипосилання        |
 
-Можна:
+Щоб додати мову, додайте ще одну гілку `if (langCode === '...')`. Мова за замовчуванням — останній `return` у функції.
 
-* змінити тексти
-* змінити мову за замовчуванням (`DEFAULT_LANG`)
-* додати нову мову (додайте її в `TRANSLATIONS` і в список `SUPPORTED`)
+Суфікс **Ads** у назві додається в `typewriter.js` (`this.data.brand + ' <b>Ads</b>'`) — змініть його там.
 
-Елементи з атрибутом `data-i18n` отримують текст, а `data-i18n-aria` — підпис для скрінрідерів.
+Часовий пояс годинника (`UTC+3`) задано в `typewriter.js`, метод `startClock()`, і в підписі `<em>UTC+3</em>` у розмітці.
 
 ### Кольори та стиль
 
-Основні параметри задано змінними на початку `footer.css`:
+Основні змінні розташовані на початку `assets/css/base.css`:
 
 ```css
-.pt-footer {
-  --pt-bg: rgba(255, 255, 255, 0.08);   /* фон скла */
-  --pt-border: rgba(255, 255, 255, 0.18); /* рамка */
-  --pt-text: #e8ecff;                   /* колір тексту */
-  --pt-accent: #7aa2ff;                 /* акцент при наведенні */
-  --pt-radius: 20px;                    /* заокруглення */
+.footer-wrapper {
+  --ft-pink: #ff2a62;     /* основний акцент */
+  --ft-edge: #ff9dbd;     /* світла кромка */
+  --ft-white: #ffffff;
+  --ft-soft: #f6f1f3;
+  --ft-muted: #cfc6c9;
+  --ft-cut: 16px;         /* зріз кутів */
+  --ft-max: 1200px;       /* максимальна ширина */
+  --ft-glass: .16;        /* прозорість скла */
 }
+```
+
+### Фоновий малюнок
+
+Керується атрибутом `data-bg` у `.footer-wrapper` (`on` / `off`, за замовчуванням `off`):
+
+```html
+<div class="footer-wrapper" data-bg="on">
+```
+
+Або через JavaScript:
+
+```js
+window.footerUtils.setBackground(true);
+window.footerUtils.toggleBackground();
+```
+
+Картинка задається змінною `--ft-bg-img` (за замовчуванням `assets/images/picture.webp`).
+
+### Захист від копіювання
+
+Режим задається атрибутом `data-protect`:
+
+| Значення | Що відбувається                                                             |
+| -------- | --------------------------------------------------------------------------- |
+| `footer` | захист діє лише всередині футера (використовується в демо)                  |
+| `page`   | захист на всій сторінці (**значення за замовчуванням, якщо атрибут не вказано**) |
+| `off`    | захист вимкнено                                                             |
+
+Блокуються контекстне меню, копіювання, виділення, перетягування та частина гарячих клавіш. Поля введення не зачіпаються.
+
+> Це лише легка перешкода: повністю захистити контент на клієнті неможливо. У режимі `page` також приховується сторінка під час друку. Якщо вам це не потрібно, використовуйте `footer` або `off`.
+
+Режим можна задати і через конфіг, до підключення скриптів:
+
+```html
+<script>
+  window.FooterConfig = { protect: 'footer', background: 'off' };
+</script>
+```
+
+### Керування з JavaScript
+
+Після завантаження доступний об'єкт `window.footerUtils`:
+
+```js
+footerUtils.restartTyping();                 // перезапустити друкарську машинку
+footerUtils.updateTexts(['Текст 1', 'Текст 2']); // замінити фрази
+footerUtils.setBackground(true);             // увімкнути/вимкнути фон
+footerUtils.toggleBackground();              // перемкнути фон
+footerUtils.detectLanguage();                // отримати тексти поточної мови
 ```
 
 ### Налаштування частинок
 
-Параметри розташовані у функції `initParticles()` у `footer.js`:
-
-```js
-number: { value: isMobile ? 20 : 40 }   // кількість частинок
-color:  { value: '#ffffff' }            // колір
-move:   { speed: 1 }                    // швидкість
-```
-
-Зменште кількість і швидкість для слабших пристроїв або спокійнішого вигляду.
+Параметри розташовані в `assets/js/particles.js`. Кількість частинок обчислюється автоматично за площею футера (від 14 до 70), дальність зв'язків задає `this.link` (за замовчуванням 125). Зменште значення для слабких пристроїв або спокійнішого вигляду.
 
 ---
 
@@ -183,15 +282,15 @@ move:   { speed: 1 }                    // швидкість
 <table align="center">
   <tr>
     <td align="center">
-      <img width="581" height="892" alt="chrome_B1AAI7eRqi" src="https://github.com/user-attachments/assets/60155fb0-c52a-44d2-9e0b-bd8f4de1b6f0" alt="Mobile view 1" /><br/>
+      <img width="483" height="891" alt="chrome_sr3gtINryR" src="https://github.com/user-attachments/assets/8b7c35e9-4f4f-47d8-ba1b-f24b26eeb1f2" alt="Mobile view 1" /><br/>
       <sub>Смартфон</sub>
     </td>
     <td align="center">
-      <img width="1466" height="872" alt="chrome_653xxqbE42" src="https://github.com/user-attachments/assets/03dd5e18-3650-4e63-b448-88fd0102bc1c" alt="Desktop view" /><br/>
+      <img width="1411" height="859" alt="chrome_L2eTnXYkbD" src="https://github.com/user-attachments/assets/a3ad4838-ee61-4e00-a2c7-c0f4b176594d" alt="Desktop view" /><br/>
       <sub>Десктоп</sub>
     </td>
     <td align="center">
-      <img width="489" height="913" alt="chrome_HHbuyAhQDb" src="https://github.com/user-attachments/assets/8a1336e3-23f9-4ef9-94d0-5dd434120405" alt="Mobile view 2" /><br/>
+     <img width="451" height="912" alt="chrome_CeNEgRNm7a" src="https://github.com/user-attachments/assets/2cf5d23b-43b9-4e41-b732-df0e8e480b95" alt="Mobile view 2" /><br/>
       <sub>Смартфон (альтернативний вигляд)</sub>
     </td>
   </tr>
@@ -201,18 +300,17 @@ move:   { speed: 1 }                    // швидкість
 
 ## Доступність
 
-* підтримка `prefers-reduced-motion` (частинки не запускаються, переходи вимикаються)
-* коректні ARIA-атрибути
-* навігація з клавіатури та помітний фокус
-* сумісність зі скрінрідерами
-
-Інтерфейс залишається зручним для всіх користувачів.
+* `prefers-reduced-motion` — анімації вимикаються, частинки малюються статично, перша фраза показується одразу
+* `prefers-contrast: high` — посилені контури та контраст тексту
+* ARIA-атрибути в посилань, `aria-live` для тексту, що друкується
+* Видимий фокус і клавіатурна навігація
+* Анімація частинок ставиться на паузу, коли футер не видно або вкладка неактивна
 
 ---
 
 ## Сумісність браузерів
 
-Підтримуються сучасні браузери:
+Підтримуються сучасні браузери з `ResizeObserver` та `IntersectionObserver`:
 
 * Chrome 90+
 * Firefox 88+
@@ -226,16 +324,22 @@ move:   { speed: 1 }                    // швидкість
 ## FAQ
 
 **Чому футер російською?**
-Російська — мова за замовчуванням. Вона показується, коли мова браузера не російська, не українська й не англійська.
+Російська — мова за замовчуванням. Вона показується, якщо мова браузера не російська, не українська і не англійська.
 
 **Частинки не з'являються. Що перевірити?**
-Переконайтеся, що Particles.js підключено раніше за `footer.js`, що в проєкті є елемент `<div id="footer-particles">` і що в консолі браузера немає помилок. Якщо в системі ввімкнено зменшення руху, частинки вимкнено навмисно.
+Переконайтеся, що в розмітці є `<div id="particles-js">`, що `main.js` підключено останнім і що в консолі немає помилок. Якщо в системі ввімкнено зменшення руху, частинки малюються без анімації навмисно.
 
 **Соціальні іконки відображаються порожніми квадратами.**
-Не підключено Font Awesome. Перевірте посилання на стилі в `<head>`.
+Font Awesome завантажується автоматично з `kit.fontawesome.com`. Перевірте, що запит не блокується розширенням, CSP або мережею.
+
+**Не вдається скопіювати текст футера.**
+Увімкнено захист від копіювання. Встановіть `data-protect="off"` або `window.FooterConfig = { protect: 'off' }`.
+
+**Футер погано читається на світлому сайті.**
+Тема підкладки визначається автоматично за фоном батьківських елементів. Її можна задати вручну: `data-surface="light"` або `data-surface="dark"` у `.footer-wrapper`.
 
 **Чи можна вимкнути анімацію?**
-Приберіть виклик `initParticles()` у `footer.js` або видаліть блок `footer-particles` з розмітки.
+Видаліть `particles.js` і блок `<div id="particles-js">`, але тоді приберіть і `new ParticleSystem()` з `main.js`. Друкарську машинку можна зупинити, залишивши один текст у `texts`.
 
 ---
 
@@ -247,7 +351,7 @@ move:   { speed: 1 }                    // швидкість
 2. Створіть гілку для своїх змін
 3. Відкрийте Pull Request з коротким описом
 
-Про помилки повідомляйте через Issue: вкажіть браузер, пристрій і кроки для відтворення.
+Про знайдені помилки повідомляйте через Issue: вкажіть браузер, пристрій і кроки для відтворення.
 
 ---
 
