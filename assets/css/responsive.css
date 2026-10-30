@@ -1,0 +1,95 @@
+@media (max-width: 1160px) and (min-width: 1081px) {
+    .footer-link { display: none; }
+}
+
+@media (max-width: 1080px) {
+    .footer-container {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "brand"
+            "actions"
+            "rule"
+            "status";
+        gap: 14px;
+    }
+
+    .footer-link,
+    .footer-ticks { display: none; }
+
+    .footer-text-container { padding-right: 0; }
+
+    .footer-status { flex-direction: column; align-items: stretch; gap: 12px; padding-right: 0; }
+
+    .footer-meta {
+        align-self: stretch;
+        justify-content: flex-start;
+        margin: 0;
+        padding: 10px 0 0 24px;
+        border-top: 1px dashed var(--ft-line);
+    }
+
+    .footer-actions { justify-self: stretch; gap: 6px; }
+
+    .footer-actions .social-icon {
+        flex: none;
+        width: 48px;
+        height: 44px;
+    }
+
+    .footer-actions .multilink-wrap {
+        flex: 1 1 auto;
+        min-width: 210px;
+        margin-left: 2px;
+    }
+
+    .footer-actions .multilink-button {
+        flex: 1 1 auto;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-brand { --bh: 40px; gap: 12px; }
+
+    .brand-text { height: auto; min-height: var(--bh); justify-content: center; gap: 7px; }
+
+    .brand-sub {
+        white-space: normal;
+        letter-spacing: .1em;
+        line-height: 1.3;
+        text-wrap: balance;
+    }
+
+    .footer-text-container { padding-left: 20px; }
+
+    .footer-meta { flex-wrap: wrap; gap: 8px 16px; padding-left: 20px; }
+
+    .footer-actions {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+    }
+
+    .footer-actions .social-icon { width: auto; height: 42px; }
+
+    .footer-actions .multilink-wrap {
+        min-width: 0;
+        grid-column: 1 / -1;
+        margin-left: 0;
+    }
+
+    .footer-actions .multilink-button { height: 46px; }
+
+    .multilink-button #button-text { padding: 0 16px 0 20px; font-size: 12px; }
+    .multilink-button .arrow { width: 54px; }
+}
+
+@media (max-width: 359px) {
+    .footer { --pl: 16px; --pr: 12px; --pt: 14px; --pb: 14px; }
+
+    .brand-sub { letter-spacing: .06em; }
+
+    .footer-actions .social-icon { height: 40px; font-size: 15px; }
+
+    .footer-text-container { letter-spacing: .02em; }
+}

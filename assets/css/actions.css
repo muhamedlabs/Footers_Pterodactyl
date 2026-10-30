@@ -1,0 +1,247 @@
+.footer-actions {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.social-icon {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    background:
+        repeating-linear-gradient(-58deg, transparent 0 9px, rgba(255, 249, 250, .12) 9px 10px),
+        linear-gradient(160deg, rgba(var(--ft-a), .55), rgba(var(--ft-a), .2));
+    box-shadow: inset 0 0 0 1px rgba(var(--ft-a), .95), 0 0 16px rgba(var(--ft-a), .38);
+    color: var(--ft-white);
+    font-size: 17px;
+    text-decoration: none;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: color .25s, box-shadow .3s, filter .25s;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: ftPop .45s var(--ft-ease) forwards;
+}
+
+.social-icon:nth-child(1) { animation-delay: .5s; }
+.social-icon:nth-child(2) { animation-delay: .58s; }
+.social-icon:nth-child(3) { animation-delay: .66s; }
+.social-icon:nth-child(4) { animation-delay: .74s; }
+.social-icon:nth-child(5) { animation-delay: .82s; }
+
+@keyframes ftPop { to { opacity: 1; transform: none; } }
+
+.social-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--ft-fill);
+    transform: translateY(101%);
+    transition: transform .35s var(--ft-ease);
+}
+
+.social-icon::after {
+    --k: var(--ft-pink);
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        linear-gradient(var(--k), var(--k)) 0 0 / 8px 2px no-repeat,
+        linear-gradient(var(--k), var(--k)) 0 0 / 2px 8px no-repeat,
+        linear-gradient(var(--k), var(--k)) 100% 100% / 8px 2px no-repeat,
+        linear-gradient(var(--k), var(--k)) 100% 100% / 2px 8px no-repeat,
+        linear-gradient(var(--k), var(--k)) calc(100% - 6px) 6px / 3px 3px no-repeat;
+    transition: background-size .35s var(--ft-ease);
+}
+
+.social-icon i {
+    transition: transform .3s var(--ft-ease), filter .3s;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, .3));
+}
+
+.social-icon:focus-visible {
+    box-shadow: inset 0 0 0 1px var(--ft-edge), 0 0 16px rgba(var(--ft-a), .6), 0 0 34px rgba(var(--ft-a), .28);
+    outline: none;
+}
+
+.social-icon:focus-visible::before { transform: none; }
+
+@media (hover: hover) {
+    .social-icon:hover { box-shadow: inset 0 0 0 1px var(--ft-edge), 0 0 16px rgba(var(--ft-a), .6), 0 0 34px rgba(var(--ft-a), .28); }
+    .social-icon:hover::before { transform: none; }
+    .social-icon:hover::after {
+        --k: #fff;
+        background-size: 16px 2px, 2px 16px, 16px 2px, 2px 16px, 3px 3px;
+    }
+    .social-icon:hover i { transform: scale(1.14); filter: drop-shadow(0 0 7px rgba(255, 255, 255, .55)); }
+}
+
+.social-icon:active {
+    transform: scale(.94);
+    box-shadow: inset 0 0 0 1px #ffb3cb, 0 0 20px rgba(var(--ft-a), .85), 0 0 42px rgba(var(--ft-a), .4);
+}
+.social-icon:active::before { transform: none; background: var(--ft-fill-down); }
+.social-icon:active::after { --k: #fff; background-size: 16px 2px, 2px 16px, 16px 2px, 2px 16px, 3px 3px; }
+.social-icon:active i { transform: scale(1.08); }
+.multilink-button:active { transform: translateY(1px) scale(.985); }
+
+.multilink-button {
+    --c: 12px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: stretch;
+    flex: none;
+    height: 44px;
+    margin-left: 0;
+    color: var(--ft-white);
+    font: 400 12px var(--ft-font);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    touch-action: manipulation;
+    background:
+        linear-gradient(100deg, #ff3d6d, #ff1f55 55%, #e8123f) no-repeat,
+        linear-gradient(180deg, #5e1a38, #3b1024);
+    background-size: 0% 100%, 100% 100%;
+    transition: background-size .55s var(--ft-ease), filter .25s;
+    clip-path: polygon(var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0 100%, 0 var(--c));
+    opacity: 0;
+    transform: translateY(8px);
+    animation: ftPop .5s var(--ft-ease) .95s forwards;
+}
+
+.multilink-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background: rgba(var(--ft-a), 1);
+    transition: background .3s;
+    clip-path: polygon(evenodd,
+        var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0 100%, 0 var(--c), var(--c) 0,
+        calc(var(--c) + .41px) 1px,
+        calc(100% - 1px) 1px,
+        calc(100% - 1px) calc(100% - var(--c) - .41px),
+        calc(100% - var(--c) - .41px) calc(100% - 1px),
+        1px calc(100% - 1px),
+        1px calc(var(--c) + .41px),
+        calc(var(--c) + .41px) 1px,
+        var(--c) 0);
+}
+
+.multilink-button::after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    bottom: -10%;
+    left: -40%;
+    width: 26%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .42), transparent);
+    transform: skewX(-20deg);
+    animation: ftShine 5.5s ease-in-out 2.6s infinite;
+}
+
+@keyframes ftShine {
+    0%, 55% { left: -40%; }
+    100% { left: 130%; }
+}
+
+.multilink-button > * { position: relative; z-index: 1; }
+
+.multilink-button #button-text {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 16px 0 18px;
+}
+
+.multilink-button .arrow {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 50px;
+    background: linear-gradient(180deg, #ff4b78, var(--ft-pink));
+    transition: background .35s;
+}
+
+.multilink-button .arrow svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: var(--ft-white);
+    transition: stroke .3s, transform .3s var(--ft-ease);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.multilink-button:focus-visible { outline: 2px solid var(--ft-pink); outline-offset: 3px; }
+
+@media (hover: hover) {
+    .multilink-button:hover {
+        background-size: 100% 100%, 100% 100%;
+    }
+    .multilink-button:hover::before { background: var(--ft-edge); }
+    .multilink-wrap:hover { filter: drop-shadow(0 0 8px rgba(var(--ft-a), .7)) drop-shadow(0 0 22px rgba(var(--ft-a), .4)); }
+    .multilink-button:hover::after { animation-duration: 1.4s; animation-delay: 0s; }
+    .multilink-button:hover .arrow { background: linear-gradient(180deg, #ffffff, #ffe3ea); }
+    .multilink-button:hover .arrow svg { stroke: #1a0a10; transform: translateX(4px); }
+}
+
+.multilink-button:focus-visible {
+    background-size: 100% 100%, 100% 100%;
+}
+.multilink-button:focus-visible::before { background: var(--ft-edge); }
+.multilink-wrap:focus-within { filter: drop-shadow(0 0 8px rgba(var(--ft-a), .7)) drop-shadow(0 0 22px rgba(var(--ft-a), .4)); }
+
+.multilink-button:active {
+    background:
+        linear-gradient(100deg, #ff2f66, #f01a50 55%, #d60c3a) no-repeat,
+        linear-gradient(180deg, #46142a, #2a0c18);
+    background-size: 100% 100%, 100% 100%;
+}
+.multilink-button:active::before { background: #ffb3cb; }
+.multilink-button:active .arrow svg { transform: translateX(7px); }
+.multilink-wrap:active { filter: drop-shadow(0 0 10px rgba(var(--ft-a), .95)) drop-shadow(0 0 26px rgba(var(--ft-a), .55)); }
+
+.multilink-wrap {
+    display: flex;
+    flex: none;
+    margin-left: 4px;
+    transition: filter .3s;
+}
+.multilink-button:focus-visible::after { animation-duration: 1.4s; animation-delay: 0s; }
+.multilink-button:focus-visible .arrow { background: linear-gradient(180deg, #ffffff, #ffe3ea); }
+.multilink-button:focus-visible .arrow svg { stroke: #1a0a10; transform: translateX(4px); }
+
+.footer-wrapper[data-bg="on"] .social-icon {
+    background: linear-gradient(160deg, rgba(var(--ft-a), .3), rgba(14, 14, 14, .55));
+}
+
+@media (hover: hover) {
+    .multilink-button:hover #button-text { animation: ftTextGl .4s steps(2) 1; }
+}
+
+.multilink-button:focus-visible #button-text { animation: ftTextGl .4s steps(2) 1; }
+
+@keyframes ftTextGl {
+    0%   { text-shadow: 2px 0 var(--ft-pink), -2px 0 rgba(255, 249, 250, .5); }
+    50%  { text-shadow: -2px 0 var(--ft-pink), 2px 0 rgba(255, 249, 250, .5); transform: translateX(1px); }
+    100% { text-shadow: none; transform: none; }
+}

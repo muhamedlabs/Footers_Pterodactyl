@@ -1,0 +1,90 @@
+.footer-bg {
+    position: absolute;
+    inset: 1px 1px 1px 3px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+
+    background:
+        repeating-linear-gradient(-58deg, transparent 0 52px, rgba(var(--ft-a), .26) 52px 53.5px),
+        repeating-linear-gradient(-58deg, transparent 0 13px, rgba(255, 249, 250, .035) 13px 14px),
+        linear-gradient(90deg, rgba(10, 8, 9, .55), rgba(10, 8, 9, .15) 60%, rgba(10, 8, 9, .45)),
+        var(--ft-bg-img) 50% 50% / cover no-repeat;
+    clip-path: polygon(calc(var(--ft-cut) - 2.6px) 0, 100% 0, 100% calc(100% - var(--ft-cut) + .6px), calc(100% - var(--ft-cut) + .6px) 100%, 0 100%, 0 calc(var(--ft-cut) - 2.6px));
+    transition: opacity .6s var(--ft-ease);
+    animation: ftBgDrift 28s ease-in-out infinite alternate;
+}
+
+.footer-wrapper[data-bg="on"] .footer-bg {
+    opacity: 1;
+}
+
+.footer-wrapper[data-surface="light"] {
+    --ft-glass: .985;
+}
+
+.footer-wrapper[data-bg="on"] {
+    --ft-glass: .42;
+}
+
+.footer-wrapper[data-bg="on"] .footer::after {
+
+    background:
+        repeating-linear-gradient(-58deg, transparent 0 52px, rgba(var(--ft-a), .26) 52px 53.5px),
+        repeating-linear-gradient(-58deg, transparent 0 13px, rgba(255, 249, 250, .035) 13px 14px),
+        linear-gradient(90deg, rgba(14, 14, 14, .35), rgba(24, 17, 19, .25));
+}
+
+@keyframes ftBgDrift {
+    from { background-position: 0 0, 0 0, 0% 50%, 20% 50%; }
+    to   { background-position: 0 0, 0 0, 0% 50%, 80% 50%; }
+}
+
+@keyframes ftPulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(var(--ft-a), .7); }
+    50% { box-shadow: 0 0 16px rgba(var(--ft-a), 1); }
+}
+
+.footer-line {
+    position: absolute;
+    top: 0;
+    left: var(--ft-cut);
+    right: 0;
+    height: 2px;
+    z-index: 3;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.footer-line::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -30%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, var(--ft-pink), #fff, transparent);
+    filter: drop-shadow(0 0 4px var(--ft-pink));
+    animation: ftSweep 6s ease-in-out infinite;
+}
+
+@keyframes ftSweep {
+    0% { left: -30%; }
+    55%, 100% { left: 110%; }
+}
+
+@keyframes ftTicks { to { background-position-x: 9.24px; } }
+
+.footer-ticks {
+    position: absolute;
+    right: calc(var(--ft-cut) + 6px);
+    bottom: calc(var(--pb) + 6px);
+    z-index: 4;
+    width: 96px;
+    height: 9px;
+    pointer-events: none;
+    background: repeating-linear-gradient(-60deg, rgba(var(--ft-a), .95) 0 2px, transparent 2px 8px);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000);
+    mask-image: linear-gradient(90deg, transparent, #000);
+    animation: ftTicks 1.6s linear infinite;
+}
