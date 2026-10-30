@@ -1,13 +1,3 @@
-
-> **v11+** — лёгкий глитч (как на сайте), насыщенные фоны плиток и кнопки, элементы ярче, фон темнее и тише.
-
-> **v11** — нижняя строка: одна чистая линия «● Сеть активна / ЧЧ:ММ:СС UTC+3» + бегущие штрихи, без коробок и лишних линий.
-
-> **v10** — вместо копирайта справа: пульсирующий статус «Сеть активна» и живое время UTC+3, бегущие красные штрихи, защита от копирования работает молча (без сообщений).
-
-> **v9** — тонкий курсор-палочка, стирание без смены цвета, крупный текст, блок копирайта справа, один шрифт на весь футер.
-
-> **Финальная версия (v5)** — сборка лучшего из v2, v3 и v4: панель со срезанными углами и бегущей искрой (v2), плитка-логотип и отдельные плитки соцсетей (v4), кнопка с бликом, печатающийся текст, копирайт, бегущая лента и «засечки» (v2).
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
 <p align="center">
