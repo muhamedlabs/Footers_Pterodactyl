@@ -942,32 +942,31 @@
     to   { background-position: 0 0, 0 0, 0% 50%, 80% 50%; }
 }
 
-html.ft-protect,
-html.ft-protect body,
-.footer-wrapper[data-protected="true"] {
+.footer-wrapper[data-protected="true"],
+.footer-wrapper[data-protected="true"] * {
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
 }
 
-html.ft-protect input,
-html.ft-protect textarea,
-html.ft-protect select,
-html.ft-protect [contenteditable="true"] {
+.footer-wrapper[data-protected="true"] input,
+.footer-wrapper[data-protected="true"] textarea,
+.footer-wrapper[data-protected="true"] select,
+.footer-wrapper[data-protected="true"] [contenteditable="true"] {
     -webkit-user-select: text;
     user-select: text;
 }
 
-html.ft-protect img,
-html.ft-protect svg,
-html.ft-protect video,
-html.ft-protect a {
+.footer-wrapper[data-protected="true"] img,
+.footer-wrapper[data-protected="true"] svg,
+.footer-wrapper[data-protected="true"] video,
+.footer-wrapper[data-protected="true"] a {
     -webkit-user-drag: none;
     user-drag: none;
 }
 
 @media print {
-    html.ft-protect body {
+    .footer-wrapper[data-protected="true"] {
         display: none !important;
     }
 }
