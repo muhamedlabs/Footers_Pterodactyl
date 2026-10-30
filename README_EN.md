@@ -1,25 +1,19 @@
-
-> **v9** — thin bar cursor, erasing without colour change, larger text, copyright block on the right, one font across the whole footer.
-
-> **Final version (v5)** — the best of v2, v3 and v4 in one: chamfered panel with a travelling spark (v2), logo tile and separate social tiles (v4), shining button, typing text, copyright, ticker and tick marks (v2).
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
-<p align="center">
-  <img width="1920" height="957" alt="preview" src="https://github.com/user-attachments/assets/f6636d36-399c-4b99-9874-1a8b22ddd879" />
-</p>
+<img width="1920" height="957" alt="chrome_CEJ9p0kcgB" src="https://github.com/user-attachments/assets/3e4c39ae-10a7-4624-9183-fcf58fa1d5af" />
 
 ## Description
 
-**Footers Pterodactyl** is a modern responsive footer with glassmorphism design, smooth particle animation, and built-in multilingual support.
+**Footers Pterodactyl** is a modern, responsive footer with glassmorphism, soft particle animation and built-in multilingual support.
 
-Perfect for:
+Suitable for:
 
 * web applications
 * portfolios
 * landing pages
 * commercial websites
 
-Lightweight, clean, and ready to use without complex configuration.
+Lightweight, clean and ready to use with no complicated setup.
 
 ---
 
@@ -28,48 +22,60 @@ Lightweight, clean, and ready to use without complex configuration.
 * Glassmorphism design
 * Animated particles inside the footer
 * Automatic browser language detection
-* Fully responsive to any screen size
+* Fully responsive on any screen size
 * Optimized performance
-* Smooth subtle animations
+* Smooth, unobtrusive animations
 * Accessibility and reduced-motion support
 * Social icons with hover effects
 
 ---
 
-## Language Support
+## Language support
 
-The footer supports **only three languages**:
+The footer supports **three languages only**:
 
-| Language        | Code | Behavior                      |
-| --------------- | ---- | ----------------------------- |
-| Russian         | `ru` | **used by default**           |
-| Ukrainian       | `uk` | detected automatically        |
-| English         | `en` | detected automatically        |
+| Language   | Code | Behavior                  |
+| ---------- | ---- | ------------------------- |
+| Russian    | `ru` | **used by default**       |
+| Ukrainian  | `uk` | detected automatically    |
+| English    | `en` | detected automatically    |
 
-If the browser language is not recognized, the **Russian version** is displayed.
+If the browser language is not recognized, the **Russian version** is shown.
 
 ---
 
-## Display Examples
+## Screenshots
 
 **Ukrainian**  
-<img width="1371" height="180" src="https://github.com/user-attachments/assets/2da536ba-ac9e-4794-be73-1e5b2bbfe297" />
+<img width="1357" height="177" alt="chrome_vdqe2j7L1u" src="https://github.com/user-attachments/assets/88fbe0dc-83b4-45d8-954d-28f0cdb0ef6a" />
 
 **Russian**  
-<img width="1320" height="195" src="https://github.com/user-attachments/assets/79730c7c-30f3-4b9a-8fb3-cf2fb172583e" />
+<img width="1266" height="126" alt="chrome_QYNoShnJdy" src="https://github.com/user-attachments/assets/d0967740-d3bb-4f36-8114-a00d5eefa0f1" />
 
 **English**  
-<img width="1290" height="150" src="https://github.com/user-attachments/assets/f4cfdea1-6232-4a9d-8d33-a3f6a26e4296" />
+<img width="1296" height="160" alt="chrome_Z3T1JHu0Zc" src="https://github.com/user-attachments/assets/87fda919-f04c-454d-ac94-3ed3160eaec6" />
 
 ---
 
 ## Installation
 
-1. Copy the footer HTML code
+1. Copy the footer's HTML code
 2. Paste it before the closing `</body>` tag
 3. Done
 
-No build tools, npm packages, or unnecessary dependencies.
+No bundlers, npm packages or unnecessary dependencies.
+
+### Connecting dependencies
+
+The footer relies on two external libraries. Make sure they are loaded on your page (for example via CDN):
+
+```html
+<!-- Font Awesome (social icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Particles.js (particle animation) -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+```
 
 ---
 
@@ -85,7 +91,7 @@ No build tools, npm packages, or unnecessary dependencies.
 
 ## Configuration
 
-### Social Links
+### Social links
 
 Replace the URL inside the tags:
 
@@ -93,7 +99,7 @@ Replace the URL inside the tags:
 <a href="https://muhamedlabs.pro" class="social-icon">
 ```
 
-### Changing Texts and Languages
+### Changing texts and languages
 
 Edit the function:
 
@@ -103,29 +109,45 @@ detectLanguage()
 
 You can:
 
-* change texts
+* change the texts
 * change the default language
 * add a new language
 
+### Particle settings
+
+The animation is configured through the standard Particles.js options. The most useful ones:
+
+```js
+particles: {
+  number: { value: 40 },              // number of particles
+  color: { value: "#ffffff" },        // particle color
+  opacity: { value: 0.4 },            // transparency
+  size: { value: 3 },                 // particle size
+  move: { speed: 1 }                  // movement speed
+}
+```
+
+Lower `number` and `speed` for weaker devices or a calmer look.
+
 ---
 
-## Compatibility and Responsiveness
+## Compatibility and responsiveness
 
-The footer displays correctly on different devices:
+The footer displays correctly on different types of devices:
 
 <table align="center">
   <tr>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/b75d9461-02c2-4ba7-99b0-d5efaa61c51f" width="260" alt="Mobile view 1" /><br/>
-      <sub>Mobile phone</sub>
+      <img width="581" height="892" alt="chrome_B1AAI7eRqi" src="https://github.com/user-attachments/assets/60155fb0-c52a-44d2-9e0b-bd8f4de1b6f0" alt="Mobile view 1" /><br/>
+      <sub>Smartphone</sub>
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/bcce8488-b2f9-41fc-8bbf-46ba1f585145" width="420" alt="Desktop view" /><br/>
+      <img width="1466" height="872" alt="chrome_653xxqbE42" src="https://github.com/user-attachments/assets/03dd5e18-3650-4e63-b448-88fd0102bc1c" alt="Desktop view" /><br/>
       <sub>Desktop</sub>
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/d0d1a28d-5552-4c5c-8236-2d4bbd0c286b" width="260" alt="Mobile view 2" /><br/>
-      <sub>Mobile phone (alternate view)</sub>
+      <img width="489" height="913" alt="chrome_HHbuyAhQDb" src="https://github.com/user-attachments/assets/8a1336e3-23f9-4ef9-94d0-5dd434120405" alt="Mobile view 2" /><br/>
+      <sub>Smartphone (alternative view)</sub>
     </td>
   </tr>
 </table>
@@ -135,17 +157,17 @@ The footer displays correctly on different devices:
 ## Accessibility
 
 * `prefers-reduced-motion` support
-* proper ARIA attributes
+* correct ARIA attributes
 * keyboard navigation
 * screen reader compatibility
 
-The interface remains user-friendly for everyone.
+The interface stays comfortable for all users.
 
 ---
 
-## Browser Compatibility
+## Browser compatibility
 
-Supported modern browsers:
+Modern browsers are supported:
 
 * Chrome 90+
 * Firefox 88+
@@ -154,9 +176,39 @@ Supported modern browsers:
 * iOS Safari 14+
 * Chrome Android 90+
 
-## Contact and Support
+---
 
-We are always open to communication, new ideas, and collaboration. For any questions, please contact:
+## FAQ
+
+**Why is the footer in Russian?**
+Russian is the default language. It is shown when the browser language is not Russian, Ukrainian or English.
+
+**The particles don't appear. What should I check?**
+Make sure Particles.js is loaded before the footer script and that there are no errors in the browser console.
+
+**The social icons show as empty squares.**
+Font Awesome is not loaded. Check the stylesheet link from the "Connecting dependencies" section.
+
+**Can I turn the animation off?**
+Users with `prefers-reduced-motion` enabled get reduced animation automatically. You can also remove the Particles.js initialization to disable it for everyone.
+
+---
+
+## Contributing
+
+Ideas and improvements are welcome:
+
+1. Fork the repository
+2. Create a branch for your change
+3. Open a Pull Request with a short description
+
+For bugs, open an Issue and describe the browser, the device and the steps to reproduce.
+
+---
+
+## Contact and support
+
+We are always open to communication, new ideas and collaboration. For any questions, reach out:
 
 - Telegram channel: https://t.me/muhamedlabs
 - Email: partners@muhamedlabs.pro

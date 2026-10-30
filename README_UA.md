@@ -1,12 +1,6 @@
-
-> **v9** — тонкий курсор-риска, стирання без зміни кольору, більший текст, блок копірайту праворуч, один шрифт на весь футер.
-
-> **Фінальна версія (v5)** — збірка найкращого з v2, v3 і v4: панель зі зрізаними кутами та біжучою іскрою (v2), плитка-логотип і окремі плитки соцмереж (v4), кнопка з відблиском, текст, що друкується, копірайт, біжучий рядок і «засічки» (v2).
 # Footers Pterodactyl <a href="README.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Russia_flag.png?raw=true" alt="RU" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_UA.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Ukraine_flag.png?raw=true" alt="UA" width="28" height="28" style="border-radius: 12px;"></a> <a href="README_EN.md"><img src="https://github.com/muhamedlabs/MuhamedTrash/blob/main/Flags/Unit_King_flag.png?raw=true" alt="UK" width="28" height="28" style="border-radius: 12px;"></a>
 
-<p align="center">
-  <img width="1920" height="957" alt="preview" src="https://github.com/user-attachments/assets/f6636d36-399c-4b99-9874-1a8b22ddd879" />
-</p>
+<img width="1920" height="957" alt="chrome_CEJ9p0kcgB" src="https://github.com/user-attachments/assets/3e4c39ae-10a7-4624-9183-fcf58fa1d5af" />
 
 ## Опис
 
@@ -16,10 +10,10 @@
 
 * веб-застосунків
 * портфоліо
-* лендингів
+* лендінгів
 * комерційних сайтів
 
-Легкий, охайний і готовий до використання без складного налаштування.
+Легкий, акуратний і готовий до використання без складного налаштування.
 
 ---
 
@@ -40,36 +34,48 @@
 
 Футер підтримує **лише три мови**:
 
-| Мова            | Код  | Поведіння                        |
-| --------------- | ---- | -------------------------------- |
-| Російська       | `ru` | **використовується за замовчуванням** |
-| Українська      | `uk` | визначається автоматично          |
-| Англійська      | `en` | визначається автоматично          |
+| Мова         | Код  | Поведінка                      |
+| ------------ | ---- | ------------------------------ |
+| Російська    | `ru` | **використовується за замовчуванням** |
+| Українська   | `uk` | визначається автоматично       |
+| Англійська   | `en` | визначається автоматично       |
 
-Якщо мова браузера не розпізнана — відображається **російська версія**.
+Якщо мову браузера не розпізнано — відображається **російська версія**.
 
 ---
 
 ## Приклади відображення
 
 **Українська**  
-<img width="1371" height="180" src="https://github.com/user-attachments/assets/2da536ba-ac9e-4794-be73-1e5b2bbfe297" />
+<img width="1357" height="177" alt="chrome_vdqe2j7L1u" src="https://github.com/user-attachments/assets/88fbe0dc-83b4-45d8-954d-28f0cdb0ef6a" />
 
 **Російська**  
-<img width="1320" height="195" src="https://github.com/user-attachments/assets/79730c7c-30f3-4b9a-8fb3-cf2fb172583e" />
+<img width="1266" height="126" alt="chrome_QYNoShnJdy" src="https://github.com/user-attachments/assets/d0967740-d3bb-4f36-8114-a00d5eefa0f1" />
 
 **Англійська**  
-<img width="1290" height="150" src="https://github.com/user-attachments/assets/f4cfdea1-6232-4a9d-8d33-a3f6a26e4296" />
+<img width="1296" height="160" alt="chrome_Z3T1JHu0Zc" src="https://github.com/user-attachments/assets/87fda919-f04c-454d-ac94-3ed3160eaec6" />
 
 ---
 
 ## Встановлення
 
 1. Скопіюйте HTML-код футера
-2. Вставте його перед закриваючим тегом `</body>`
+2. Вставте його перед закривним тегом `</body>`
 3. Готово
 
-Без збірників, npm-пакетів і зайвих залежностей.
+Без збирачів, npm-пакетів і зайвих залежностей.
+
+### Підключення залежностей
+
+Футер використовує дві зовнішні бібліотеки. Переконайтеся, що вони підключені на сторінці (наприклад, через CDN):
+
+```html
+<!-- Font Awesome (соціальні іконки) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Particles.js (анімація частинок) -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+```
 
 ---
 
@@ -107,24 +113,40 @@ detectLanguage()
 * змінити мову за замовчуванням
 * додати нову мову
 
+### Налаштування частинок
+
+Анімація налаштовується через стандартні опції Particles.js. Найкорисніші:
+
+```js
+particles: {
+  number: { value: 40 },              // кількість частинок
+  color: { value: "#ffffff" },        // колір частинок
+  opacity: { value: 0.4 },            // прозорість
+  size: { value: 3 },                 // розмір частинок
+  move: { speed: 1 }                  // швидкість руху
+}
+```
+
+Зменште `number` і `speed` для слабших пристроїв або спокійнішого вигляду.
+
 ---
 
 ## Сумісність і адаптивність
 
-Футер коректно відображається на різних пристроях:
+Футер коректно відображається на різних типах пристроїв:
 
 <table align="center">
   <tr>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/b75d9461-02c2-4ba7-99b0-d5efaa61c51f" width="260" alt="Mobile view 1" /><br/>
+      <img width="581" height="892" alt="chrome_B1AAI7eRqi" src="https://github.com/user-attachments/assets/60155fb0-c52a-44d2-9e0b-bd8f4de1b6f0" alt="Mobile view 1" /><br/>
       <sub>Смартфон</sub>
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/bcce8488-b2f9-41fc-8bbf-46ba1f585145" width="420" alt="Desktop view" /><br/>
+      <img width="1466" height="872" alt="chrome_653xxqbE42" src="https://github.com/user-attachments/assets/03dd5e18-3650-4e63-b448-88fd0102bc1c" alt="Desktop view" /><br/>
       <sub>Десктоп</sub>
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/d0d1a28d-5552-4c5c-8236-2d4bbd0c286b" width="260" alt="Mobile view 2" /><br/>
+      <img width="489" height="913" alt="chrome_HHbuyAhQDb" src="https://github.com/user-attachments/assets/8a1336e3-23f9-4ef9-94d0-5dd434120405" alt="Mobile view 2" /><br/>
       <sub>Смартфон (альтернативний вигляд)</sub>
     </td>
   </tr>
@@ -136,7 +158,7 @@ detectLanguage()
 
 * підтримка `prefers-reduced-motion`
 * коректні ARIA-атрибути
-* клавіатурна навігація
+* навігація з клавіатури
 * сумісність зі скрінрідерами
 
 Інтерфейс залишається зручним для всіх користувачів.
@@ -154,9 +176,39 @@ detectLanguage()
 * iOS Safari 14+
 * Chrome Android 90+
 
+---
+
+## FAQ
+
+**Чому футер російською?**
+Російська — мова за замовчуванням. Вона показується, коли мова браузера не російська, не українська й не англійська.
+
+**Частинки не з'являються. Що перевірити?**
+Переконайтеся, що Particles.js завантажується раніше за скрипт футера і що в консолі браузера немає помилок.
+
+**Соціальні іконки відображаються порожніми квадратами.**
+Не підключено Font Awesome. Перевірте посилання на стилі з розділу «Підключення залежностей».
+
+**Чи можна вимкнути анімацію?**
+Для користувачів із увімкненим `prefers-reduced-motion` анімація зменшується автоматично. Також можна прибрати ініціалізацію Particles.js, щоб вимкнути її для всіх.
+
+---
+
+## Участь у розвитку проєкту
+
+Ідеї та покращення вітаються:
+
+1. Зробіть форк репозиторію
+2. Створіть гілку для своїх змін
+3. Відкрийте Pull Request з коротким описом
+
+Про помилки повідомляйте через Issue: вкажіть браузер, пристрій і кроки для відтворення.
+
+---
+
 ## Зв'язок і підтримка
 
-Ми завжди відкриті до спілкування, нових ідей та співпраці. З усіх питань звертайтеся:
+Ми завжди відкриті до спілкування, нових ідей і співпраці. З усіх питань звертайтеся:
 
 - Telegram-канал: https://t.me/muhamedlabs
 - Email: partners@muhamedlabs.pro
