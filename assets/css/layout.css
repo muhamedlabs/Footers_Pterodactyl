@@ -65,7 +65,7 @@
     left: 0;
     width: 44px;
     height: 3px;
-    background: linear-gradient(90deg, transparent, rgba(var(--ft-a), .55) 55%, var(--ft-pink) 85%, #fff);
+    background: linear-gradient(90deg, transparent, rgba(var(--ft-a), .55) 55%, var(--ft-pink) 85%, #FFF9FA);
     filter: drop-shadow(0 0 5px var(--ft-pink));
     animation: ftTravel 3.6s ease-in-out infinite;
 }

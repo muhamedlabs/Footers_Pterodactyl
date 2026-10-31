@@ -104,13 +104,13 @@ class ParticleSystem {
             for (let k = i + 1; k < nodes.length; k++) {
                 const b = nodes[k], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
                 if (d < link) {
-                    ctx.strokeStyle = 'rgba(255,70,110,' + ((1 - d / link) * 0.42).toFixed(3) + ')';
+                    ctx.strokeStyle = 'rgba(253,51,89,' + ((1 - d / link) * 0.42).toFixed(3) + ')';
                     ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
                 }
             }
             const md = Math.hypot(a.x - this.mouse.x, a.y - this.mouse.y);
             if (md < 150) {
-                ctx.strokeStyle = 'rgba(255,120,150,' + ((1 - md / 150) * 0.8).toFixed(3) + ')';
+                ctx.strokeStyle = 'rgba(254,103,131,' + ((1 - md / 150) * 0.8).toFixed(3) + ')';
                 ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(this.mouse.x, this.mouse.y); ctx.stroke();
             }
         }
@@ -119,12 +119,12 @@ class ParticleSystem {
             const tw = 0.55 + 0.45 * Math.sin(t * n.sp + n.ph);
             if (n.big) {
                 const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 11);
-                g.addColorStop(0, 'rgba(255,38,92,' + (0.6 * tw).toFixed(3) + ')');
-                g.addColorStop(1, 'rgba(255,38,92,0)');
+                g.addColorStop(0, 'rgba(253,24,67,' + (0.6 * tw).toFixed(3) + ')');
+                g.addColorStop(1, 'rgba(253,24,67,0)');
                 ctx.fillStyle = g;
                 ctx.beginPath(); ctx.arc(n.x, n.y, 11, 0, 6.2832); ctx.fill();
             }
-            ctx.fillStyle = 'rgba(255,' + (n.big ? 95 : 130) + ',' + (n.big ? 138 : 165) + ',' + (0.45 + 0.5 * tw).toFixed(3) + ')';
+            ctx.fillStyle = 'rgba(' + (n.big ? 254 : 254) + ',' + (n.big ? 80 : 118) + ',' + (n.big ? 113 : 144) + ',' + (0.45 + 0.5 * tw).toFixed(3) + ')';
             ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
         }
     }

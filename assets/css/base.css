@@ -8,14 +8,14 @@
 }
 
 .footer-wrapper {
-    --ft-pink: #ff2a62;
-    --ft-edge: #ff9dbd;
-    --ft-fill: linear-gradient(160deg, #ff5f90, #ff1659 70%, #f20b48);
-    --ft-fill-down: linear-gradient(160deg, #ff2f6c, #e60e47);
-    --ft-a: 255, 42, 98;
-    --ft-white: #ffffff;
-    --ft-soft: #f6f1f3;
-    --ft-muted: #cfc6c9;
+    --ft-pink: #FD1843;
+    --ft-edge: #fe94a8;
+    --ft-fill: linear-gradient(160deg, #fe5071, #FD1843 70%, #e6143c);
+    --ft-fill-down: linear-gradient(160deg, #fd2e55, #c90f33);
+    --ft-a: 253, 24, 67;
+    --ft-white: #FFF9FA;
+    --ft-soft: #e6dfe1;
+    --ft-muted: #a39a9d;
     --ft-line: rgba(255, 249, 250, .26);
     --ft-cut: 16px;
     --ft-max: 1200px;
@@ -97,7 +97,7 @@
         repeating-linear-gradient(-58deg, transparent 0 13px, rgba(255, 249, 250, .035) 13px 14px),
         radial-gradient(60% 150% at 0% 50%, rgba(var(--ft-a), .30), transparent 70%),
         radial-gradient(42% 130% at 100% 0%, rgba(var(--ft-a), .20), transparent 70%),
-        linear-gradient(90deg, rgba(34, 11, 20, var(--ft-glass)), rgba(46, 14, 27, calc(var(--ft-glass) * .88)));
+        linear-gradient(90deg, rgba(34, 12, 17, var(--ft-glass)), rgba(46, 15, 22, calc(var(--ft-glass) * .88)));
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     backdrop-filter: blur(12px) saturate(140%);
     transition: background .5s;

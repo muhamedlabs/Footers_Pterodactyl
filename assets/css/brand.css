@@ -117,13 +117,13 @@
 .footer-brand:focus-visible { outline: 2px solid var(--ft-pink); outline-offset: 6px; }
 
 .footer-brand:focus-visible .brand-title { color: #FFF9FA; text-shadow: 0 0 18px rgba(253, 24, 67, .55); }
-.footer-brand:focus-visible .brand-title b { color: #ff4f72; }
+.footer-brand:focus-visible .brand-title b { color: #fd4a6b; }
 .footer-brand:focus-visible .brand-sub { color: #e6dfe1; }
 .footer-brand:focus-visible .brand-mk { filter: drop-shadow(0 0 12px rgba(253, 24, 67, .8)); }
 
 @media (hover: hover) {
     .footer-brand:hover .brand-title { color: #FFF9FA; text-shadow: 0 0 18px rgba(253, 24, 67, .55); }
-    .footer-brand:hover .brand-title b { color: #ff4f72; }
+    .footer-brand:hover .brand-title b { color: #fd4a6b; }
     .footer-brand:hover .brand-sub { color: #e6dfe1; }
     .footer-brand:hover .brand-mk { filter: drop-shadow(0 0 12px rgba(253, 24, 67, .8)); }
 }

@@ -46,7 +46,7 @@
     right: 0;
 }
 
-#typing-text .ft-t { color: var(--ft-white); text-shadow: 0 0 14px rgba(255, 255, 255, .22); }
+#typing-text .ft-t { color: var(--ft-white); text-shadow: 0 0 14px rgba(255, 249, 250, .22); }
 
 #typing-text .typing-cursor {
     display: inline-block;
